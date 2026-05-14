@@ -21,7 +21,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-32 relative overflow-hidden">
+    <section id="contact" className="py-20 md:py-32 relative overflow-hidden">
       {/* Subtle Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -z-10" />
 
@@ -42,7 +42,7 @@ export default function Contact() {
                 <div className="h-[1px] w-12 bg-primary/30" />
               </motion.div>
               <motion.h2 variants={itemVariants} className="text-4xl md:text-7xl font-black text-text-main leading-none">
-                Let's Start a <br />
+                Let's Start a <br className="hidden sm:block" />
                 <span className="text-text-muted italic underline decoration-primary/30 underline-offset-8">Conversation.</span>
               </motion.h2>
               <motion.p variants={itemVariants} className="text-lg text-text-muted leading-relaxed max-w-md">
@@ -58,7 +58,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-text-muted mb-1">Direct Email</h4>
-                  <p className="text-lg font-black text-text-main group-hover:text-primary transition-colors">hello@mehedihasan.dev</p>
+                  <p className="text-base md:text-lg font-black text-text-main group-hover:text-primary transition-colors">hello@mehedihasan.dev</p>
                 </div>
               </motion.a>
               
@@ -68,7 +68,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-text-muted mb-1">Current Location</h4>
-                  <p className="text-lg font-black text-text-main">Dhaka, Bangladesh</p>
+                  <p className="text-base md:text-lg font-black text-text-main">Dhaka, Bangladesh</p>
                 </div>
               </motion.div>
             </div>
@@ -78,7 +78,7 @@ export default function Contact() {
           <div className="lg:col-span-7">
             <motion.div 
               variants={itemVariants}
-              className="glass-card p-8 md:p-16 border-border-main/50 relative overflow-hidden"
+              className="glass-card p-6 md:p-16 border-border-main/50 relative overflow-hidden"
             >
               {/* Background Decoration */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -z-10" />

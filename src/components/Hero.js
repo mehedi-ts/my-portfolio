@@ -97,23 +97,23 @@ export default function Hero() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="space-y-10 z-10"
+            className="space-y-10 z-10 text-center lg:text-left flex flex-col items-center lg:items-start"
           >
             <div className="space-y-4">
               <motion.span 
                 variants={itemVariants}
-                className="text-primary font-black uppercase tracking-[0.3em] text-xs"
+                className="text-primary font-black uppercase tracking-[0.3em] text-[10px] md:text-xs"
               >
                 Welcome to my world
               </motion.span>
               <motion.h1 
                 variants={itemVariants}
-                className="text-5xl md:text-7xl font-black text-text-main leading-none tracking-tight"
+                className="text-5xl md:text-7xl font-black text-text-main leading-none tracking-tight max-w-[10ch] lg:max-w-none"
               >
                 Hi, I'm <span className="text-primary">Mehedi</span>
               </motion.h1>
               
-              <motion.div variants={itemVariants} className="h-12 overflow-hidden">
+              <motion.div variants={itemVariants} className="h-10 md:h-12 overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={roles[roleIndex]}
@@ -121,7 +121,7 @@ export default function Hero() {
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -20, opacity: 0 }}
                     transition={{ duration: 0.5, ease: "circOut" }}
-                    className="text-2xl md:text-3xl font-bold text-text-muted italic"
+                    className="text-xl md:text-3xl font-bold text-text-muted italic"
                   >
                     {roles[roleIndex]}
                   </motion.p>
@@ -131,54 +131,54 @@ export default function Hero() {
 
             <motion.p 
               variants={itemVariants}
-              className="max-w-lg text-lg text-text-muted leading-relaxed"
+              className="max-w-md lg:max-w-lg text-base md:text-lg text-text-muted leading-relaxed"
             >
               Building high-performance digital products that bridge the gap 
               between complex logic and intuitive user experience.
             </motion.p>
 
             {/* CTA Buttons */}
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-6 pt-4">
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6 pt-4 w-full sm:w-auto">
               <a 
                 href="/resume.pdf" 
                 download
-                className="px-8 py-4 bg-primary text-white rounded-2xl font-black uppercase tracking-widest text-xs shadow-[0_0_40px_rgba(99,102,241,0.4)] hover:shadow-[0_0_60px_rgba(99,102,241,0.7)] hover:-translate-y-1 transition-all duration-300 flex items-center space-x-3 group"
+                className="px-8 py-5 md:py-4 bg-primary text-white rounded-2xl font-black uppercase tracking-widest text-xs shadow-[0_0_40px_rgba(99,102,241,0.4)] hover:shadow-[0_0_60px_rgba(99,102,241,0.7)] hover:-translate-y-1 active:scale-95 transition-all duration-300 flex items-center justify-center space-x-3 group"
               >
                 <Download size={18} className="group-hover:animate-bounce" />
                 <span>Download CV</span>
               </a>
               <button 
                 onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 glass-card border-border-main/50 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-bg-card hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-[0_0_30px_rgba(99,102,241,0.2)] hover:-translate-y-1"
+                className="px-8 py-5 md:py-4 glass-card border-border-main/50 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-bg-card hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-[0_0_30px_rgba(99,102,241,0.2)] hover:-translate-y-1 active:scale-95"
               >
                 View Projects
               </button>
             </motion.div>
 
             {/* Social Links */}
-            <motion.div variants={itemVariants} className="flex items-center space-x-6 pt-4">
-              <a href="#" className="text-text-muted hover:text-primary transition-colors"><Github size={20} /></a>
-              <a href="#" className="text-text-muted hover:text-primary transition-colors"><Linkedin size={20} /></a>
-              <a href="#" className="text-text-muted hover:text-primary transition-colors"><Twitter size={20} /></a>
-              <a href="#" className="text-text-muted hover:text-primary transition-colors"><Instagram size={20} /></a>
+            <motion.div variants={itemVariants} className="flex items-center space-x-8 lg:space-x-6 pt-6 lg:pt-4">
+              <a href="#" className="text-text-muted hover:text-primary transition-colors hover:scale-125 transition-transform"><Github size={20} /></a>
+              <a href="#" className="text-text-muted hover:text-primary transition-colors hover:scale-125 transition-transform"><Linkedin size={20} /></a>
+              <a href="#" className="text-text-muted hover:text-primary transition-colors hover:scale-125 transition-transform"><Twitter size={20} /></a>
+              <a href="#" className="text-text-muted hover:text-primary transition-colors hover:scale-125 transition-transform"><Instagram size={20} /></a>
             </motion.div>
           </motion.div>
 
-          {/* Right Side: 3D Visual */}
-          <div className="relative h-[500px] md:h-[700px] w-full hidden lg:block">
+          {/* Right Side: 3D Visual - Hidden on Mobile */}
+          <div className="relative h-[400px] md:h-[700px] w-full hidden lg:block">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
               className="h-full w-full"
             >
-              <Canvas shadows dpr={[1, 2]}>
+              <Canvas shadows dpr={[1, 1.5]}>
                 <Scene />
               </Canvas>
             </motion.div>
             
             {/* Soft Glow Behind Orb */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px] -z-10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-primary/10 rounded-full blur-[80px] md:blur-[100px] -z-10" />
           </div>
 
         </div>

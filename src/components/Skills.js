@@ -26,7 +26,7 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-32 relative overflow-hidden bg-bg-card/30">
+    <section id="skills" className="py-20 md:py-32 relative overflow-hidden bg-bg-card/30">
       <div className="section-container">
         
         <div className="mb-24">
@@ -35,7 +35,7 @@ export default function Skills() {
             <div className="h-[1px] w-12 bg-primary/30" />
           </div>
           <h2 className="text-4xl md:text-7xl font-black text-text-main leading-tight">
-            Specialized Tech <br />
+            Specialized Tech <br className="hidden sm:block" />
             <span className="text-text-muted italic underline decoration-primary/30 underline-offset-8">Infrastructure.</span>
           </h2>
         </div>
@@ -48,7 +48,7 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: idx * 0.1 }}
-              className="group p-10 glass-card hover-glow relative overflow-hidden"
+              className="group p-8 md:p-10 glass-card hover-glow relative overflow-hidden"
             >
               {/* Background Accent */}
               <div 
@@ -58,8 +58,8 @@ export default function Skills() {
 
               <div className="relative z-10 space-y-10">
                 <div className="flex items-center justify-between">
-                  <div className="w-16 h-16 rounded-2xl bg-bg-main border border-border-main flex items-center justify-center text-primary shadow-xl group-hover:scale-110 group-hover:border-primary transition-all duration-500">
-                    <cat.icon size={28} style={{ color: cat.color }} />
+                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-bg-main border border-border-main flex items-center justify-center text-primary shadow-xl group-hover:scale-110 group-hover:border-primary transition-all duration-500">
+                    <cat.icon size={24} className="md:size-[28px]" style={{ color: cat.color }} />
                   </div>
                   <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: cat.color }} />
                 </div>

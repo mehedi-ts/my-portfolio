@@ -26,7 +26,7 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-32 relative overflow-hidden">
+    <section id="experience" className="py-20 md:py-32 relative overflow-hidden">
       <div className="section-container">
         <div className="mb-24">
           <div className="flex items-center space-x-4 mb-6">
@@ -34,16 +34,16 @@ export default function Experience() {
             <div className="h-[1px] w-12 bg-primary/30" />
           </div>
           <h2 className="text-4xl md:text-7xl font-black text-text-main leading-tight">
-            Professional <br />
+            Professional <br className="hidden sm:block" />
             <span className="text-text-muted italic underline decoration-primary/30 underline-offset-8">Trajectory.</span>
           </h2>
         </div>
 
         <div className="relative max-w-5xl mx-auto">
           {/* Vertical Line Connector - Subtler */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-primary/30 via-secondary/20 to-transparent -translate-x-1/2 hidden md:block" />
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-primary/30 via-secondary/20 to-transparent -translate-x-1/2" />
 
-          <div className="space-y-16">
+          <div className="space-y-12 md:space-y-16">
             {experiences.map((exp, index) => (
               <motion.div
                 key={exp.company}
@@ -54,11 +54,11 @@ export default function Experience() {
                 className="relative flex flex-col md:flex-row items-center md:justify-between group"
               >
                 {/* Timeline Dot - Refined */}
-                <div className="absolute left-0 md:left-1/2 top-10 -translate-x-1/2 w-4 h-4 rounded-full bg-bg-main border-2 border-primary z-10 group-hover:scale-125 transition-transform hidden md:block" />
+                <div className="absolute left-0 md:left-1/2 top-8 md:top-10 -translate-x-1/2 w-3 h-3 md:w-4 md:h-4 rounded-full bg-bg-main border-2 border-primary z-10 group-hover:scale-125 transition-transform" />
 
                 {/* Content Box */}
-                <div className={`w-full md:w-[45%] ${index % 2 === 0 ? "md:text-right" : "md:order-last md:text-left"}`}>
-                  <div className="glass-card p-10 relative overflow-hidden group-hover:border-primary/20 transition-all shadow-sm">
+                <div className={`w-full md:w-[45%] pl-8 md:pl-0 ${index % 2 === 0 ? "md:text-right" : "md:order-last md:text-left"}`}>
+                  <div className="glass-card p-6 md:p-10 relative overflow-hidden group-hover:border-primary/20 transition-all shadow-sm">
                     <div className={`flex items-center space-x-3 mb-6 ${index % 2 === 0 ? "md:justify-end" : "justify-start"}`}>
                       <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">{exp.period}</span>
                     </div>

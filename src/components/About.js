@@ -11,7 +11,7 @@ const stats = [
 
 export default function About() {
   return (
-    <section id="about" className="py-32 relative">
+    <section id="about" className="py-20 md:py-32 relative">
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           
@@ -23,16 +23,16 @@ export default function About() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-bg-card border border-border-main relative group">
+            <div className="aspect-[4/5] md:aspect-[4/5] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-bg-card border border-border-main relative group">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-secondary/10" />
-              <div className="flex items-center justify-center h-full text-text-muted/10 font-black uppercase tracking-[0.5em] text-2xl select-none">
+              <div className="flex items-center justify-center h-full text-text-muted/10 font-black uppercase tracking-[0.5em] text-xl md:text-2xl select-none">
                 Portrait
               </div>
               
               {/* Subtle glass effect overlay */}
-              <div className="absolute inset-x-8 bottom-8 p-8 glass border-white/5 rounded-3xl">
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-white">Engineering Excellence</p>
-                <p className="text-[10px] text-white/50 mt-1 uppercase tracking-widest">Est. 2019</p>
+              <div className="absolute inset-x-6 md:inset-x-8 bottom-6 md:bottom-8 p-6 md:p-8 glass border-white/5 rounded-2xl md:rounded-3xl">
+                <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-white">Engineering Excellence</p>
+                <p className="text-[8px] md:text-[10px] text-white/50 mt-1 uppercase tracking-widest">Est. 2019</p>
               </div>
             </div>
           </motion.div>
@@ -55,10 +55,10 @@ export default function About() {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-3 gap-8 pt-12 border-t border-border-main/50">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-12 border-t border-border-main/50">
               {stats.map((stat) => (
-                <div key={stat.label} className="space-y-2">
-                  <div className="text-3xl md:text-4xl font-black text-text-main">{stat.value}</div>
+                <div key={stat.label} className="space-y-2 flex flex-col items-center sm:items-start text-center sm:text-left">
+                  <div className="text-4xl md:text-4xl font-black text-text-main">{stat.value}</div>
                   <div className="text-[10px] font-black uppercase tracking-widest text-text-muted leading-tight">{stat.label}</div>
                 </div>
               ))}

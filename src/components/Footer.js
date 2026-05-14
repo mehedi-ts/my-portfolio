@@ -12,16 +12,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8 mb-20">
           {/* Branding Section */}
           <div className="md:col-span-4 space-y-8">
-            <Link href="/" className="text-xl font-black tracking-tighter text-text-main flex items-center space-x-2">
+            <Link href="/" className="text-xl font-black tracking-tighter text-text-main flex items-center space-x-2 justify-center md:justify-start">
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white text-sm">M</div>
               <span>Hasan</span>
               <span className="text-primary">.</span>
             </Link>
-            <p className="text-text-muted leading-relaxed max-w-xs text-sm font-medium">
+            <p className="text-text-muted leading-relaxed max-w-xs text-sm font-medium mx-auto md:mx-0">
               Designing and engineering high-performance digital products 
               with a focus on scalability, aesthetics, and user value.
             </p>
-            <div className="flex gap-6">
+            <div className="flex gap-6 justify-center md:justify-start">
               {[Github, Linkedin, Twitter, Instagram, Facebook].map((Icon, i) => (
                 <a key={i} href="#" className="text-text-muted hover:text-primary transition-all hover:scale-110">
                   <Icon size={18} />
@@ -30,8 +30,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Links Sections */}
-          <div className="md:col-span-2 space-y-6">
+          <div className="md:col-span-2 space-y-6 text-center md:text-left">
             <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Explore</h4>
             <ul className="space-y-4 text-xs font-black uppercase tracking-widest text-text-muted">
               <li><Link href="/#about" className="hover:text-text-main transition-colors">About</Link></li>
@@ -41,7 +40,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="md:col-span-2 space-y-6">
+          <div className="md:col-span-2 space-y-6 text-center md:text-left">
             <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Expertise</h4>
             <ul className="space-y-4 text-xs font-black uppercase tracking-widest text-text-muted">
               <li>Web Engineering</li>
@@ -52,9 +51,9 @@ export default function Footer() {
           </div>
 
           {/* Newsletter/Contact Area */}
-          <div className="md:col-span-4 space-y-6">
+          <div className="md:col-span-4 space-y-6 text-center md:text-left">
             <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Direct Reach</h4>
-            <p className="text-text-muted text-sm leading-relaxed font-medium">
+            <p className="text-text-muted text-sm leading-relaxed font-medium mx-auto md:mx-0">
               Interested in a collaboration? Reach out directly to discuss your next project.
             </p>
             <a 

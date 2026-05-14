@@ -70,7 +70,11 @@ function ProjectCard({ project, index }) {
       transition={{ duration: 0.8, delay: index * 0.1 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      style={{ 
+        rotateX: typeof window !== 'undefined' && window.innerWidth > 1024 ? rotateX : 0, 
+        rotateY: typeof window !== 'undefined' && window.innerWidth > 1024 ? rotateY : 0, 
+        transformStyle: "preserve-3d" 
+      }}
       className="group relative flex flex-col h-full perspective-1000"
     >
       {/* 3D Content Container */}
@@ -144,7 +148,7 @@ export default function Projects() {
     : projects.filter(p => p.category === activeFilter);
 
   return (
-    <section id="projects" className="py-32 relative">
+    <section id="projects" className="py-20 md:py-32 relative">
       <div className="section-container">
         <div className="mb-20">
           <div className="flex flex-col md:flex-row justify-between items-end gap-12">
@@ -154,18 +158,18 @@ export default function Projects() {
                 <div className="h-[1px] w-12 bg-primary/30" />
               </div>
               <h2 className="text-4xl md:text-7xl font-black text-text-main leading-tight">
-                Case Studies & <br />
+                Case Studies & <br className="hidden sm:block" />
                 <span className="text-text-muted italic underline decoration-primary/30 underline-offset-8">Solutions.</span>
               </h2>
             </div>
 
             {/* Filter Pills */}
-            <div className="flex flex-wrap gap-4 p-2 glass-card rounded-[2rem] border-border-main/50">
+            <div className="flex flex-wrap gap-2 md:gap-4 p-2 glass-card rounded-2xl md:rounded-[2rem] border-border-main/50 w-full md:w-auto">
               {filters.map((f) => (
                 <button
                   key={f}
                   onClick={() => setActiveFilter(f)}
-                  className={`px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${
+                  className={`flex-1 md:flex-none px-4 md:px-6 py-2 md:py-3 rounded-xl md:rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-widest transition-all ${
                     activeFilter === f 
                       ? "bg-primary text-white shadow-xl shadow-primary/20" 
                       : "text-text-muted hover:text-text-main"

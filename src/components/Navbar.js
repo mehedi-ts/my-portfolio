@@ -126,49 +126,109 @@ export default function Navbar() {
 
         {/* Mobile Menu Toggle */}
         <button 
-          className="text-text-main lg:hidden p-3 glass-card rounded-2xl pointer-events-auto"
-          onClick={() => setIsOpen(!isOpen)}
+          className="text-text-main lg:hidden p-3 glass-card rounded-2xl pointer-events-auto hover:bg-bg-card transition-colors"
+          onClick={() => setIsOpen(true)}
+          aria-label="Open Menu"
         >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+          <Menu size={24} />
         </button>
       </motion.div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95, y: -20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            className="glass absolute top-28 left-4 right-4 flex flex-col space-y-4 rounded-[2.5rem] p-10 lg:hidden shadow-3xl pointer-events-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] lg:hidden"
           >
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={cn(
-                  "text-2xl font-black transition-colors",
-                  isActive(link.href) ? "text-primary" : "text-text-main hover:text-primary"
-                )}
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
-            <div className="pt-8 border-t border-border-main flex justify-between items-center">
-              {mounted && (
-                <button
-                  onClick={() => {
-                    setTheme(theme === "dark" ? "light" : "dark");
-                    setIsOpen(false);
-                  }}
-                  className="glass-card p-4 rounded-2xl flex items-center space-x-4 w-full justify-center"
+            {/* Backdrop */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-bg-main/80 backdrop-blur-2xl"
+              onClick={() => setIsOpen(false)}
+            />
+            
+            {/* Menu Content Container */}
+            <motion.div 
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="absolute top-0 right-0 bottom-0 w-full md:w-[400px] bg-bg-main border-l border-border-main shadow-2xl flex flex-col p-10"
+            >
+              {/* Top Header inside Menu */}
+              <div className="flex items-center justify-between mb-20">
+                <div className="text-xl font-black tracking-tighter text-text-main">
+                  Menu<span className="text-primary">.</span>
+                </div>
+                <button 
+                  onClick={() => setIsOpen(false)}
+                  className="p-3 glass-card rounded-2xl text-text-main hover:bg-bg-card transition-colors"
+                  aria-label="Close Menu"
                 >
-                  {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-                  <span className="text-sm font-black uppercase tracking-widest">Toggle Theme</span>
+                  <X size={24} />
                 </button>
-              )}
-            </div>
+              </div>
+
+              {/* Navigation Links */}
+              <div className="flex-1 flex flex-col space-y-6">
+                {navLinks.map((link, idx) => (
+                  <motion.div
+                    key={link.name}
+                    initial={{ x: 50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.1 + idx * 0.05 }}
+                  >
+                    <Link
+                      href={link.href}
+                      className={cn(
+                        "text-5xl font-black transition-all hover:translate-x-2 block group",
+                        isActive(link.href) ? "text-primary" : "text-text-main"
+                      )}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {link.name}
+                      <span className="text-primary opacity-0 group-hover:opacity-100 ml-2 transition-opacity">.</span>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Bottom Section: Socials & Theme */}
+              <motion.div 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="mt-auto space-y-12"
+              >
+                <div className="space-y-6">
+                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-text-muted">Stay Connected</p>
+                  <div className="flex space-x-6">
+                    <a href="#" className="w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-text-muted hover:text-primary transition-colors hover:scale-110 transition-transform"><Github size={20} /></a>
+                    <a href="#" className="w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-text-muted hover:text-primary transition-colors hover:scale-110 transition-transform"><Linkedin size={20} /></a>
+                  </div>
+                </div>
+
+                <div className="pt-10 border-t border-border-main/50 flex items-center justify-between">
+                  {mounted && (
+                    <button
+                      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                      className="p-4 rounded-2xl glass-card text-text-main flex items-center space-x-4 flex-1 justify-center mr-4"
+                    >
+                      {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+                      <span className="text-[10px] font-black uppercase tracking-widest">Toggle Theme</span>
+                    </button>
+                  )}
+                  <div className="text-[10px] font-black uppercase tracking-[0.2em] text-text-muted">
+                    &copy; 2026
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
