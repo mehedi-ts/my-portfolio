@@ -1,38 +1,182 @@
 "use client";
 
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ExternalLink, ArrowUpRight } from "lucide-react";
+import { ExternalLink, ArrowUpRight, MessageSquare, Activity, Sparkles, Blocks } from "lucide-react";
 import { Github } from "./BrandIcons";
 import { useState } from "react";
+import Link from "next/link";
 
 const projects = [
   {
     title: "Aura AI",
     category: "Full Stack",
-    description: "Enterprise-grade generative AI platform designed for scalable content orchestration and real-time data processing.",
-    tech: ["Next.js", "OpenAI", "PostgreSQL", "Redis"],
-    link: "#",
+    description: "MERN generative AI prompt assistant. Connects a React interface to Express router flows, keeping complete conversation logs in MongoDB.",
+    tech: ["React.js", "Express.js", "MongoDB", "Node.js"],
+    link: "/projects",
     github: "#",
+    metrics: "MERN Stack Application",
   },
   {
     title: "Nexus Analytics",
     category: "Frontend",
-    description: "High-performance real-time monitoring dashboard providing actionable insights for industrial IoT ecosystems.",
-    tech: ["React", "Three.js", "Tailwind", "Socket.io"],
-    link: "#",
+    description: "Responsive browser terminal graphing core MERN endpoint latency, server CPU metrics, and active client socket arrays.",
+    tech: ["Next.js", "Tailwind CSS", "Recharts", "Framer Motion"],
+    link: "/projects",
     github: "#",
+    metrics: "Interactive Client Dashboard",
   },
   {
     title: "Lumina Agency",
     category: "Design",
-    description: "Awwwards-caliber digital agency website featuring complex GSAP scroll interactions and custom shaders.",
-    tech: ["GSAP", "Next.js", "Framer", "GLSL"],
-    link: "#",
+    description: "Stunning creative portfolio page. Tailored for maximum visual premiumness, elegant hover interactions, and light/dark theme cycles.",
+    tech: ["React.js", "Tailwind CSS", "Framer Motion", "Vite"],
+    link: "/projects",
     github: "#",
+    metrics: "Component Design Showcase",
   },
 ];
 
 const filters = ["All", "Full Stack", "Frontend", "Design"];
+
+// Sub-component: Aura AI prompt stream mockup (retains premium dark dev console style)
+function AuraMockup() {
+  return (
+    <div className="w-full h-full bg-[#08080c] p-4 flex flex-col justify-between font-mono text-[9px] select-none text-left">
+      {/* App Header */}
+      <div className="flex items-center justify-between border-b border-white/5 pb-2">
+        <div className="flex items-center space-x-1.5 text-slate-300">
+          <MessageSquare size={10} className="text-primary" />
+          <span className="font-bold tracking-tight">aura-chat-v2.1</span>
+        </div>
+        <span className="text-[8px] bg-green-500/10 border border-green-500/20 text-green-400 px-1.5 py-0.5 rounded">ONLINE</span>
+      </div>
+
+      {/* Messages Scroll Area */}
+      <div className="flex-1 py-3.5 space-y-3 overflow-hidden">
+        {/* User Prompt */}
+        <div className="flex flex-col items-end space-y-1">
+          <span className="text-[7px] text-slate-500">USER_PROMPT</span>
+          <div className="bg-white/5 border border-white/10 rounded-xl rounded-tr-none px-3 py-1.5 text-slate-300 max-w-[85%]">
+            Configure Express collection routers.
+          </div>
+        </div>
+
+        {/* AI Stream Response */}
+        <div className="flex flex-col items-start space-y-1">
+          <span className="text-[7px] text-primary">AURA_MERN [STREAMING]</span>
+          <div className="bg-primary/5 border border-primary/20 rounded-xl rounded-tl-none px-3 py-1.5 text-slate-200 space-y-1 max-w-[90%]">
+            <div>router.post("/items", createItem);</div>
+            <div className="text-[7px] text-slate-500 font-semibold">// CRUD pipeline configured</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Input bar mockup */}
+      <div className="border-t border-white/5 pt-2 flex items-center justify-between text-slate-500">
+        <span>Prompt aura-model-mern...</span>
+        <span className="w-4 h-4 rounded bg-primary/20 flex items-center justify-center text-primary text-[8px] font-black">✔</span>
+      </div>
+    </div>
+  );
+}
+
+// Sub-component: Nexus Analytics interactive telemetry mockup (premium console)
+function NexusMockup() {
+  return (
+    <div className="w-full h-full bg-[#050508] p-4 flex flex-col justify-between font-mono text-[9px] select-none relative overflow-hidden text-left">
+      {/* Dotted Grid overlay inside card */}
+      <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:10px_10px] pointer-events-none" />
+
+      {/* Header */}
+      <div className="flex items-center justify-between border-b border-white/5 pb-2 relative z-10">
+        <div className="flex items-center space-x-1.5 text-slate-300">
+          <Activity size={10} className="text-secondary animate-pulse" />
+          <span className="font-bold tracking-tight">mern-express-io</span>
+        </div>
+        <span className="text-primary text-[8px] font-black">API_OK</span>
+      </div>
+
+      {/* Stats Widgets Row */}
+      <div className="grid grid-cols-3 gap-2 relative z-10 pt-2">
+        <div className="p-2 rounded bg-white/5 border border-white/5 text-center">
+          <div className="text-slate-500 text-[6px] uppercase">API Speed</div>
+          <div className="text-[10px] font-black text-slate-200">42ms</div>
+        </div>
+        <div className="p-2 rounded bg-white/5 border border-white/5 text-center">
+          <div className="text-slate-500 text-[6px] uppercase">Node Load</div>
+          <div className="text-[10px] font-black text-emerald-400">8%</div>
+        </div>
+        <div className="p-2 rounded bg-white/5 border border-white/5 text-center">
+          <div className="text-slate-500 text-[6px] uppercase">DB Conn</div>
+          <div className="text-[10px] font-black text-slate-200">Active</div>
+        </div>
+      </div>
+
+      {/* Visual sparklines graph */}
+      <div className="flex-1 flex items-end justify-between space-x-1 pt-4 pb-2 relative z-10">
+        {[20, 45, 28, 60, 35, 75, 40, 90, 50, 70, 85, 95].map((val, i) => (
+          <div key={i} className="flex-1 flex flex-col justify-end h-full">
+            <motion.div 
+              initial={{ height: 0 }}
+              whileInView={{ height: `${val}%` }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: i * 0.03 }}
+              className="w-full bg-gradient-to-t from-secondary/50 to-primary rounded-t-sm" 
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Graph Footer */}
+      <div className="flex items-center justify-between text-[7px] text-slate-500 border-t border-white/5 pt-1.5">
+        <span>Refresh rate: 60Hz</span>
+        <span>Avg packet latency: 12ms</span>
+      </div>
+    </div>
+  );
+}
+
+// Sub-component: Lumina Agency UI design system mockup
+function LuminaMockup() {
+  return (
+    <div className="w-full h-full bg-[#0a0a0f] p-4 flex flex-col justify-between select-none relative overflow-hidden group text-left">
+      {/* Background overlapping layout elements */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] h-[180px] bg-gradient-to-tr from-primary/10 to-secondary/10 rounded-full blur-2xl -z-10 group-hover:scale-125 transition-transform duration-700" />
+      
+      {/* Interactive overlapping slides */}
+      <div className="flex-1 flex items-center justify-center relative">
+        <div className="absolute text-[32px] md:text-[40px] font-black text-white/5 uppercase tracking-tighter select-none font-sans z-0">
+          LUMINA
+        </div>
+
+        {/* Floating cards representing editorial layout */}
+        <div className="w-[120px] h-[80px] rounded-xl glass border-white/10 shadow-2xl relative z-10 flex flex-col justify-between p-2.5 rotate-[-6deg] group-hover:rotate-0 transition-transform duration-500">
+          <span className="text-[6px] font-black uppercase text-primary tracking-widest">SHOWCASE DESIGN</span>
+          <div className="w-full h-[3px] bg-white/10 rounded" />
+          <div className="w-2/3 h-[3px] bg-white/10 rounded" />
+          <div className="flex items-center justify-between">
+            <div className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center text-[5px] text-primary">✔</div>
+            <span className="text-[6px] text-slate-300 font-bold">2026 EDITION</span>
+          </div>
+        </div>
+
+        {/* Small badge card */}
+        <div className="w-[80px] h-[55px] rounded-lg bg-[#050508] border border-white/5 shadow-xl absolute z-20 top-1/2 left-[58%] flex flex-col justify-between p-2 rotate-[12deg] group-hover:rotate-[4deg] transition-transform duration-500">
+          <div className="flex items-center space-x-1">
+            <div className="w-1 h-1 rounded-full bg-emerald-500" />
+            <span className="text-[5px] text-slate-400 font-bold uppercase">Active Render</span>
+          </div>
+          <span className="text-[8px] font-black text-white">AWWWARDS🏆</span>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between text-[7px] font-mono text-slate-500 border-t border-white/5 pt-2">
+        <span>Tailwind Styles</span>
+        <span>Smooth scroll engine</span>
+      </div>
+    </div>
+  );
+}
 
 function ProjectCard({ project, index }) {
   const x = useMotionValue(0);
@@ -41,8 +185,8 @@ function ProjectCard({ project, index }) {
   const mouseXSpring = useSpring(x);
   const mouseYSpring = useSpring(y);
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["8deg", "-8deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-8deg", "8deg"]);
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -71,67 +215,75 @@ function ProjectCard({ project, index }) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ 
-        rotateX: typeof window !== 'undefined' && window.innerWidth > 1024 ? rotateX : 0, 
-        rotateY: typeof window !== 'undefined' && window.innerWidth > 1024 ? rotateY : 0, 
+        rotateX, 
+        rotateY, 
         transformStyle: "preserve-3d" 
       }}
-      className="group relative flex flex-col h-full perspective-1000"
+      className="group relative flex flex-col h-full perspective-1000 select-none text-left"
     >
-      {/* 3D Content Container */}
+      {/* Container card */}
       <div 
-        style={{ transform: "translateZ(50px)" }}
-        className="relative flex flex-col h-full"
+        style={{ transform: "translateZ(30px)" }}
+        className="relative flex flex-col h-full glass-panel p-6"
       >
-        {/* Image Area */}
-        <div className="relative aspect-[16/11] overflow-hidden rounded-[3rem] bg-bg-card border border-border-main mb-8 shadow-sm group-hover:shadow-2xl transition-all duration-700">
-          <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-secondary/30 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10" />
+        {/* Mockup Showcase Area */}
+        <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-border-main mb-6 shadow-md transition-all duration-500 bg-bg-main">
           
-          <div className="flex items-center justify-center h-full text-text-muted/5 font-black uppercase tracking-[0.5em] text-[12px] group-hover:scale-110 transition-transform duration-700 select-none">
-            {project.title}
+          {/* Custom Visual Mockups */}
+          {project.title === "Aura AI" && <AuraMockup />}
+          {project.title === "Nexus Analytics" && <NexusMockup />}
+          {project.title === "Lumina Agency" && <LuminaMockup />}
+
+          {/* Hover launch overlay */}
+          <div className="absolute inset-0 bg-bg-main/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-25 flex items-center justify-center">
+            <Link 
+              href={project.link} 
+              className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-transform"
+            >
+              <ArrowUpRight size={20} />
+            </Link>
           </div>
 
-          {/* Live Badge */}
-          <div className="absolute top-6 right-6 z-20 flex items-center space-x-2 px-3 py-1.5 rounded-full glass border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
-            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-[8px] font-black uppercase tracking-widest">Live Now</span>
-          </div>
-          
-          {/* Overlay Link */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-8 group-hover:translate-y-0 z-20">
-            <a href={project.link} className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
-              <ArrowUpRight size={28} />
-            </a>
+          {/* Live indicator badge */}
+          <div className="absolute top-4 right-4 z-20 flex items-center space-x-1.5 px-2.5 py-1 rounded-full glass border-border-main shadow-inner">
+            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-[7px] font-black uppercase tracking-widest text-text-main">Live Instance</span>
           </div>
         </div>
 
-        {/* Content Area */}
-        <div className="flex-1 flex flex-col px-4">
-          <div className="flex justify-between items-center mb-4">
-            <span className="text-[10px] font-black uppercase tracking-widest text-primary">
+        {/* Content Block */}
+        <div className="flex-grow flex flex-col">
+          <div className="flex justify-between items-center mb-3">
+            <span className="text-[9px] font-black uppercase tracking-widest text-primary">
               {project.category}
             </span>
-            <div className="flex gap-2">
-              {project.tech.map((t) => (
-                <span key={t} className="text-[9px] font-bold text-text-muted uppercase tracking-widest">
-                  {t}
-                </span>
-              ))}
-            </div>
+            <span className="text-[8px] font-bold text-text-muted uppercase tracking-widest">
+              {project.metrics}
+            </span>
           </div>
           
-          <h3 className="text-2xl font-black text-text-main mb-4 group-hover:text-primary transition-colors">
+          <h3 className="text-xl font-black text-text-main mb-2 uppercase tracking-tight group-hover:text-primary transition-colors">
             {project.title}
           </h3>
-          <p className="text-text-muted leading-relaxed mb-8 text-sm line-clamp-2">
+          
+          <p className="text-xs text-text-muted leading-relaxed mb-6 flex-grow">
             {project.description}
           </p>
+
+          <div className="flex flex-wrap gap-1.5 mb-6">
+            {project.tech.map((t) => (
+              <span key={t} className="text-[8px] font-black text-text-muted uppercase tracking-widest px-2.5 py-1.5 bg-bg-card border border-border-main rounded-lg">
+                {t}
+              </span>
+            ))}
+          </div>
           
-          <div className="mt-auto pt-6 border-t border-border-main/50 flex items-center justify-between">
-            <a href={project.link} className="text-[10px] font-black uppercase tracking-[0.2em] text-text-main hover:text-primary transition-colors flex items-center gap-2">
-              View Project <ExternalLink size={12} />
-            </a>
-            <a href={project.github} className="text-text-muted hover:text-text-main transition-colors">
-              <Github size={18} />
+          <div className="pt-5 border-t border-border-main flex items-center justify-between mt-auto">
+            <Link href={project.link} className="text-[9px] font-black uppercase tracking-wider text-text-main hover:text-primary transition-colors flex items-center gap-1.5">
+              Launch Case <ExternalLink size={12} className="text-primary shrink-0" />
+            </Link>
+            <a href={project.github} className="text-text-muted hover:text-primary transition-colors">
+              <Github size={16} />
             </a>
           </div>
         </div>
@@ -148,30 +300,32 @@ export default function Projects() {
     : projects.filter(p => p.category === activeFilter);
 
   return (
-    <section id="projects" className="py-20 md:py-32 relative">
+    <section id="projects" className="py-24 md:py-36 relative select-none">
       <div className="section-container">
+        
+        {/* Header */}
         <div className="mb-20">
-          <div className="flex flex-col md:flex-row justify-between items-end gap-12">
-            <div className="space-y-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 text-left">
+            <div className="space-y-5">
               <div className="flex items-center space-x-4">
-                <span className="text-xs font-black uppercase tracking-[0.5em] text-primary">Selected Works</span>
+                <span className="text-xs font-black uppercase tracking-[0.4em] text-primary">Selected Works</span>
                 <div className="h-[1px] w-12 bg-primary/30" />
               </div>
-              <h2 className="text-4xl md:text-7xl font-black text-text-main leading-tight">
-                Case Studies & <br className="hidden sm:block" />
-                <span className="text-text-muted italic underline decoration-primary/30 underline-offset-8">Solutions.</span>
+              <h2 className="text-4xl md:text-5xl font-black text-text-main leading-tight">
+                Product Cases & <br className="hidden sm:block" />
+                <span className="text-gradient">Implementations.</span>
               </h2>
             </div>
 
             {/* Filter Pills */}
-            <div className="flex flex-wrap gap-2 md:gap-4 p-2 glass-card rounded-2xl md:rounded-[2rem] border-border-main/50 w-full md:w-auto">
+            <div className="flex flex-wrap gap-2 p-1.5 glass border-border-main rounded-2xl w-full md:w-auto select-none">
               {filters.map((f) => (
                 <button
                   key={f}
                   onClick={() => setActiveFilter(f)}
-                  className={`flex-1 md:flex-none px-4 md:px-6 py-2 md:py-3 rounded-xl md:rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-widest transition-all ${
+                  className={`flex-1 md:flex-none px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all cursor-pointer ${
                     activeFilter === f 
-                      ? "bg-primary text-white shadow-xl shadow-primary/20" 
+                      ? "bg-primary text-white shadow-lg shadow-primary/20 animate-none" 
                       : "text-text-muted hover:text-text-main"
                   }`}
                 >
@@ -182,16 +336,27 @@ export default function Projects() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {/* Cards Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, index) => (
               <ProjectCard key={project.title} project={project} index={index} />
             ))}
           </AnimatePresence>
         </div>
+
+        {/* Direct link to dedicated catalog pages */}
+        <div className="mt-16 flex justify-center">
+          <Link 
+            href="/projects" 
+            className="px-8 py-4.5 glass hover:border-primary/30 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-bg-card transition-all duration-300 flex items-center space-x-2 text-text-main cursor-pointer"
+          >
+            <span>View All Projects</span>
+            <ExternalLink size={13} className="text-primary" />
+          </Link>
+        </div>
+
       </div>
     </section>
   );
 }
-
-

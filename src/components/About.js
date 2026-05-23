@@ -1,65 +1,145 @@
 "use client";
 
 import { motion } from "framer-motion";
-import RevealText from "./RevealText";
+import { ShieldCheck, Zap, Layers, Code, Server, Database } from "lucide-react";
 
 const stats = [
-  { label: "Years in Industry", value: "05+" },
-  { label: "Successful Projects", value: "50+" },
-  { label: "Global Clients", value: "30+" },
+  { label: "Learning & Code", value: "2+ Yrs", metric: "Active Dev" },
+  { label: "React Projects", value: "15+", metric: "Custom UI" },
+  { label: "MERN Stack Specialist", value: "100%", metric: "Hands-on" },
+];
+
+const coreRules = [
+  {
+    title: "Clean Frontend UI",
+    description: "Designing semantic interfaces, smooth hover responses, and fluid CSS states using React, Next.js, and Tailwind.",
+    icon: Zap,
+  },
+  {
+    title: "Structured API Workflows",
+    description: "Architecting modular server routing, Express middlewares, and secure query operations with Node.js.",
+    icon: Layers,
+  },
+  {
+    title: "Safe Database Systems",
+    description: "Structuring reliable NoSQL collections, MongoDB schemas, and index pipelines for fluid record streams.",
+    icon: ShieldCheck,
+  },
 ];
 
 export default function About() {
   return (
-    <section id="about" className="py-20 md:py-32 relative">
+    <section id="about" className="py-24 md:py-36 relative overflow-hidden bg-bg-card/10 border-y border-border-main select-none">
+      {/* Background soft ambient glows */}
+      <div className="absolute top-1/2 left-[5%] w-[350px] h-[350px] bg-secondary/5 rounded-full blur-[100px] -z-10" />
+      <div className="absolute bottom-[10%] right-[10%] w-[300px] h-[300px] bg-primary/4 rounded-full blur-[100px] -z-10 animate-pulse-soft" />
+
       <div className="section-container">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Visual Side */}
+          {/* Visual Side: Premium Profile Frame Slot 2 */}
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="relative"
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 w-full flex items-center justify-center relative"
           >
-            <div className="aspect-[4/5] md:aspect-[4/5] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-bg-card border border-border-main relative group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-secondary/10" />
-              <div className="flex items-center justify-center h-full text-text-muted/10 font-black uppercase tracking-[0.5em] text-xl md:text-2xl select-none">
-                Portrait
-              </div>
-              
-              {/* Subtle glass effect overlay */}
-              <div className="absolute inset-x-6 md:inset-x-8 bottom-6 md:bottom-8 p-6 md:p-8 glass border-white/5 rounded-2xl md:rounded-3xl">
-                <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-white">Engineering Excellence</p>
-                <p className="text-[8px] md:text-[10px] text-white/50 mt-1 uppercase tracking-widest">Est. 2019</p>
+            {/* Outer Bento Frame */}
+            <div className="w-[280px] h-[360px] lg:w-[300px] lg:h-[380px] rounded-[2rem] p-1 bg-gradient-to-tr from-secondary/40 via-primary/30 to-amber-500/20 shadow-xl flex items-center justify-center overflow-hidden group">
+              <div className="w-full h-full rounded-[1.8rem] bg-bg-main relative flex flex-col items-center justify-center p-6 overflow-hidden">
+                
+                {/* Micro dotted grid layer inside Card */}
+                <div className="absolute inset-0 bg-[radial-gradient(var(--grid-dots)_1px,transparent_1px)] bg-[size:16px_16px] opacity-60" />
+
+                {/* SVG Workspace Icon */}
+                <div className="w-32 h-32 rounded-full border border-border-main bg-bg-card/50 flex items-center justify-center relative z-10 mb-6 group-hover:border-secondary/20 transition-colors duration-500">
+                  <svg className="w-16 h-16 text-text-muted/40 group-hover:text-secondary/30 transition-colors duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                </div>
+
+                {/* Profile Placeholder Text */}
+                <div className="text-center relative z-10 space-y-1">
+                  <div className="text-xs font-black uppercase tracking-widest text-text-main">Second Avatar Slot</div>
+                  <div className="text-[9px] font-mono text-text-muted">src/assets/about-photo.jpg</div>
+                </div>
+
+                {/* Stack highlight badge */}
+                <div className="absolute bottom-5 left-5 right-5 border border-border-main bg-bg-card/70 backdrop-blur-md rounded-xl p-3 flex items-center justify-between z-10">
+                  <span className="text-[8px] font-black uppercase tracking-widest text-text-main flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
+                    Clean Coder
+                  </span>
+                  <span className="text-[8px] font-mono text-secondary font-bold">MERN stack</span>
+                </div>
+
               </div>
             </div>
+
+            {/* Micro floating dashboard box overlay */}
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-4 -right-2 glass border-border-main p-3.5 rounded-2xl shadow-lg flex flex-col space-y-1 select-none z-20"
+            >
+              <span className="text-[8px] font-black uppercase tracking-wider text-text-muted">Main Goal</span>
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 rounded-full bg-primary" />
+                <span className="text-xs font-black text-text-main">Clean Coding UI</span>
+              </div>
+            </motion.div>
           </motion.div>
 
-          {/* Content Side */}
-          <div className="space-y-12">
-            <div className="space-y-8">
-              <h2 className="text-4xl md:text-5xl font-black text-text-main leading-tight tracking-tight">
-                <RevealText text="Crafting digital products with purpose and precision." />
-              </h2>
-
-              <div className="space-y-6 text-lg text-text-muted leading-relaxed font-medium">
-                <p>
-                  <RevealText text="I am a Frontend Engineer dedicated to creating immersive, accessible, and high-performance digital experiences. My approach combines technical rigor with a deep understanding of user behavior to deliver products that resonate." />
-                </p>
-                <p>
-                  <RevealText text="Over the last 5 years, I've collaborated with international teams to ship production-grade interfaces for startups and established enterprises, ensuring every pixel serves a purpose." />
-                </p>
+          {/* Right Side: Narrative Copywriting Area */}
+          <div className="lg:col-span-7 space-y-10 text-left">
+            <div className="space-y-5">
+              <div className="flex items-center space-x-4">
+                <span className="text-xs font-black uppercase tracking-[0.4em] text-primary">Passion & Growth</span>
+                <div className="h-[1px] w-12 bg-primary/30" />
               </div>
+              
+              <h2 className="text-4xl md:text-5xl font-black text-text-main leading-none">
+                Crafting interfaces with <span className="text-gradient">solid MERN</span> foundations.
+              </h2>
+              
+              <p className="text-sm md:text-base text-text-muted leading-relaxed">
+                I am a growing full-stack developer dedicated to building responsive, accessible web applications. I focus on creating interactive frontend systems coupled with structured Node.js / Express APIs and reliable MongoDB storage. I love continuous learning and constantly look for ways to write neater code, improve routing latency, and design delightful web tools.
+              </p>
             </div>
 
-            {/* Stats Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-12 border-t border-border-main/50">
+            {/* Core Stack Highlights */}
+            <div className="space-y-4 pt-1">
+              {coreRules.map((rule, idx) => (
+                <motion.div
+                  key={rule.title}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.08 }}
+                  className="flex space-x-4 p-4 rounded-2xl bg-bg-card border border-border-main hover:border-primary/20 hover:bg-bg-card/85 transition-all group"
+                >
+                  <div className="w-9 h-9 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+                    <rule.icon size={16} />
+                  </div>
+                  <div className="flex-1 space-y-1">
+                    <h4 className="text-xs font-black text-text-main uppercase tracking-wider">{rule.title}</h4>
+                    <p className="text-[11px] text-text-muted leading-relaxed">{rule.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Stats Indicators Block */}
+            <div className="grid grid-cols-3 gap-4 pt-8 border-t border-border-main">
               {stats.map((stat) => (
-                <div key={stat.label} className="space-y-2 flex flex-col items-center sm:items-start text-center sm:text-left">
-                  <div className="text-4xl md:text-4xl font-black text-text-main">{stat.value}</div>
-                  <div className="text-[10px] font-black uppercase tracking-widest text-text-muted leading-tight">{stat.label}</div>
+                <div key={stat.label} className="space-y-1 text-left">
+                  <div className="text-2xl md:text-3xl font-black text-gradient leading-none">{stat.value}</div>
+                  <div className="text-[9px] font-black uppercase tracking-wider text-text-main leading-tight pt-1.5">{stat.label}</div>
+                  <div className="text-[8px] font-semibold text-text-muted uppercase tracking-wider">{stat.metric}</div>
                 </div>
               ))}
             </div>
@@ -70,4 +150,3 @@ export default function About() {
     </section>
   );
 }
-

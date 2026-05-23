@@ -1,61 +1,16 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, PerspectiveCamera, OrbitControls, Sphere } from "@react-three/drei";
-import { useEffect, useState, useRef } from "react";
-import { ArrowRight, Download } from "lucide-react";
-import { Github, Linkedin, Twitter, Instagram } from "./BrandIcons";
-import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { ArrowRight, Sparkles, Terminal, Code, Cpu, Database, Blocks } from "lucide-react";
+import { Github, Linkedin, Twitter } from "./BrandIcons";
 
 const roles = [
-  "Web Developer",
-  "Frontend Developer",
-  "Backend Developer",
-  "UI Structure Designer",
-  "Problem Solver",
-  "System Architecture Enthusiast",
+  "MERN Stack Developer",
+  "Frontend React Engineer",
+  "Next.js App Builder",
+  "UI/UX Enthusiast",
 ];
-
-function AnimatedOrb() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
-  return (
-    <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-      <Sphere args={[1, 100, 100]} scale={2.4}>
-        <MeshDistortMaterial
-          color={isDark ? "#6366f1" : "#4f46e5"}
-          speed={3}
-          distort={0.4}
-          radius={1}
-          metalness={0.5}
-          roughness={0.2}
-          emissive={isDark ? "#6366f1" : "#ffffff"}
-          emissiveIntensity={isDark ? 0.5 : 0.2}
-        />
-      </Sphere>
-    </Float>
-  );
-}
-
-function Scene() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
-  return (
-    <>
-      <PerspectiveCamera makeDefault position={[0, 0, 8]} />
-      <ambientLight intensity={isDark ? 0.4 : 1} />
-      <pointLight position={[10, 10, 10]} intensity={1.5} color="#6366f1" />
-      <spotLight position={[-10, 10, 10]} angle={0.15} penumbra={1} intensity={1} color="#a855f7" />
-      
-      <AnimatedOrb />
-
-      <OrbitControls enableZoom={false} enablePan={false} />
-    </>
-  );
-}
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -63,7 +18,7 @@ export default function Hero() {
   useEffect(() => {
     const timer = setInterval(() => {
       setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 3000);
+    }, 3500);
     return () => clearInterval(timer);
   }, []);
 
@@ -73,112 +28,221 @@ export default function Hero() {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.2,
+        delayChildren: 0.15,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, x: -30 },
+    hidden: { opacity: 0, y: 25 },
     visible: { 
       opacity: 1, 
-      x: 0, 
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+      y: 0, 
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
     },
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      <div className="section-container">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section id="home" className="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden select-none">
+      {/* Background radial glows - adapts perfectly to Light/Dark modes */}
+      <div className="absolute top-[20%] left-[20%] w-[350px] h-[350px] bg-primary/8 dark:bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10 animate-pulse-soft" />
+      <div className="absolute bottom-[20%] right-[15%] w-[350px] h-[350px] bg-secondary/8 dark:bg-secondary/4 rounded-full blur-[100px] pointer-events-none -z-10" />
+
+      <div className="section-container w-full">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Side: Content Area */}
+          {/* Left Side: Copywriting Content */}
           <motion.div 
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="space-y-10 z-10 text-center lg:text-left flex flex-col items-center lg:items-start"
+            className="lg:col-span-7 space-y-8 z-10 text-left flex flex-col items-start"
           >
+            {/* Status Pulse Indicator */}
+            <motion.div 
+              variants={itemVariants}
+              className="inline-flex items-center space-x-2.5 px-3.5 py-2 rounded-full glass border-border-main shadow-inner"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-text-main">
+                Ready for fresh web projects
+              </span>
+            </motion.div>
+
+            {/* Title Headline */}
             <div className="space-y-4">
-              <motion.span 
-                variants={itemVariants}
-                className="text-primary font-black uppercase tracking-[0.3em] text-[10px] md:text-xs"
-              >
-                Welcome to my world
-              </motion.span>
               <motion.h1 
                 variants={itemVariants}
-                className="text-5xl md:text-7xl font-black text-text-main leading-none tracking-tight max-w-[10ch] lg:max-w-none"
+                className="text-5xl md:text-7xl font-black text-text-main leading-[1.05] tracking-tight max-w-[15ch]"
               >
-                Hi, I'm <span className="text-primary">Mehedi</span>
+                Building <span className="text-gradient font-black">Modern</span> Web Experiences.
               </motion.h1>
               
-              <motion.div variants={itemVariants} className="h-10 md:h-12 overflow-hidden">
-                <AnimatePresence mode="wait">
-                  <motion.p
-                    key={roles[roleIndex]}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -20, opacity: 0 }}
-                    transition={{ duration: 0.5, ease: "circOut" }}
-                    className="text-xl md:text-3xl font-bold text-text-muted italic"
-                  >
-                    {roles[roleIndex]}
-                  </motion.p>
-                </AnimatePresence>
+              {/* Typewritten MERN Role */}
+              <motion.div 
+                variants={itemVariants} 
+                className="flex items-center font-mono text-xs md:text-sm bg-bg-card/45 dark:bg-white/3 border border-border-main px-4 py-2 rounded-xl backdrop-blur-md"
+              >
+                <Terminal size={14} className="text-primary mr-2.5" />
+                <span className="text-text-muted select-none mr-1.5">const developer = </span>
+                <div className="overflow-hidden h-5 relative flex items-center min-w-[200px]">
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={roles[roleIndex]}
+                      initial={{ y: 12, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -12, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: "easeInOut" }}
+                      className="text-primary font-bold absolute"
+                    >
+                      "{roles[roleIndex]}";
+                    </motion.span>
+                  </AnimatePresence>
+                </div>
               </motion.div>
             </div>
 
+            {/* Authentic MERN Copy */}
             <motion.p 
               variants={itemVariants}
-              className="max-w-md lg:max-w-lg text-base md:text-lg text-text-muted leading-relaxed"
+              className="max-w-xl text-sm md:text-base text-text-muted leading-relaxed"
             >
-              Building high-performance digital products that bridge the gap 
-              between complex logic and intuitive user experience.
+              Hi, I'm <strong className="text-text-main font-bold">Mehedi Hasan</strong>. I am a passionate full-stack developer specializing in the <strong className="text-text-main font-semibold">MERN Stack</strong> (React, Next.js, Node.js, MongoDB). I love crafting clean, fast, responsive interfaces and writing neat backend workflows that bring complex layouts to life.
             </motion.p>
 
-            {/* CTA Buttons */}
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6 pt-4 w-full sm:w-auto">
-              <a 
-                href="/resume.pdf" 
-                download
-                className="px-8 py-5 md:py-4 bg-primary text-white rounded-2xl font-black uppercase tracking-widest text-xs shadow-[0_0_40px_rgba(99,102,241,0.4)] hover:shadow-[0_0_60px_rgba(99,102,241,0.7)] hover:-translate-y-1 active:scale-95 transition-all duration-300 flex items-center justify-center space-x-3 group"
+            {/* CTAs */}
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-2">
+              <button 
+                onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
+                className="px-8 py-4 glow-button text-xs uppercase tracking-widest font-black flex items-center justify-center space-x-2 cursor-pointer"
               >
-                <Download size={18} className="group-hover:animate-bounce" />
-                <span>Download CV</span>
-              </a>
+                <span>Let's Connect</span>
+                <ArrowRight size={14} />
+              </button>
               <button 
                 onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-5 md:py-4 glass-card border-border-main/50 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-bg-card hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-[0_0_30px_rgba(99,102,241,0.2)] hover:-translate-y-1 active:scale-95"
+                className="px-8 py-4 glass hover:border-primary/30 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-bg-card/45 transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer text-text-main"
               >
-                View Projects
+                <span>Selected Works</span>
               </button>
             </motion.div>
 
-            {/* Social Links */}
-            <motion.div variants={itemVariants} className="flex items-center space-x-8 lg:space-x-6 pt-6 lg:pt-4">
-              <a href="#" className="text-text-muted hover:text-primary transition-colors hover:scale-125 transition-transform"><Github size={20} /></a>
-              <a href="#" className="text-text-muted hover:text-primary transition-colors hover:scale-125 transition-transform"><Linkedin size={20} /></a>
-              <a href="#" className="text-text-muted hover:text-primary transition-colors hover:scale-125 transition-transform"><Twitter size={20} /></a>
-              <a href="#" className="text-text-muted hover:text-primary transition-colors hover:scale-125 transition-transform"><Instagram size={20} /></a>
+            {/* Social Anchors */}
+            <motion.div variants={itemVariants} className="flex items-center space-x-5 pt-3">
+              <a href="#" className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all duration-300 hover:scale-105"><Github size={18} /></a>
+              <a href="#" className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all duration-300 hover:scale-105"><Linkedin size={18} /></a>
+              <a href="#" className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all duration-300 hover:scale-105"><Twitter size={18} /></a>
             </motion.div>
           </motion.div>
 
-          {/* Right Side: 3D Visual - Hidden on Mobile */}
-          <div className="relative h-[400px] md:h-[700px] w-full hidden lg:block">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
-              className="h-full w-full"
-            >
-              <Canvas shadows dpr={[1, 1.5]}>
-                <Scene />
-              </Canvas>
-            </motion.div>
+          {/* Right Side: Visual Profile Block */}
+          <div className="lg:col-span-5 relative h-[450px] lg:h-[520px] w-full flex items-center justify-center">
             
-            {/* Soft Glow Behind Orb */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-primary/10 rounded-full blur-[80px] md:blur-[100px] -z-10" />
+            {/* Ambient Back Glow Behind Portrait Frame */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/15 via-secondary/15 to-transparent rounded-[2.5rem] blur-3xl -z-10 animate-pulse-soft" />
+
+            {/* Profile Frame with animated gradient border and glass back */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-[300px] h-[380px] lg:w-[320px] lg:h-[400px] rounded-[2.5rem] p-1.5 bg-gradient-to-tr from-primary via-secondary to-amber-500 shadow-2xl flex items-center justify-center overflow-hidden group"
+            >
+              {/* Layered Inner card */}
+              <div className="w-full h-full rounded-[2.3rem] bg-bg-main relative flex flex-col items-center justify-center overflow-hidden p-6 select-none">
+                
+                {/* Dotted Grid Background inside Card */}
+                <div className="absolute inset-0 bg-[radial-gradient(var(--grid-dots)_1px,transparent_1px)] bg-[size:16px_16px] opacity-70" />
+                
+                {/* Soft glowing ambient orbs inside container */}
+                <div className="absolute -top-12 -right-12 w-32 h-32 bg-primary/10 rounded-full blur-xl group-hover:scale-125 transition-transform duration-700" />
+                <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-secondary/15 rounded-full blur-xl group-hover:scale-125 transition-transform duration-700" />
+
+                {/* SVG Workspace / Avatar Representation */}
+                <div className="w-40 h-40 rounded-full border border-border-main bg-bg-card shadow-inner flex items-center justify-center relative z-10 overflow-hidden mb-6 group-hover:border-primary/20 transition-colors duration-500">
+                  <svg className="w-24 h-24 text-text-muted/40 group-hover:text-primary/30 transition-colors duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  
+                  {/* Subtle Inner Glass Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-bg-main/60 to-transparent" />
+                </div>
+
+                {/* Branding Tag Line Inside Placeholder Card */}
+                <div className="text-center relative z-10 space-y-1.5">
+                  <div className="text-xs font-black uppercase tracking-widest text-text-main">Your Portrait Here</div>
+                  <div className="text-[9px] font-mono text-text-muted">src/assets/avatar.png</div>
+                </div>
+
+                {/* Bottom Frame Tech Stack Tag */}
+                <div className="absolute bottom-6 left-6 right-6 border border-border-main bg-bg-card/60 backdrop-blur-md rounded-2xl p-3 flex items-center justify-between z-10">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                    <span className="text-[8px] font-black uppercase tracking-widest text-text-main">MERN Specialist</span>
+                  </div>
+                  <span className="text-[8px] font-mono text-primary font-bold">v1.0.0</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* FLOATING TECH BADGES (React, Next.js, Node.js, MongoDB) */}
+            
+            {/* Badge 1: React (Floating Top-Left) */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="absolute top-[8%] left-[2%] md:-left-[5%] glass rounded-2xl p-3 flex items-center space-x-2 border-border-main animate-float-badge shadow-md cursor-pointer select-none"
+            >
+              <div className="w-6 h-6 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+                <Code size={13} />
+              </div>
+              <span className="text-[9px] font-black uppercase tracking-widest text-text-main">React</span>
+            </motion.div>
+
+            {/* Badge 2: Next.js (Floating Bottom-Right) */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="absolute bottom-[10%] right-[2%] md:-right-[5%] glass rounded-2xl p-3 flex items-center space-x-2 border-border-main animate-float-badge-delayed shadow-md cursor-pointer select-none"
+            >
+              <div className="w-6 h-6 rounded-lg bg-text-main/10 flex items-center justify-center text-text-main">
+                <Blocks size={13} />
+              </div>
+              <span className="text-[9px] font-black uppercase tracking-widest text-text-main">Next.js</span>
+            </motion.div>
+
+            {/* Badge 3: Node.js (Floating Top-Right) */}
+            <motion.div
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="absolute top-[18%] right-[0%] md:-right-[8%] glass rounded-2xl p-3 flex items-center space-x-2 border-border-main animate-float-badge-slow shadow-md cursor-pointer select-none"
+            >
+              <div className="w-6 h-6 rounded-lg bg-green-500/10 flex items-center justify-center text-green-500">
+                <Cpu size={13} />
+              </div>
+              <span className="text-[9px] font-black uppercase tracking-widest text-text-main">Node</span>
+            </motion.div>
+
+            {/* Badge 4: MongoDB (Floating Bottom-Left) */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="absolute bottom-[6%] left-[0%] md:-left-[8%] glass rounded-2xl p-3 flex items-center space-x-2 border-border-main animate-float-badge shadow-md cursor-pointer select-none"
+            >
+              <div className="w-6 h-6 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                <Database size={13} />
+              </div>
+              <span className="text-[9px] font-black uppercase tracking-widest text-text-main">MongoDB</span>
+            </motion.div>
+
           </div>
 
         </div>
@@ -186,6 +250,3 @@ export default function Hero() {
     </section>
   );
 }
-
-
-

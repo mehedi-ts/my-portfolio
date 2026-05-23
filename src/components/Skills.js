@@ -1,86 +1,136 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code, Server, Cpu, Database, Cloud, Terminal } from "lucide-react";
+import { Code, Database, Terminal, CheckCircle2 } from "lucide-react";
 
 const skillCategories = [
   {
-    name: "Frontend Architecture",
+    name: "Frontend Core",
+    description: "Building responsive layouts, reactive state pipelines, and accessible single-page components.",
     icon: Code,
-    color: "#6366f1",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "GSAP"]
+    color: "rgba(234, 88, 12, 0.2)", // orange glow
+    badgeColor: "text-primary bg-primary/5 border-primary/10",
+    skills: [
+      { name: "React.js", level: "Advanced" },
+      { name: "Next.js (App Router)", level: "Advanced" },
+      { name: "Tailwind CSS", level: "Advanced" },
+      { name: "Framer Motion", level: "Proficient" },
+      { name: "JavaScript (ES6+)", level: "Advanced" },
+      { name: "HTML5 / CSS3", level: "Advanced" },
+    ]
   },
   {
-    name: "Backend & Systems",
+    name: "Backend MERN Stack",
+    description: "Creating modular server routes, database document schemas, and safe authentication handlers.",
     icon: Database,
-    color: "#a855f7",
-    skills: ["Node.js", "Express", "PostgreSQL", "MongoDB", "Redis", "REST APIs"]
+    color: "rgba(139, 92, 246, 0.2)", // purple glow
+    badgeColor: "text-secondary bg-secondary/5 border-secondary/10",
+    skills: [
+      { name: "Node.js / Express", level: "Advanced" },
+      { name: "MongoDB / Mongoose", level: "Advanced" },
+      { name: "RESTful JSON APIs", level: "Advanced" },
+      { name: "JWT Auth / Security", level: "Proficient" },
+      { name: "SQL Basics", level: "Proficient" },
+      { name: "Cors & Middlewares", level: "Advanced" },
+    ]
   },
   {
-    name: "DevOps & Tooling",
+    name: "Developer Tools",
+    description: "Configuring local development environments, version tracking, and quick cloud deployments.",
     icon: Terminal,
-    color: "#0ea5e9",
-    skills: ["Docker", "AWS", "CI/CD", "Git", "Vercel", "Testing (Jest)"]
+    color: "rgba(59, 130, 246, 0.2)", // blue glow
+    badgeColor: "text-blue-500 bg-blue-500/5 border-blue-500/10",
+    skills: [
+      { name: "Git / GitHub versioning", level: "Advanced" },
+      { name: "Vercel / Netlify Deploy", level: "Advanced" },
+      { name: "npm / yarn packing", level: "Advanced" },
+      { name: "Postman / API testing", level: "Advanced" },
+      { name: "Chrome DevTools", level: "Advanced" },
+      { name: "VS Code environment", level: "Advanced" },
+    ]
   }
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-20 md:py-32 relative overflow-hidden bg-bg-card/30">
+    <section id="skills" className="py-24 md:py-36 relative overflow-hidden bg-bg-main select-none">
+      {/* Background ambient corner blur */}
+      <div className="absolute top-1/4 right-[5%] w-[300px] h-[300px] bg-primary/4 rounded-full blur-[90px] -z-10 animate-pulse-soft" />
+
       <div className="section-container">
         
-        <div className="mb-24">
-          <div className="flex items-center space-x-4 mb-8">
-            <span className="text-xs font-black uppercase tracking-[0.5em] text-primary">Technical Stack</span>
+        {/* Section Header */}
+        <div className="mb-20 max-w-3xl text-left">
+          <div className="flex items-center space-x-4 mb-6">
+            <span className="text-xs font-black uppercase tracking-[0.4em] text-primary">My Toolset</span>
             <div className="h-[1px] w-12 bg-primary/30" />
           </div>
-          <h2 className="text-4xl md:text-7xl font-black text-text-main leading-tight">
-            Specialized Tech <br className="hidden sm:block" />
-            <span className="text-text-muted italic underline decoration-primary/30 underline-offset-8">Infrastructure.</span>
+          <h2 className="text-4xl md:text-5xl font-black text-text-main leading-tight">
+            Languages & <br className="hidden sm:block" />
+            <span className="text-gradient">Frameworks.</span>
           </h2>
+          <p className="mt-4 text-sm md:text-base text-text-muted leading-relaxed">
+            An honest overview of my technological focus. I prioritize building clean components, robust middlewares, and well-indexed collections.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {/* Bento Grid */}
+        <div className="grid lg:grid-cols-3 gap-8 md:gap-10">
           {skillCategories.map((cat, idx) => (
             <motion.div
               key={cat.name}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: idx * 0.1 }}
-              className="group p-8 md:p-10 glass-card hover-glow relative overflow-hidden"
+              transition={{ duration: 0.7, delay: idx * 0.1 }}
+              className="glass-panel p-8 md:p-10 relative overflow-hidden flex flex-col justify-between group h-full"
             >
-              {/* Background Accent */}
+              {/* Corner Glow Overlay on Hover */}
               <div 
-                className="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-700"
+                className="absolute -top-24 -right-24 w-48 h-48 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-2xl -z-10"
                 style={{ backgroundColor: cat.color }}
               />
 
-              <div className="relative z-10 space-y-10">
+              <div className="space-y-8">
+                {/* Header block within Card */}
                 <div className="flex items-center justify-between">
-                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-bg-main border border-border-main flex items-center justify-center text-primary shadow-xl group-hover:scale-110 group-hover:border-primary transition-all duration-500">
-                    <cat.icon size={24} className="md:size-[28px]" style={{ color: cat.color }} />
+                  <div className="w-12 h-12 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-main shadow-md group-hover:scale-105 group-hover:border-primary/20 transition-all duration-300">
+                    <cat.icon size={18} className="text-primary" />
                   </div>
-                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: cat.color }} />
+                  <span className="text-[9px] font-black uppercase tracking-widest text-text-muted">Section 0{idx + 1}</span>
                 </div>
 
-                <div className="space-y-6">
-                  <h3 className="text-2xl font-black text-text-main uppercase tracking-tight">{cat.name}</h3>
-                  <div className="flex flex-wrap gap-3">
+                <div className="space-y-3 text-left">
+                  <h3 className="text-xl font-extrabold text-text-main tracking-tight uppercase">{cat.name}</h3>
+                  <p className="text-xs text-text-muted leading-relaxed">{cat.description}</p>
+                </div>
+
+                <div className="h-[1px] w-full bg-border-main" />
+
+                {/* Sub-grid of individual skills */}
+                <div className="space-y-3.5 text-left">
+                  <h4 className="text-[10px] font-black uppercase tracking-wider text-text-muted">Skills Inventory</h4>
+                  <div className="grid grid-cols-1 gap-2.5">
                     {cat.skills.map((skill) => (
-                      <span 
-                        key={skill}
-                        className="px-4 py-2 rounded-xl bg-bg-main border border-border-main text-[10px] font-black uppercase tracking-widest text-text-muted hover:border-primary hover:text-primary transition-all duration-300"
+                      <div 
+                        key={skill.name}
+                        className="flex items-center justify-between p-3 rounded-xl bg-bg-card/45 border border-border-main hover:border-primary/10 hover:bg-bg-card transition-all duration-300"
                       >
-                        {skill}
-                      </span>
+                        <div className="flex items-center space-x-2.5">
+                          <CheckCircle2 size={12} className="text-primary shrink-0" />
+                          <span className="text-xs font-bold text-text-main">{skill.name}</span>
+                        </div>
+                        <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-md border border-border-main ${cat.badgeColor}`}>
+                          {skill.level}
+                        </span>
+                      </div>
                     ))}
                   </div>
                 </div>
               </div>
 
-              {/* Progress Line Decoration */}
-              <div className="absolute bottom-0 left-0 h-[2px] bg-primary group-hover:w-full w-0 transition-all duration-1000" />
+              {/* Progress Line Accent */}
+              <div className="absolute bottom-0 left-0 h-[3px] bg-gradient-to-r from-primary to-amber-400 group-hover:w-full w-0 transition-all duration-750 ease-out" />
             </motion.div>
           ))}
         </div>
@@ -88,5 +138,3 @@ export default function Skills() {
     </section>
   );
 }
-
-

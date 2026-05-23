@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { Github, Linkedin } from "./BrandIcons";
 import { useState, useEffect } from "react";
@@ -8,14 +7,16 @@ import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import Magnetic from "./Magnetic";
 
+// Optimized links count for desktop to prevent wrapping on smaller monitors
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/#about" },
-  { name: "Experience", href: "/#experience" },
+  { name: "Services", href: "/#services" },
   { name: "Skills", href: "/#skills" },
   { name: "Projects", href: "/projects" },
+  { name: "Experience", href: "/#experience" },
+  { name: "Testimonials", href: "/#testimonials" },
   { name: "Contact", href: "/#contact" },
 ];
 
@@ -33,12 +34,12 @@ export default function Navbar() {
       setScrolled(window.scrollY > 20);
       
       if (pathname === "/") {
-        const sections = ["home", "about", "experience", "skills", "projects", "contact"];
+        const sections = ["home", "about", "services", "skills", "projects", "experience", "testimonials", "contact"];
         const current = sections.find(section => {
           const el = document.getElementById(section);
           if (el) {
             const rect = el.getBoundingClientRect();
-            return rect.top <= 100 && rect.bottom >= 100;
+            return rect.top <= 120 && rect.bottom >= 120;
           }
           return false;
         });
@@ -61,177 +62,162 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-[100] flex justify-center p-4 md:p-6 pointer-events-none">
-      <motion.div 
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+    <nav className="fixed top-0 left-0 right-0 z-[100] flex justify-center p-4 md:p-6 pointer-events-none select-none">
+      {/* Main Bar Wrapper - Static, simple, stable, zero fancy entrance animations */}
+      <div 
         className={cn(
-          "flex w-full max-w-7xl items-center justify-between rounded-[2rem] px-8 py-4 transition-all duration-700 pointer-events-auto",
-          scrolled ? "glass shadow-[0_20px_50px_rgba(0,0,0,0.1)] backdrop-blur-3xl border-white/5 py-3" : "bg-transparent"
+          "flex w-full max-w-7xl items-center justify-between rounded-[1.5rem] md:rounded-[2rem] px-6 md:px-8 py-3.5 transition-all duration-300 pointer-events-auto",
+          scrolled 
+            ? "glass shadow-lg shadow-black/5 dark:shadow-white/2 border border-border-main backdrop-blur-2xl py-3" 
+            : "bg-transparent border border-transparent"
         )}
       >
-        <Link href="/" className="text-xl font-black tracking-tighter text-text-main group flex items-center space-x-2">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white text-sm">M</div>
-          <span className="hidden md:block">Hasan</span>
-          <span className="text-primary group-hover:scale-150 transition-transform">.</span>
+        {/* Brand Logo */}
+        <Link href="/" className="text-lg md:text-xl font-extrabold tracking-tighter text-text-main group flex items-center space-x-2">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-amber-500 flex items-center justify-center text-white text-sm font-black shadow-md">M</div>
+          <span className="hidden sm:block font-black text-text-main">Hasan</span>
+          <span className="text-primary font-black">.</span>
         </Link>
 
-        {/* Desktop Links */}
-        <div className="hidden space-x-1 lg:flex items-center">
+        {/* Desktop Navigation Links */}
+        <div className="hidden lg:flex items-center space-x-1">
           {navLinks.map((link) => {
             const active = isActive(link.href);
             return (
-              <Magnetic key={link.name}>
-                <Link
-                  href={link.href}
-                  className={cn(
-                    "relative px-5 py-2 text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300 hover:text-primary",
-                    active ? "text-primary" : "text-text-muted"
-                  )}
-                >
-                  <span className="relative z-10">{link.name}</span>
-                  {active && (
-                    <motion.div 
-                      layoutId="nav-active"
-                      className="absolute inset-0 bg-primary/5 rounded-full"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                    />
-                  )}
-                </Link>
-              </Magnetic>
+              <Link
+                key={link.name}
+                href={link.href}
+                className={cn(
+                  "relative px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.25em] transition-all duration-200 hover:text-primary",
+                  active ? "text-primary bg-primary/5 dark:bg-primary/10" : "text-text-muted"
+                )}
+              >
+                <span>{link.name}</span>
+              </Link>
             );
           })}
-          
-          <div className="h-4 w-[1px] bg-border-main/50 mx-6" />
-
-          {/* Theme Toggle & CTA */}
-          <div className="flex items-center space-x-6">
-            {mounted && (
-              <Magnetic>
-                <button
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  className="p-2.5 rounded-2xl glass-card text-text-muted hover:text-primary transition-all hover:scale-110 active:scale-95 border-border-main/30"
-                >
-                  {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-                </button>
-              </Magnetic>
-            )}
-            <Magnetic>
-              <Link href="/#contact" className="rounded-2xl bg-primary px-8 py-3 text-xs font-black uppercase tracking-widest text-white transition-all hover:scale-105 hover:shadow-[0_10px_30px_rgba(99,102,241,0.4)] active:scale-95">
-                Hire Me
-              </Link>
-            </Magnetic>
-          </div>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <button 
-          className="text-text-main lg:hidden p-3 glass-card rounded-2xl pointer-events-auto hover:bg-bg-card transition-colors"
-          onClick={() => setIsOpen(true)}
-          aria-label="Open Menu"
-        >
-          <Menu size={24} />
-        </button>
-      </motion.div>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] lg:hidden"
-          >
-            {/* Backdrop */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-bg-main/80 backdrop-blur-2xl"
-              onClick={() => setIsOpen(false)}
-            />
-            
-            {/* Menu Content Container */}
-            <motion.div 
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="absolute top-0 right-0 bottom-0 w-full md:w-[400px] bg-bg-main border-l border-border-main shadow-2xl flex flex-col p-10"
+        {/* Desktop Theme Toggle & CTA Buttons */}
+        <div className="hidden lg:flex items-center space-x-4 shrink-0">
+          {mounted && (
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2.5 rounded-xl bg-bg-card border border-border-main text-text-muted hover:text-primary transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+              aria-label="Toggle Theme"
             >
-              {/* Top Header inside Menu */}
-              <div className="flex items-center justify-between mb-20">
-                <div className="text-xl font-black tracking-tighter text-text-main">
-                  Menu<span className="text-primary">.</span>
-                </div>
-                <button 
-                  onClick={() => setIsOpen(false)}
-                  className="p-3 glass-card rounded-2xl text-text-main hover:bg-bg-card transition-colors"
-                  aria-label="Close Menu"
-                >
-                  <X size={24} />
-                </button>
-              </div>
+              {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+            </button>
+          )}
+          <Link 
+            href="/#contact" 
+            className="rounded-xl bg-primary px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-white transition-all duration-200 hover:scale-105 hover:bg-primary/95 text-center whitespace-nowrap shrink-0"
+          >
+            Hire Me
+          </Link>
+        </div>
 
-              {/* Navigation Links */}
-              <div className="flex-1 flex flex-col space-y-6">
-                {navLinks.map((link, idx) => (
-                  <motion.div
-                    key={link.name}
-                    initial={{ x: 50, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.1 + idx * 0.05 }}
-                  >
-                    <Link
-                      href={link.href}
-                      className={cn(
-                        "text-5xl font-black transition-all hover:translate-x-2 block group",
-                        isActive(link.href) ? "text-primary" : "text-text-main"
-                      )}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {link.name}
-                      <span className="text-primary opacity-0 group-hover:opacity-100 ml-2 transition-opacity">.</span>
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
+        {/* Mobile Navbar Control Center (Theme Toggle + Burger Icon) */}
+        <div className="flex lg:hidden items-center space-x-3 pointer-events-auto">
+          {mounted && (
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2.5 rounded-xl bg-bg-card border border-border-main text-text-muted hover:text-primary transition-all duration-200 cursor-pointer"
+              aria-label="Toggle Theme"
+            >
+              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+          )}
+          <button 
+            className="text-text-main p-2.5 bg-bg-card border border-border-main rounded-xl hover:bg-bg-card/80 transition-colors cursor-pointer"
+            onClick={() => setIsOpen(true)}
+            aria-label="Open Menu"
+          >
+            <Menu size={18} />
+          </button>
+        </div>
+      </div>
 
-              {/* Bottom Section: Socials & Theme */}
-              <motion.div 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="mt-auto space-y-12"
-              >
-                <div className="space-y-6">
-                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-text-muted">Stay Connected</p>
-                  <div className="flex space-x-6">
-                    <a href="#" className="w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-text-muted hover:text-primary transition-colors hover:scale-110 transition-transform"><Github size={20} /></a>
-                    <a href="#" className="w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-text-muted hover:text-primary transition-colors hover:scale-110 transition-transform"><Linkedin size={20} /></a>
-                  </div>
-                </div>
-
-                <div className="pt-10 border-t border-border-main/50 flex items-center justify-between">
-                  {mounted && (
-                    <button
-                      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                      className="p-4 rounded-2xl glass-card text-text-main flex items-center space-x-4 flex-1 justify-center mr-4"
-                    >
-                      {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-                      <span className="text-[10px] font-black uppercase tracking-widest">Toggle Theme</span>
-                    </button>
-                  )}
-                  <div className="text-[10px] font-black uppercase tracking-[0.2em] text-text-muted">
-                    &copy; 2026
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          </motion.div>
+      {/* Redesigned, Bulletproof Mobile Navbar Overlay (Simple, stable transitions, closes on any backdrop or link click) */}
+      <div 
+        className={cn(
+          "fixed inset-0 z-[999] lg:hidden transition-all duration-300 ease-in-out pointer-events-none",
+          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0"
         )}
-      </AnimatePresence>
+      >
+        {/* Clickable Backdrop Overlay */}
+        <div 
+          className={cn(
+            "absolute inset-0 bg-bg-main/80 backdrop-blur-md transition-opacity duration-300",
+            isOpen ? "opacity-100" : "opacity-0"
+          )}
+          onClick={() => setIsOpen(false)}
+        />
+        
+        {/* Sliding Menu Side Panel Drawer */}
+        <div 
+          className={cn(
+            "absolute top-0 right-0 bottom-0 w-full max-w-[300px] bg-bg-main border-l border-border-main p-6 flex flex-col transition-transform duration-300 ease-out shadow-2xl",
+            isOpen ? "translate-x-0" : "translate-x-full"
+          )}
+        >
+          {/* Mobile Drawer Header */}
+          <div className="flex items-center justify-between mb-8 pb-4 border-b border-border-main/50">
+            <span className="text-[10px] font-black uppercase tracking-widest text-primary">Navigation</span>
+            <button 
+              onClick={() => setIsOpen(false)}
+              className="p-2 border border-border-main rounded-xl text-text-main hover:bg-bg-card transition-colors cursor-pointer"
+              aria-label="Close Menu"
+            >
+              <X size={16} />
+            </button>
+          </div>
+
+          {/* Links list - closes mobile drawer instantly on click */}
+          <div className="flex-1 flex flex-col space-y-3 overflow-y-auto pr-1">
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={cn(
+                    "text-xl font-bold py-2 px-3 rounded-xl border border-transparent text-left transition-all",
+                    active 
+                      ? "text-primary bg-primary/5 border-primary/10" 
+                      : "text-text-main hover:text-primary hover:bg-bg-card/50"
+                  )}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Bottom mobile drawer footer (Theme + CTA + Socials) */}
+          <div className="pt-6 border-t border-border-main/50 space-y-6">
+            {/* Direct CTA Link inside Mobile Menu */}
+            <Link 
+              href="/#contact"
+              onClick={() => setIsOpen(false)}
+              className="block w-full py-3.5 rounded-xl bg-primary text-white text-[10px] font-black uppercase tracking-widest text-center shadow-md hover:bg-primary/95 transition-all"
+            >
+              Hire Me
+            </Link>
+
+            <div className="flex items-center justify-between pt-2">
+              <span className="text-[9px] font-black uppercase tracking-wider text-text-muted">Stay Connected</span>
+              <div className="flex space-x-3">
+                <a href="#" className="w-8 h-8 rounded-lg bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all"><Github size={14} /></a>
+                <a href="#" className="w-8 h-8 rounded-lg bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all"><Linkedin size={14} /></a>
+              </div>
+            </div>
+            
+            <p className="text-[9px] font-mono text-text-muted text-left">&copy; {new Date().getFullYear()} Mehedi Hasan.</p>
+          </div>
+        </div>
+      </div>
     </nav>
   );
 }

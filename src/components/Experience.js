@@ -1,88 +1,142 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, Calendar, ChevronRight } from "lucide-react";
+import { GitCommit, Calendar, BarChart3, CheckCircle } from "lucide-react";
 
 const experiences = [
   {
-    company: "Tech Innovators",
-    role: "Senior Full Stack Developer",
-    period: "2023 - Present",
-    description: "Lead developer for large-scale enterprise applications, focusing on architectural scalability and performance optimization. Implementing advanced React patterns and high-performance backends.",
+    company: "Apex Digital Solutions",
+    role: "Full Stack MERN Developer",
+    period: "2024 - Present",
+    description: "Developing fast client interfaces, modular Express endpoint routes, and MongoDB collection schemas. Structuring reusable React components with focus on load speeds.",
+    impact: "98+ Lighthouse Score",
+    stack: ["Next.js", "React.js", "Express.js", "MongoDB", "Node.js", "Tailwind CSS"],
+    bullets: [
+      "Refactored legacy single-page assets into server-rendered Next.js components, boosting page speed.",
+      "Designed clean document schemas using Mongoose with strict request validations.",
+      "Collaborated directly with designers to construct pixel-perfect, highly interactive components."
+    ]
   },
   {
-    company: "Creative Solutions",
-    role: "Frontend Specialist",
-    period: "2021 - 2023",
-    description: "Specialized in building high-fidelity user interfaces with complex animations and real-time interactions. Optimized core web vitals and reduced bundle sizes by 40%.",
+    company: "Innovate Web Studio",
+    role: "Frontend Developer Associate",
+    period: "2022 - 2024",
+    description: "Specialized in crafting modern, fluid user experiences. Enforced highly modular CSS tokens and responsive layout hierarchies using Tailwind.",
+    impact: "-35% Layout Complexity",
+    stack: ["React.js", "Redux", "Framer Motion", "Tailwind CSS", "JavaScript", "Vite"],
+    bullets: [
+      "Created reusable frontend component blocks, reducing UI turnaround times significantly.",
+      "Successfully wired custom RESTful JSON backend endpoints directly to state management stores.",
+      "Optimized animation rendering layers to achieve butter-smooth, hardware-accelerated 60 FPS transitions."
+    ]
   },
   {
-    company: "StartUp Hub",
+    company: "Local Dev Agency",
     role: "Junior Web Developer",
-    period: "2019 - 2021",
-    description: "Developed and maintained various client websites. Mastered the fundamentals of modern web development and team collaboration.",
+    period: "2021 - 2022",
+    description: "Built responsive client sites, customized interactive scripts, and integrated third-party forms. Monitored server deploys and local Git repositories.",
+    impact: "Shipped 10+ Client Portals",
+    stack: ["JavaScript", "HTML5", "CSS3", "Git", "Sass", "Bootstrap"],
+    bullets: [
+      "Coded clean, mobile-first website layouts straight from Figma layouts with pixel-perfect loyalty.",
+      "Maintained pristine local Git commit structures and developer notes for senior review.",
+      "Optimized media delivery, scaling down raw images to speed up index page paint benchmarks."
+    ]
   },
 ];
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-20 md:py-32 relative overflow-hidden">
+    <section id="experience" className="py-24 md:py-36 relative overflow-hidden bg-bg-main select-none">
+      {/* Background soft ambient blur */}
+      <div className="absolute top-1/2 left-[5%] w-[400px] h-[400px] bg-secondary/4 dark:bg-secondary/2 rounded-full blur-[120px] pointer-events-none -z-10 animate-pulse-soft" />
+
       <div className="section-container">
-        <div className="mb-24">
+        
+        {/* Section Header */}
+        <div className="mb-24 max-w-3xl text-left">
           <div className="flex items-center space-x-4 mb-6">
-            <span className="text-xs font-black uppercase tracking-[0.5em] text-primary">My Journey</span>
+            <span className="text-xs font-black uppercase tracking-[0.4em] text-primary">Professional Journey</span>
             <div className="h-[1px] w-12 bg-primary/30" />
           </div>
-          <h2 className="text-4xl md:text-7xl font-black text-text-main leading-tight">
-            Professional <br className="hidden sm:block" />
-            <span className="text-text-muted italic underline decoration-primary/30 underline-offset-8">Trajectory.</span>
+          <h2 className="text-4xl md:text-5xl font-black text-text-main leading-tight">
+            Work Experience & <br className="hidden sm:block" />
+            <span className="text-gradient">Shipped Milestones.</span>
           </h2>
         </div>
 
-        <div className="relative max-w-5xl mx-auto">
-          {/* Vertical Line Connector - Subtler */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-primary/30 via-secondary/20 to-transparent -translate-x-1/2" />
+        {/* Git Branch Style Timeline */}
+        <div className="relative max-w-4xl mx-auto pl-6 sm:pl-0">
+          
+          {/* Main timeline Git-Branch line */}
+          <div className="absolute left-3.5 sm:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-secondary to-transparent -translate-x-1/2" />
 
-          <div className="space-y-12 md:space-y-16">
+          <div className="space-y-16">
             {experiences.map((exp, index) => (
               <motion.div
                 key={exp.company}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 35 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="relative flex flex-col md:flex-row items-center md:justify-between group"
+                viewport={{ once: true, margin: "-50px" }}
+                className="relative flex flex-col sm:flex-row items-stretch sm:justify-between group"
               >
-                {/* Timeline Dot - Refined */}
-                <div className="absolute left-0 md:left-1/2 top-8 md:top-10 -translate-x-1/2 w-3 h-3 md:w-4 md:h-4 rounded-full bg-bg-main border-2 border-primary z-10 group-hover:scale-125 transition-transform" />
+                {/* Git Node Icon Indicator */}
+                <div className="absolute left-3.5 sm:left-1/2 top-4 sm:top-6 -translate-x-1/2 w-6 h-6 rounded-full bg-bg-card border-2 border-primary z-10 flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
+                  <GitCommit size={12} className="text-primary animate-pulse-soft" />
+                </div>
 
-                {/* Content Box */}
-                <div className={`w-full md:w-[45%] pl-8 md:pl-0 ${index % 2 === 0 ? "md:text-right" : "md:order-last md:text-left"}`}>
-                  <div className="glass-card p-6 md:p-10 relative overflow-hidden group-hover:border-primary/20 transition-all shadow-sm">
-                    <div className={`flex items-center space-x-3 mb-6 ${index % 2 === 0 ? "md:justify-end" : "justify-start"}`}>
-                      <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">{exp.period}</span>
+                {/* Left/Right Card placement */}
+                <div className={`w-full sm:w-[46%] ${index % 2 === 0 ? "sm:text-right" : "sm:order-last sm:text-left"}`}>
+                  <div className="glass-panel p-6 md:p-8 hover:border-primary/20 transition-all duration-300">
+                    
+                    {/* Period & Stats line */}
+                    <div className={`flex flex-wrap items-center gap-3 mb-4 text-[9px] font-black ${index % 2 === 0 ? "sm:justify-end" : "justify-start"}`}>
+                      <span className="flex items-center space-x-1 text-primary bg-primary/5 px-2.5 py-1 rounded-md border border-primary/10 select-none">
+                        <Calendar size={10} className="mr-1" /> {exp.period}
+                      </span>
+                      <span className="flex items-center space-x-1 text-emerald-500 bg-emerald-500/5 px-2.5 py-1 rounded-md border border-emerald-500/10 select-none">
+                        <BarChart3 size={10} className="mr-1" /> {exp.impact}
+                      </span>
                     </div>
+
+                    <h3 className="text-xl font-black text-text-main uppercase tracking-tight">{exp.company}</h3>
+                    <p className="text-xs font-bold text-text-muted uppercase tracking-widest mt-1 mb-4">{exp.role}</p>
                     
-                    <h3 className="text-2xl font-black text-text-main mb-2 uppercase tracking-tight">{exp.company}</h3>
-                    <p className="text-sm font-bold text-text-muted mb-6 uppercase tracking-widest">{exp.role}</p>
-                    
-                    <p className="text-sm text-text-muted leading-relaxed">
+                    <p className="text-xs text-text-muted leading-relaxed mb-5 text-left">
                       {exp.description}
                     </p>
 
-                    {/* Gradient Overlay on Hover */}
-                    <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                    {/* Bullet List Details */}
+                    <div className={`space-y-2.5 text-xs text-text-muted text-left ${index % 2 === 0 ? "sm:flex sm:flex-col sm:items-end" : ""}`}>
+                      {exp.bullets.map((bullet, bIdx) => (
+                        <div key={bIdx} className="flex items-start space-x-2">
+                          <CheckCircle size={12} className="text-primary shrink-0 mt-0.5" />
+                          <span className="text-[11px] leading-snug">{bullet}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Stack tags */}
+                    <div className={`flex flex-wrap gap-1.5 mt-6 pt-5 border-t border-border-main ${index % 2 === 0 ? "sm:justify-end" : "justify-start"}`}>
+                      {exp.stack.map((s) => (
+                        <span key={s} className="text-[8px] font-black uppercase tracking-wider px-2 py-1 bg-bg-card border border-border-main rounded-md text-text-muted hover:text-primary transition-all select-none">
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+
                   </div>
                 </div>
 
-                {/* Empty Spacer */}
-                <div className="hidden md:block w-[45%]" />
+                {/* Empty spacer block to align cards properly */}
+                <div className="hidden sm:block w-[46%]" />
               </motion.div>
             ))}
           </div>
+
         </div>
       </div>
     </section>
   );
 }
-
