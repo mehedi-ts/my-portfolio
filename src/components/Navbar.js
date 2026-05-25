@@ -127,7 +127,7 @@ export default function Navbar() {
             </button>
           )}
           <a
-            href="/resume.pdf"
+            href="https://drive.google.com/file/d/1H5ixpTDc24xw8bZ3OS8IYQLKMt1a3EpH/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-xl bg-primary px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-white transition-all duration-200 hover:scale-105 hover:bg-primary/95 text-center whitespace-nowrap shrink-0"
