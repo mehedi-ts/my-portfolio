@@ -15,6 +15,7 @@ const projects = [
     link: "/projects",
     github: "#",
     metrics: "MERN Stack Application",
+    image: "/images/projects/aura-ai.png",
   },
   {
     title: "Nexus Analytics",
@@ -24,6 +25,7 @@ const projects = [
     link: "/projects",
     github: "#",
     metrics: "Interactive Client Dashboard",
+    image: "/images/projects/nexus-analytics.png",
   },
   {
     title: "Lumina Agency",
@@ -33,6 +35,7 @@ const projects = [
     link: "/projects",
     github: "#",
     metrics: "Component Design Showcase",
+    image: "/images/projects/lumina-agency.png",
   },
 ];
 
@@ -178,9 +181,79 @@ function LuminaMockup() {
   );
 }
 
+// Premium fallback placeholder layout when thumbnail image is not available
+function ProjectFallback({ title, category }) {
+  // Determine gradient color scheme based on category/title
+  const isDesign = category?.toLowerCase().includes("design") || category?.toLowerCase().includes("ux");
+  const isFullStack = category?.toLowerCase().includes("full");
+  
+  const glowClass = isDesign 
+    ? "from-amber-500/10 to-primary/5" 
+    : isFullStack 
+      ? "from-primary/10 to-secondary/5" 
+      : "from-secondary/10 to-primary/5";
+      
+  const iconColor = isDesign 
+    ? "text-amber-500" 
+    : isFullStack 
+      ? "text-primary" 
+      : "text-secondary";
+
+  return (
+    <div className="w-full h-full bg-[#050508] p-6 flex flex-col justify-between font-mono text-[9px] select-none relative overflow-hidden text-center items-center justify-center">
+      {/* Grid overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:12px_12px] pointer-events-none" />
+      
+      {/* Circular ambient glow in the center */}
+      <div className={`absolute w-[180px] h-[180px] rounded-full bg-gradient-to-tr ${glowClass} blur-2xl -z-10`} />
+
+      {/* Floating abstract code nodes background */}
+      <div className="absolute inset-0 opacity-[0.03] font-mono text-[7px] text-left p-4 pointer-events-none leading-relaxed select-none overflow-hidden">
+        <div>{"import { useState } from 'react';"}</div>
+        <div>{"const query = () => db.collection('node');"}</div>
+        <div>{"export default async function Pipeline() {"}</div>
+        <div>{"  const res = await fetch('/api/v1/stream');"}</div>
+        <div>{"  return res.json();"}</div>
+        <div>{"}"}</div>
+      </div>
+
+      {/* Centerpiece container */}
+      <div className="relative z-10 flex flex-col items-center justify-center space-y-3 my-auto">
+        {/* Floating animated-like glass icon badge */}
+        <div className={`w-12 h-12 rounded-2xl glass border border-white/5 flex items-center justify-center ${iconColor} shadow-xl`}>
+          {isDesign ? (
+            <Sparkles size={20} className="animate-pulse" />
+          ) : isFullStack ? (
+            <Blocks size={20} />
+          ) : (
+            <Activity size={20} />
+          )}
+        </div>
+
+        {/* Minimalist Centered Title Display */}
+        <div className="space-y-1">
+          <h4 className="text-sm font-black text-white uppercase tracking-wider">
+            {title}
+          </h4>
+          <span className="text-[7px] font-black uppercase tracking-[0.3em] text-text-muted">
+            {category || "Application Node"}
+          </span>
+        </div>
+      </div>
+
+      {/* Footer info line */}
+      <div className="w-full border-t border-white/5 pt-2 text-[7px] text-text-muted flex items-center justify-between mt-auto">
+        <span>DEV_ENV // STAGE_1</span>
+        <span>SYS_STATUS: ONLINE</span>
+      </div>
+    </div>
+  );
+}
+
 function ProjectCard({ project, index }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
+  const [imageError, setImageError] = useState(false);
 
   const mouseXSpring = useSpring(x);
   const mouseYSpring = useSpring(y);
@@ -229,10 +302,30 @@ function ProjectCard({ project, index }) {
         {/* Mockup Showcase Area */}
         <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-border-main mb-6 shadow-md transition-all duration-500 bg-bg-main">
           
-          {/* Custom Visual Mockups */}
-          {project.title === "Aura AI" && <AuraMockup />}
-          {project.title === "Nexus Analytics" && <NexusMockup />}
-          {project.title === "Lumina Agency" && <LuminaMockup />}
+          {/* Render Thumbnail Image if specified and load succeeds */}
+          {project.image && !imageError ? (
+            <img 
+              src={project.image} 
+              alt={project.title} 
+              loading="lazy"
+              onError={() => setImageError(true)}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
+            /* Fallback to custom interactive mockups, or the beautiful universal fallback component */
+            <>
+              {project.title === "Aura AI" && <AuraMockup />}
+              {project.title === "Nexus Analytics" && <NexusMockup />}
+              {project.title === "Lumina Agency" && <LuminaMockup />}
+              
+              {/* Universal beautiful fallback if it's none of the above */}
+              {project.title !== "Aura AI" && 
+               project.title !== "Nexus Analytics" && 
+               project.title !== "Lumina Agency" && (
+                <ProjectFallback title={project.title} category={project.category} />
+              )}
+            </>
+          )}
 
           {/* Hover launch overlay */}
           <div className="absolute inset-0 bg-bg-main/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-25 flex items-center justify-center">

@@ -126,12 +126,14 @@ export default function Navbar() {
               {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
             </button>
           )}
-          <Link
-            href="/#contact"
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-xl bg-primary px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-white transition-all duration-200 hover:scale-105 hover:bg-primary/95 text-center whitespace-nowrap shrink-0"
           >
-            Hire Me
-          </Link>
+            Download Resume
+          </a>
         </div>
 
         {/* Mobile Navbar Control Center (Theme Toggle + Burger Icon) */}
@@ -217,13 +219,15 @@ export default function Navbar() {
           {/* Bottom mobile drawer footer (Theme + CTA + Socials) */}
           <div className="pt-6 border-t border-border-main/50 space-y-6">
             {/* Direct CTA Link inside Mobile Menu */}
-            <Link
-              href="/#contact"
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
               className="block w-full py-3.5 rounded-xl bg-primary text-white text-[10px] font-black uppercase tracking-widest text-center shadow-md hover:bg-primary/95 transition-all"
             >
-              Hire Me
-            </Link>
+              Download Resume
+            </a>
 
             <div className="flex items-center justify-between pt-2">
               <span className="text-[9px] font-black uppercase tracking-wider text-text-muted">
