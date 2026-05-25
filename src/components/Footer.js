@@ -46,8 +46,8 @@ export default function Footer() {
             {/* Social Channels */}
             <div className="flex gap-4">
               {[
-                { Icon: Github, href: "#" },
-                { Icon: Linkedin, href: "#" },
+                { Icon: Github, href: "https://github.com/mehedi-ts" },
+                { Icon: Linkedin, href: "https://linkedin.com/in/mehedi-ts" },
                 { Icon: Twitter, href: "#" },
                 { Icon: Instagram, href: "#" }
               ].map((item, i) => (
@@ -94,7 +94,7 @@ export default function Footer() {
             {/* Realtime clock display */}
             <div className="flex items-center space-x-2.5 p-3.5 rounded-xl bg-bg-card border border-border-main text-[10px] font-black uppercase tracking-wider text-text-main">
               <Globe size={13} className="text-primary animate-spin" style={{ animationDuration: "12s" }} />
-              <span>Dhaka — {localTime || "12:00 PM"} GMT+6</span>
+              <span>Narayanganj — {localTime || "12:00 PM"} GMT+6</span>
             </div>
           </div>
 

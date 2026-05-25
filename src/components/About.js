@@ -47,29 +47,23 @@ export default function About() {
           >
             {/* Outer Bento Frame */}
             <div className="w-[280px] h-[360px] lg:w-[300px] lg:h-[380px] rounded-[2rem] p-1 bg-gradient-to-tr from-secondary/40 via-primary/30 to-amber-500/20 shadow-xl flex items-center justify-center overflow-hidden group">
-              <div className="w-full h-full rounded-[1.8rem] bg-bg-main relative flex flex-col items-center justify-center p-6 overflow-hidden">
+              <div className="w-full h-full rounded-[1.8rem] bg-bg-main relative flex flex-col items-center justify-center overflow-hidden">
                 
                 {/* Micro dotted grid layer inside Card */}
                 <div className="absolute inset-0 bg-[radial-gradient(var(--grid-dots)_1px,transparent_1px)] bg-[size:16px_16px] opacity-60" />
 
-                {/* SVG Workspace Icon */}
-                <div className="w-32 h-32 rounded-full border border-border-main bg-bg-card/50 flex items-center justify-center relative z-10 mb-6 group-hover:border-secondary/20 transition-colors duration-500">
-                  <svg className="w-16 h-16 text-text-muted/40 group-hover:text-secondary/30 transition-colors duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                  </svg>
-                </div>
+                {/* Portrait Image */}
+                <img
+                  src="https://i.ibb.co.com/JRD8yNmp/2b80a376-cf15-493a-861b-e726fbd007e9.png"
+                  alt="Mehedi Hasan"
+                  className="w-full h-full object-cover relative z-10 transition-transform duration-500 group-hover:scale-105"
+                />
 
-                {/* Profile Placeholder Text */}
-                <div className="text-center relative z-10 space-y-1">
-                  <div className="text-xs font-black uppercase tracking-widest text-text-main">Second Avatar Slot</div>
-                  <div className="text-[9px] font-mono text-text-muted">src/assets/about-photo.jpg</div>
-                </div>
+                {/* Subtle Inner Glass Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-bg-main/30 to-transparent z-15" />
 
                 {/* Stack highlight badge */}
-                <div className="absolute bottom-5 left-5 right-5 border border-border-main bg-bg-card/70 backdrop-blur-md rounded-xl p-3 flex items-center justify-between z-10">
+                <div className="absolute bottom-5 left-5 right-5 border border-border-main bg-bg-card/85 backdrop-blur-md rounded-xl p-3 flex items-center justify-between z-20">
                   <span className="text-[8px] font-black uppercase tracking-widest text-text-main flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
                     Clean Coder

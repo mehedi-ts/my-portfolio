@@ -235,13 +235,13 @@ export default function Navbar() {
               </span>
               <div className="flex space-x-3">
                 <a
-                  href="#"
+                  href="https://github.com/mehedi-ts"
                   className="w-8 h-8 rounded-lg bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all"
                 >
                   <Github size={14} />
                 </a>
                 <a
-                  href="#"
+                  href="https://linkedin.com/in/mehedi-ts"
                   className="w-8 h-8 rounded-lg bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all"
                 >
                   <Linkedin size={14} />

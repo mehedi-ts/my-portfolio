@@ -204,7 +204,7 @@ export default function Hero() {
               className="relative w-[320px] h-[320px] lg:w-[360px] lg:h-[360px] rounded-full p-1.5 bg-gradient-to-tr from-primary via-secondary to-amber-500 shadow-2xl flex items-center justify-center overflow-hidden group"
             >
               {/* Layered Inner card */}
-              <div className="w-full h-full rounded-full bg-bg-main relative flex flex-col items-center justify-center overflow-hidden p-6 select-none">
+              <div className="w-full h-full rounded-full bg-bg-main relative flex flex-col items-center justify-center overflow-hidden select-none">
                 {/* Dotted Grid Background inside Card */}
                 <div className="absolute inset-0 bg-[radial-gradient(var(--grid-dots)_1px,transparent_1px)] bg-[size:16px_16px] opacity-70" />
 
@@ -212,37 +212,18 @@ export default function Hero() {
                 <div className="absolute -top-12 -right-12 w-32 h-32 bg-primary/10 rounded-full blur-xl group-hover:scale-125 transition-transform duration-700" />
                 <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-secondary/15 rounded-full blur-xl group-hover:scale-125 transition-transform duration-700" />
 
-                {/* SVG Workspace / Avatar Representation */}
-                <div className="w-40 h-40 rounded-full border border-border-main bg-bg-card shadow-inner flex items-center justify-center relative z-10 overflow-hidden mb-6 group-hover:border-primary/20 transition-colors duration-500">
-                  <svg
-                    className="w-24 h-24 text-text-muted/40 group-hover:text-primary/30 transition-colors duration-500"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </svg>
+                {/* Portrait Image */}
+                <img
+                  src="https://i.ibb.co.com/JRD8yNmp/2b80a376-cf15-493a-861b-e726fbd007e9.png"
+                  alt="Mehedi Hasan"
+                  className="w-full h-full object-cover relative z-10 transition-transform duration-500 group-hover:scale-105"
+                />
 
-                  {/* Subtle Inner Glass Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-bg-main/60 to-transparent" />
-                </div>
-
-                {/* Branding Tag Line Inside Placeholder Card */}
-                <div className="text-center relative z-10 space-y-1.5">
-                  <div className="text-xs font-black uppercase tracking-widest text-text-main">
-                    Your Portrait Here
-                  </div>
-                  <div className="text-[9px] font-mono text-text-muted">
-                    src/assets/avatar.png
-                  </div>
-                </div>
+                {/* Subtle Inner Glass Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-bg-main/30 to-transparent z-15" />
 
                 {/* Bottom Frame Tech Stack Tag - Beautifully adapted to a capsule layout inside the circle */}
-                <div className="absolute bottom-6 border border-border-main bg-bg-card/60 backdrop-blur-md rounded-full px-4 py-2 flex items-center space-x-3.5 z-10">
+                <div className="absolute bottom-6 border border-border-main bg-bg-card/85 backdrop-blur-md rounded-full px-4 py-2 flex items-center space-x-3.5 z-20">
                   <div className="flex items-center space-x-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
                     <span className="text-[8px] font-black uppercase tracking-widest text-text-main">
