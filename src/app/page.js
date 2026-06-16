@@ -14,7 +14,7 @@ export default function Home() {
       {/* Scroll sections */}
       <Hero />
       <About />
-      <Services />
+      {/* <Services /> */}
       <Skills />
       <Projects />
       <Experience />
