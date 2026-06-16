@@ -12,11 +12,9 @@ import { cn } from "@/lib/utils";
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/#about" },
-  { name: "Services", href: "/#services" },
   { name: "Skills", href: "/#skills" },
   { name: "Projects", href: "/projects" },
   { name: "Experience", href: "/#experience" },
-  { name: "Testimonials", href: "/#testimonials" },
   { name: "Contact", href: "/#contact" },
 ];
 
@@ -38,11 +36,11 @@ export default function Navbar() {
         const sections = [
           "home",
           "about",
-          "services",
+
           "skills",
           "projects",
           "experience",
-          "testimonials",
+
           "contact",
         ];
         const current = sections.find((section) => {
