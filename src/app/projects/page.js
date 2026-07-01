@@ -65,6 +65,25 @@ const allProjects = [
     metrics: "Keen Keeper",
     image: "https://i.ibb.co.com/JRcp7QLX/keenkeeper.png",
   },
+  {
+  title: "FitZone",
+  category: "Full Stack",
+  description:
+    "FitZone is a full-stack fitness and gym management platform that connects Members, Trainers, and Admins in one seamless ecosystem. Users can discover and book fitness classes, join community discussions, track their fitness journey, while admins manage users, trainers, classes, and platform activities through role-based dashboards.",
+  tech: [
+    "Next.js",
+    "Express.js",
+    "MongoDB",
+    "Better Auth",
+    "Tailwind CSS",
+    "HeroUI",
+    "Stripe",
+  ],
+  link: "https://fit-zone-client.vercel.app/",
+  github: "https://github.com/mehedi-ts/Fit-zone-client",
+  metrics: "FitZone",
+  image: "https://i.ibb.co.com/6Jf3vNmg/d48ea52e-86fe-42bb-8aaf-76c711171b0d.png",
+},
 ];
 
 const categories = ["All", "Frontend", "Full Stack"];
