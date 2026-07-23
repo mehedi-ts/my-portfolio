@@ -1,7 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code, Database, Terminal, CheckCircle2 } from "lucide-react";
+import { Code, Database, Terminal } from "lucide-react";
+import { 
+  SiReact, SiNextdotjs, SiTailwindcss, SiFramer, SiJavascript, SiHtml5,
+  SiNodedotjs, SiMongodb, SiJsonwebtokens, SiMysql,
+  SiGit, SiVercel, SiNpm, SiPostman, SiGooglechrome
+} from "react-icons/si";
+import { FaNetworkWired, FaServer } from "react-icons/fa";
+import { VscVscode } from "react-icons/vsc";
 
 const skillCategories = [
   {
@@ -11,12 +18,12 @@ const skillCategories = [
     color: "rgba(234, 88, 12, 0.2)", // orange glow
     badgeColor: "text-primary bg-primary/5 border-primary/10",
     skills: [
-      { name: "React.js", level: "Advanced" },
-      { name: "Next.js (App Router)", level: "Advanced" },
-      { name: "Tailwind CSS", level: "Advanced" },
-      { name: "Framer Motion", level: "Proficient" },
-      { name: "JavaScript (ES6+)", level: "Advanced" },
-      { name: "HTML5 / CSS3", level: "Advanced" },
+      { name: "React.js", level: "Advanced", TechIcon: SiReact },
+      { name: "Next.js (App Router)", level: "Advanced", TechIcon: SiNextdotjs },
+      { name: "Tailwind CSS", level: "Advanced", TechIcon: SiTailwindcss },
+      { name: "Framer Motion", level: "Proficient", TechIcon: SiFramer },
+      { name: "JavaScript (ES6+)", level: "Advanced", TechIcon: SiJavascript },
+      { name: "HTML5 / CSS3", level: "Advanced", TechIcon: SiHtml5 },
     ]
   },
   {
@@ -26,12 +33,12 @@ const skillCategories = [
     color: "rgba(139, 92, 246, 0.2)", // purple glow
     badgeColor: "text-secondary bg-secondary/5 border-secondary/10",
     skills: [
-      { name: "Node.js / Express", level: "Advanced" },
-      { name: "MongoDB / Mongoose", level: "Advanced" },
-      { name: "RESTful JSON APIs", level: "Advanced" },
-      { name: "JWT Auth / Security", level: "Proficient" },
-      { name: "SQL Basics", level: "Proficient" },
-      { name: "Cors & Middlewares", level: "Advanced" },
+      { name: "Node.js / Express", level: "Advanced", TechIcon: SiNodedotjs },
+      { name: "MongoDB / Mongoose", level: "Advanced", TechIcon: SiMongodb },
+      { name: "RESTful JSON APIs", level: "Advanced", TechIcon: FaNetworkWired },
+      { name: "JWT Auth / Security", level: "Proficient", TechIcon: SiJsonwebtokens },
+      { name: "SQL Basics", level: "Proficient", TechIcon: SiMysql },
+      { name: "Cors & Middlewares", level: "Advanced", TechIcon: FaServer },
     ]
   },
   {
@@ -41,12 +48,12 @@ const skillCategories = [
     color: "rgba(59, 130, 246, 0.2)", // blue glow
     badgeColor: "text-blue-500 bg-blue-500/5 border-blue-500/10",
     skills: [
-      { name: "Git / GitHub versioning", level: "Advanced" },
-      { name: "Vercel / Netlify Deploy", level: "Advanced" },
-      { name: "npm / yarn packing", level: "Advanced" },
-      { name: "Postman / API testing", level: "Advanced" },
-      { name: "Chrome DevTools", level: "Advanced" },
-      { name: "VS Code environment", level: "Advanced" },
+      { name: "Git / GitHub versioning", level: "Advanced", TechIcon: SiGit },
+      { name: "Vercel / Netlify Deploy", level: "Advanced", TechIcon: SiVercel },
+      { name: "npm / yarn packing", level: "Advanced", TechIcon: SiNpm },
+      { name: "Postman / API testing", level: "Advanced", TechIcon: SiPostman },
+      { name: "Chrome DevTools", level: "Advanced", TechIcon: SiGooglechrome },
+      { name: "VS Code environment", level: "Advanced", TechIcon: VscVscode },
     ]
   }
 ];
@@ -74,64 +81,56 @@ export default function Skills() {
           </p>
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid lg:grid-cols-3 gap-8 md:gap-10">
+        {/* Modern Skills Showcase */}
+        <div className="space-y-24 mt-16">
           {skillCategories.map((cat, idx) => (
-            <motion.div
-              key={cat.name}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: idx * 0.1 }}
-              className="glass-panel p-8 md:p-10 relative overflow-hidden flex flex-col justify-between group h-full"
-            >
-              {/* Corner Glow Overlay on Hover */}
-              <div 
-                className="absolute -top-24 -right-24 w-48 h-48 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-2xl -z-10"
-                style={{ backgroundColor: cat.color }}
-              />
-
-              <div className="space-y-8">
-                {/* Header block within Card */}
-                <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-main shadow-md group-hover:scale-105 group-hover:border-primary/20 transition-all duration-300">
-                    <cat.icon size={18} className="text-primary" />
-                  </div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-text-muted">Section 0{idx + 1}</span>
+            <div key={cat.name} className="relative z-10">
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-10"
+              >
+                <div className="w-14 h-14 shrink-0 rounded-2xl bg-bg-card border border-border-main flex items-center justify-center shadow-lg relative overflow-hidden group">
+                  <div 
+                    className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-500 blur-md"
+                    style={{ backgroundColor: cat.color }}
+                  />
+                  <cat.icon size={24} className="text-primary relative z-10" />
                 </div>
-
-                <div className="space-y-3 text-left">
-                  <h3 className="text-xl font-extrabold text-text-main tracking-tight uppercase">{cat.name}</h3>
-                  <p className="text-xs text-text-muted leading-relaxed">{cat.description}</p>
+                <div>
+                  <h3 className="text-2xl md:text-3xl font-black text-text-main tracking-tight">{cat.name}</h3>
+                  <p className="text-sm md:text-base text-text-muted mt-2 max-w-xl leading-relaxed">{cat.description}</p>
                 </div>
+              </motion.div>
 
-                <div className="h-[1px] w-full bg-border-main" />
-
-                {/* Sub-grid of individual skills */}
-                <div className="space-y-3.5 text-left">
-                  <h4 className="text-[10px] font-black uppercase tracking-wider text-text-muted">Skills Inventory</h4>
-                  <div className="grid grid-cols-1 gap-2.5">
-                    {cat.skills.map((skill) => (
-                      <div 
-                        key={skill.name}
-                        className="flex items-center justify-between p-3 rounded-xl bg-bg-card/45 border border-border-main hover:border-primary/10 hover:bg-bg-card transition-all duration-300"
-                      >
-                        <div className="flex items-center space-x-2.5">
-                          <CheckCircle2 size={12} className="text-primary shrink-0" />
-                          <span className="text-xs font-bold text-text-main">{skill.name}</span>
-                        </div>
-                        <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-md border border-border-main ${cat.badgeColor}`}>
-                          {skill.level}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
+                {cat.skills.map((skill, skillIdx) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: (idx * 0.1) + (skillIdx * 0.05) }}
+                    className="group relative glass-panel p-6 flex flex-col items-center justify-center overflow-hidden hover:-translate-y-2 transition-transform duration-300 border border-border-main/50 hover:border-primary/30"
+                  >
+                    {/* Hover Ambient Glow */}
+                    <div 
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl -z-10"
+                      style={{ backgroundColor: cat.color }}
+                    />
+                    
+                    <skill.TechIcon className="w-10 h-10 mb-4 text-text-muted group-hover:text-primary group-hover:scale-110 transition-all duration-300 relative z-10 drop-shadow-sm" />
+                    
+                    <span className="text-xs font-extrabold text-text-main text-center relative z-10 mb-2">{skill.name}</span>
+                    <span className={`text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-md border border-border-main ${cat.badgeColor} relative z-10 bg-bg-card/50 backdrop-blur-sm`}>
+                      {skill.level}
+                    </span>
+                  </motion.div>
+                ))}
               </div>
-
-              {/* Progress Line Accent */}
-              <div className="absolute bottom-0 left-0 h-[3px] bg-gradient-to-r from-primary to-amber-400 group-hover:w-full w-0 transition-all duration-750 ease-out" />
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
