@@ -98,13 +98,13 @@ export default function Skills() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.3, delay: skillIdx * 0.03 + catIdx * 0.1 }}
-                    className="group relative glass p-2 sm:p-2.5 rounded-xl flex flex-col items-center justify-center overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1.5 hover:scale-[1.02] border border-border-main hover:border-primary/40 shadow-sm hover:shadow-[0_8px_20px_rgba(249,115,22,0.12)] bg-bg-main hover:bg-primary/5 will-change-transform h-full cursor-default"
+                    className="group relative glass p-1.5 sm:p-2 rounded-xl flex flex-col items-center justify-center overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1.5 hover:scale-[1.02] border border-border-main hover:border-primary/40 shadow-sm hover:shadow-[0_8px_20px_rgba(249,115,22,0.12)] bg-bg-main hover:bg-primary/5 will-change-transform h-full cursor-default"
                   >
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-bg-card/80 border border-border-main/40 group-hover:bg-bg-main transition-colors duration-300 ease-out flex items-center justify-center mb-2 shadow-inner">
-                      <skill.TechIcon className={`w-4 h-4 sm:w-5 sm:h-5 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 ease-out ${skill.brandColor}`} />
+                    <div className="p-1.5 sm:p-2 rounded-lg bg-bg-card/80 border border-border-main/40 group-hover:bg-bg-main transition-colors duration-300 ease-out flex items-center justify-center mb-1.5 shadow-inner">
+                      <skill.TechIcon className={`w-7 h-7 sm:w-8 sm:h-8 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 ease-out ${skill.brandColor}`} />
                     </div>
                     
-                    <span className="text-[9px] sm:text-[10px] font-bold text-text-main text-center relative z-10 leading-tight">
+                    <span className="text-[9px] sm:text-[10px] font-bold text-text-main text-center relative z-10 leading-tight px-1">
                       {skill.name}
                     </span>
                   </motion.div>
