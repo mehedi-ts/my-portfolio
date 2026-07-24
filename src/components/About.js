@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Zap, Layers, Code, Server, Database } from "lucide-react";
+import { MoveRight, Cpu, Layout, Smartphone } from "lucide-react";
+import SectionLabel from "./SectionLabel";
 import AnimatedCounter from "./AnimatedCounter";
 
 const stats = [
@@ -14,26 +15,43 @@ const coreRules = [
   {
     title: "Clean Frontend UI",
     description: "Designing semantic interfaces, smooth hover responses, and fluid CSS states using React, Next.js, and Tailwind.",
-    icon: Zap,
+    icon: Layout,
   },
   {
     title: "Structured API Workflows",
     description: "Architecting modular server routing, Express middlewares, and secure query operations with Node.js.",
-    icon: Layers,
+    icon: Cpu,
   },
   {
     title: "Safe Database Systems",
     description: "Structuring reliable NoSQL collections, MongoDB schemas, and index pipelines for fluid record streams.",
-    icon: ShieldCheck,
+    icon: Smartphone,
   },
 ];
 
 export default function About() {
   return (
-    <section id="about" className="py-24 md:py-36 relative overflow-hidden bg-bg-card/10 border-y border-border-main select-none">
-      {/* Background soft ambient glows */}
-      <div className="absolute top-1/2 left-[5%] w-[350px] h-[350px] bg-secondary/5 rounded-full blur-[100px] -z-10" />
-      <div className="absolute bottom-[10%] right-[10%] w-[300px] h-[300px] bg-primary/4 rounded-full blur-[100px] -z-10 animate-pulse-soft" />
+    <section id="about" className="relative py-24 md:py-36 bg-bg-card/30 overflow-hidden select-none">
+      
+      {/* Contextual Background Animation: Morphing Gradient Blobs */}
+      <motion.div 
+        className="absolute top-1/4 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-primary rounded-full blur-[120px] pointer-events-none -z-10"
+        animate={{ 
+          x: [0, 50, -50, 0],
+          y: [0, 30, -30, 0],
+          opacity: [0.03, 0.05, 0.03]
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.div 
+        className="absolute bottom-1/4 right-1/4 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-orange-400 dark:bg-orange-200 rounded-full blur-[140px] pointer-events-none -z-10"
+        animate={{ 
+          x: [0, -60, 40, 0],
+          y: [0, -40, 50, 0],
+          opacity: [0.02, 0.04, 0.02]
+        }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+      />
 
       <div className="section-container">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -98,10 +116,7 @@ export default function About() {
             className="lg:col-span-7 space-y-10 text-left"
           >
             <div className="space-y-4">
-              <div className="flex items-center space-x-4">
-                <span className="text-xs font-black uppercase tracking-[0.4em] text-primary">Passion & Growth</span>
-                <div className="h-[1px] w-12 bg-primary/30" />
-              </div>
+              <SectionLabel>Passion & Growth</SectionLabel>
               
               <h2 className="text-4xl md:text-5xl font-black text-text-main leading-none">
                 Crafting interfaces with <span className="text-gradient">solid MERN</span> foundations.

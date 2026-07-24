@@ -5,6 +5,7 @@ import { Mail, MapPin, Send, CheckCircle, Loader2, Phone } from "lucide-react";
 import { Github, Linkedin, Twitter } from "./BrandIcons";
 import { SiFacebook, SiWhatsapp } from "react-icons/si";
 import { useState } from "react";
+import SectionLabel from "./SectionLabel";
 
 export default function Contact() {
   const [formState, setFormState] = useState({
@@ -35,9 +36,16 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-24 md:py-36 relative select-none overflow-hidden">
-
-      {/* Soft Blurred Gradient Blob Behind the Card */}
-      <div className="absolute top-1/2 left-[30%] w-[600px] h-[600px] bg-primary/10 dark:bg-primary/15 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 -z-10" />
+      
+      {/* Animated Soft Blurred Gradient Blob Behind the Card */}
+      <motion.div 
+        className="absolute top-1/2 left-[30%] w-[500px] h-[500px] bg-primary/10 dark:bg-primary/15 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 -z-10"
+        animate={{ 
+          x: [0, 80, -40, 0],
+          y: [0, -50, 60, 0]
+        }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+      />
 
       <div className="section-container max-w-6xl mx-auto px-4 relative z-10">
         {/* Section Header */}
@@ -48,12 +56,9 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <div className="flex items-center justify-center md:justify-start space-x-4 mb-4">
-            <span className="text-xs font-black uppercase tracking-[0.4em] text-primary">
-              Get In Touch
-            </span>
-            <div className="h-[1px] w-12 bg-primary/30" />
-          </div>
+          <SectionLabel className="justify-center md:justify-start">
+            Get In Touch
+          </SectionLabel>
           <h2 className="text-4xl md:text-5xl font-black text-text-main leading-tight">
             Let&apos;s Build Something <span className="text-gradient">Awesome.</span>
           </h2>

@@ -5,6 +5,7 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { projects } from "../lib/projects";
 import ProjectCard from "./ProjectCard";
+import SectionLabel from "./SectionLabel";
 
 export default function Projects() {
   // Sort by date (descending) and take the top 3 latest
@@ -13,18 +14,26 @@ export default function Projects() {
     .slice(0, 3);
 
   return (
-    <section id="projects" className="py-24 md:py-36 relative select-none">
-      <div className="section-container">
+    <section id="projects" className="py-24 md:py-36 relative select-none overflow-hidden">
+      {/* Shimmering Light Sweep Background */}
+      <motion.div
+        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none -z-10"
+        style={{
+          background: "linear-gradient(45deg, transparent 40%, rgba(234, 88, 12, 1) 45%, rgba(234, 88, 12, 1) 55%, transparent 60%)",
+          backgroundSize: "400% 400%"
+        }}
+        animate={{
+          backgroundPosition: ["0% 100%", "100% 0%"]
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+      />
+
+      <div className="section-container relative z-10">
         {/* Header */}
         <div className="mb-16">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 text-left">
             <div className="space-y-4">
-              <div className="flex items-center space-x-4">
-                <span className="text-xs font-black uppercase tracking-[0.4em] text-primary">
-                  Selected Works
-                </span>
-                <div className="h-[1px] w-12 bg-primary/30" />
-              </div>
+              <SectionLabel>Selected Works</SectionLabel>
               <h2 className="text-4xl md:text-5xl font-black text-text-main leading-tight">
                 Projects That <br className="hidden sm:block" />
                 <span className="text-gradient">Speak For Themselves.</span>

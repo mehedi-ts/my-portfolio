@@ -10,6 +10,7 @@ import {
 import { FaNetworkWired } from "react-icons/fa";
 import { VscVscode } from "react-icons/vsc";
 import { Layers, Code, Server, Database, Wrench } from "lucide-react";
+import SectionLabel from "./SectionLabel";
 
 const skillCategories = [
   {
@@ -65,14 +66,23 @@ const skillCategories = [
 export default function Skills() {
   return (
     <section id="skills" className="py-24 md:py-36 relative overflow-hidden bg-bg-main select-none">
-      <div className="absolute top-1/4 right-[5%] w-[300px] h-[300px] bg-primary/4 rounded-full blur-[90px] -z-10 animate-pulse-soft" />
+      
+      {/* Drifting Dot Grid Background */}
+      <motion.div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none -z-10"
+        style={{
+          backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)',
+          backgroundSize: '32px 32px'
+        }}
+        animate={{
+          backgroundPosition: ["0px 0px", "32px 32px"]
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+      />
 
       <div className="section-container max-w-6xl mx-auto">
         <div className="mb-14 max-w-2xl text-left">
-          <div className="flex items-center space-x-4 mb-4">
-            <span className="text-xs font-black uppercase tracking-[0.4em] text-primary">My Toolset</span>
-            <div className="h-[1px] w-12 bg-primary/30" />
-          </div>
+          <SectionLabel>My Toolset</SectionLabel>
           <h2 className="text-4xl md:text-5xl font-black text-text-main leading-tight mb-4">
             Languages & <span className="text-gradient">Frameworks.</span>
           </h2>
