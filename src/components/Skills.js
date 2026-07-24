@@ -96,7 +96,7 @@ export default function Skills() {
                     key={skill.name}
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
+                    viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.3, delay: skillIdx * 0.03 + catIdx * 0.1 }}
                     className="group relative glass p-1.5 sm:p-2 rounded-xl flex flex-col items-center justify-center overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1.5 hover:scale-[1.02] border border-border-main hover:border-primary/40 shadow-sm hover:shadow-[0_8px_20px_rgba(249,115,22,0.12)] bg-bg-main hover:bg-primary/5 will-change-transform h-full cursor-default"
                   >

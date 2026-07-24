@@ -59,6 +59,10 @@
     @apply border-border-main transition-colors duration-300 selection:bg-primary/20;
   }
   
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
     background-color: var(--bg-main);
     color: var(--text-main);

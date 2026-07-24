@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { Mail, MapPin, Send, CheckCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { Mail, MapPin, Send, CheckCircle, Loader2, Phone } from "lucide-react";
 import { Github, Linkedin, Twitter } from "./BrandIcons";
+import { SiFacebook, SiWhatsapp } from "react-icons/si";
 import { useState } from "react";
 
 export default function Contact() {
@@ -11,6 +12,7 @@ export default function Contact() {
     email: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const handleFormChange = (e) => {
@@ -19,213 +21,261 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    // Simulate API call
     setTimeout(() => {
-      setSubmitted(false);
-      setFormState({ name: "", email: "", message: "" });
-    }, 4000);
+      setIsSubmitting(false);
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormState({ name: "", email: "", message: "" });
+      }, 2000); // Checkmark + Sent for 2 seconds
+    }, 1500);
   };
 
   return (
-    <section
-      id="contact"
-      className="py-24 md:py-36 relative overflow-hidden bg-bg-main select-none"
-    >
-      {/* Background Soft Glow - perfectly responsive in Light/Dark */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/4 dark:bg-primary/3 rounded-full blur-[130px] pointer-events-none -z-10 animate-pulse-soft" />
+    <section id="contact" className="py-24 md:py-36 relative select-none overflow-hidden">
 
-      <div className="section-container">
+      {/* Soft Blurred Gradient Blob Behind the Card */}
+      <div className="absolute top-1/2 left-[30%] w-[600px] h-[600px] bg-primary/10 dark:bg-primary/15 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 -z-10" />
+
+      <div className="section-container max-w-6xl mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="mb-20 max-w-3xl text-left">
-          <div className="flex items-center space-x-4 mb-6">
+        <motion.div
+          className="mb-16 text-center md:text-left"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <div className="flex items-center justify-center md:justify-start space-x-4 mb-4">
             <span className="text-xs font-black uppercase tracking-[0.4em] text-primary">
               Get In Touch
             </span>
             <div className="h-[1px] w-12 bg-primary/30" />
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-text-main leading-tight">
-            Let&apos;s Build Something <br className="hidden sm:block" />
-            <span className="text-gradient">Awesome.</span>
+            Let&apos;s Build Something <span className="text-gradient">Awesome.</span>
           </h2>
-          <p className="mt-4 text-sm md:text-base text-text-muted leading-relaxed">
-            Whether you are looking to hire a full-stack developer, collaborate
-            on a React interface, or simply say hi, my inbox is always open.
-          </p>
-        </div>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Side: Contact Form Card */}
-          <div className="lg:col-span-7 w-full">
-            <div className="glass-panel p-8 md:p-12 relative overflow-hidden">
-              <AnimatePresence mode="wait">
-                {!submitted ? (
-                  <motion.form
-                    key="contact-form"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    onSubmit={handleSubmit}
-                    className="space-y-6 text-left"
-                  >
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-text-muted block px-1">
-                          Your Name
-                        </label>
-                        <input
-                          type="text"
-                          name="name"
-                          required
-                          value={formState.name}
-                          onChange={handleFormChange}
-                          className="w-full bg-bg-card border border-border-main rounded-xl px-5 py-4 text-xs text-text-main placeholder:text-text-muted focus:border-primary/50 outline-none transition-all font-semibold shadow-inner"
-                          placeholder="John Doe"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-text-muted block px-1">
-                          Email Address
-                        </label>
-                        <input
-                          type="email"
-                          name="email"
-                          required
-                          value={formState.email}
-                          onChange={handleFormChange}
-                          className="w-full bg-bg-card border border-border-main rounded-xl px-5 py-4 text-xs text-text-main placeholder:text-text-muted focus:border-primary/50 outline-none transition-all font-semibold shadow-inner"
-                          placeholder="john@company.com"
-                        />
-                      </div>
-                    </div>
+        {/* Unified Glassmorphism Card Container */}
+        <motion.div
+          className="rounded-2xl flex flex-col lg:flex-row overflow-hidden transition-all duration-300
+                     bg-white/80 backdrop-blur-xl shadow-2xl shadow-orange-900/5 border border-black/5 
+                     dark:bg-gray-900/60 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-black/40"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+        >
+          {/* Left Panel: Form (60%) */}
+          <div className="w-full lg:w-[60%] p-8 md:p-12 lg:p-16">
+            <form onSubmit={handleSubmit} className="space-y-10 flex flex-col h-full justify-between">
+              <div className="space-y-10">
+                <div className="grid md:grid-cols-2 gap-10 md:gap-8">
+                  {/* Name Input */}
+                  <div className="space-y-1 group">
+                    <label htmlFor="name" className="text-xs uppercase tracking-wide text-gray-500 dark:text-white/50 font-bold block transition-colors duration-200 group-focus-within:text-orange-500">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      placeholder="John Doe"
+                      value={formState.name}
+                      onChange={handleFormChange}
+                      className="w-full bg-transparent border-b border-gray-300 dark:border-white/20 py-2 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 focus:border-b-2 focus:border-orange-500 focus:outline-none transition-all duration-200"
+                    />
+                  </div>
 
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-text-muted block px-1">
-                        Your Message
-                      </label>
-                      <textarea
-                        name="message"
-                        rows="5"
-                        required
-                        value={formState.message}
-                        onChange={handleFormChange}
-                        className="w-full bg-bg-card border border-border-main rounded-xl px-5 py-4 text-xs text-text-main placeholder:text-text-muted focus:border-primary/50 outline-none transition-all font-semibold resize-none shadow-inner"
-                        placeholder="Tell me about your project, timeline, or just say hello..."
-                      />
-                    </div>
+                  {/* Email Input */}
+                  <div className="space-y-1 group">
+                    <label htmlFor="email" className="text-xs uppercase tracking-wide text-gray-500 dark:text-white/50 font-bold block transition-colors duration-200 group-focus-within:text-orange-500">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      placeholder="john@example.com"
+                      value={formState.email}
+                      onChange={handleFormChange}
+                      className="w-full bg-transparent border-b border-gray-300 dark:border-white/20 py-2 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 focus:border-b-2 focus:border-orange-500 focus:outline-none transition-all duration-200"
+                    />
+                  </div>
+                </div>
 
-                    <button
-                      type="submit"
-                      className="w-full glow-button py-4 text-[10px] font-black uppercase tracking-widest flex items-center justify-center space-x-2.5 cursor-pointer"
-                    >
-                      <span>Send Message</span>
-                      <Send
-                        size={12}
-                        className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                      />
-                    </button>
-                  </motion.form>
-                ) : (
-                  <motion.div
-                    key="success-message"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="py-16 text-center space-y-6 flex flex-col items-center justify-center"
-                  >
-                    <div className="w-14 h-14 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-500">
-                      <CheckCircle size={28} />
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="text-xl font-black text-text-main uppercase">
-                        Message Sent
-                      </h3>
-                      <p className="text-xs text-text-muted max-w-sm mx-auto leading-relaxed">
-                        Thank you for reaching out! I will check your message
-                        and get back to you within 24 hours.
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                {/* Message Input */}
+                <div className="space-y-1 group">
+                  <label htmlFor="message" className="text-xs uppercase tracking-wide text-gray-500 dark:text-white/50 font-bold block transition-colors duration-200 group-focus-within:text-orange-500">
+                    Your Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows="4"
+                    placeholder="Tell me about your project..."
+                    value={formState.message}
+                    onChange={handleFormChange}
+                    className="w-full bg-transparent border-b border-gray-300 dark:border-white/20 py-2 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 focus:border-b-2 focus:border-orange-500 focus:outline-none transition-all duration-200 resize-none"
+                  />
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="pt-6">
+                <button
+                  type="submit"
+                  disabled={isSubmitting || submitted}
+                  className="group relative bg-primary text-white rounded-full px-8 py-4 text-[11px] uppercase tracking-widest font-black shadow-lg shadow-orange-500/30 dark:shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/40 hover:scale-[1.03] transition-all duration-200 flex items-center gap-3 overflow-hidden disabled:opacity-90 disabled:hover:scale-100 disabled:cursor-default"
+                >
+                  {submitted ? (
+                    <span className="flex items-center gap-2">
+                      <CheckCircle size={16} /> Sent!
+                    </span>
+                  ) : isSubmitting ? (
+                    <span className="flex items-center gap-2">
+                      <Loader2 size={16} className="animate-spin" /> Sending...
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-3">
+                      Send Message
+                      <Send size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                    </span>
+                  )}
+                </button>
+              </div>
+            </form>
           </div>
 
-          {/* Right Side: Approachable Channels & Info */}
-          <div className="lg:col-span-5 space-y-8 w-full text-left">
-            {/* Direct Connect Card */}
-            <div className="glass-panel p-8 border-border-main rounded-2xl space-y-6">
-              <h4 className="text-[10px] font-black uppercase tracking-widest text-primary">
-                Direct Channels
-              </h4>
+          {/* Right Panel: Contact Info (40%) */}
+          <div className="w-full lg:w-[40%] bg-gray-900 dark:bg-black/40 dark:border-l dark:border-white/10 p-8 md:p-12 lg:p-16 text-white relative overflow-hidden flex flex-col justify-between transition-colors duration-300">
+            {/* Geometric Pattern Overlay for Texture */}
+            <div
+              className="absolute inset-0 opacity-[0.03] pointer-events-none"
+              style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}
+            />
 
-              <div className="space-y-5">
-                <a
-                  href="mailto:mehedihasan.j135@gmail.com"
-                  className="flex items-center space-x-4 group cursor-pointer"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-primary group-hover:border-primary/20 group-hover:scale-105 transition-all">
-                    <Mail size={16} />
-                  </div>
-                  <div>
-                    <h5 className="text-[8px] font-black text-text-muted uppercase tracking-wider">
-                      Email Direct
-                    </h5>
-                    <p className="text-xs font-bold text-text-main group-hover:text-primary transition-colors">
-                      mehedits.dev@gmail.com
-                    </p>
-                  </div>
-                </a>
+            <div className="relative z-10 space-y-12">
+              <div>
+                <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-primary mb-8">
+                  Contact Info
+                </h3>
 
-                <div className="flex items-center space-x-4">
-                  <div className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-secondary">
-                    <MapPin size={16} />
+                <div className="space-y-8">
+                  {/* Email Row - With pulsing accent glow */}
+                  <div className="flex items-center gap-5 group cursor-pointer">
+                    <div className="relative">
+                      {/* Pulse accent behind icon */}
+                      <div className="absolute inset-0 bg-primary/40 rounded-full blur-md animate-pulse"></div>
+                      <div className="relative w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shrink-0 shadow-lg shadow-orange-500/40 transition-transform duration-300 ease-out group-hover:-rotate-[8deg] group-hover:scale-110">
+                        <Mail size={16} />
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-1">
+                        Email
+                      </p>
+                      <a href="mailto:mehedits.dev@gmail.com" className="text-sm font-medium text-gray-100 hover:text-white transition-colors block">
+                        mehedits.dev@gmail.com
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <h5 className="text-[8px] font-black text-text-muted uppercase tracking-wider">
-                      Base Location
-                    </h5>
-                    <p className="text-xs font-bold text-text-main">
-                      Narayanganj, Bangladesh
-                    </p>
+
+                  {/* Phone/WhatsApp Row */}
+                  <div className="flex items-center gap-5 group cursor-pointer">
+                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shrink-0 shadow-lg shadow-orange-500/40 transition-transform duration-300 ease-out group-hover:-rotate-[8deg] group-hover:scale-110">
+                      <Phone size={16} />
+                    </div>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-1">
+                        Phone / WhatsApp
+                      </p>
+                      <a
+                        href="https://wa.me/8801XXXXXXXXX"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-sm font-medium text-gray-100 hover:text-white transition-colors block"
+                      >
+                        +880 1355-025437
+                      </a>
+                      <a
+                        href="https://wa.me/8801XXXXXXXXX"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs text-green-400 hover:text-green-300 mt-1 transition-colors"
+                      >
+                        <SiWhatsapp size={12} />
+                        <span>Chat on WhatsApp</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Location Row */}
+                  <div className="flex items-center gap-5 group cursor-pointer">
+                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shrink-0 shadow-lg shadow-orange-500/40 transition-transform duration-300 ease-out group-hover:-rotate-[8deg] group-hover:scale-110">
+                      <MapPin size={16} />
+                    </div>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-1">
+                        Location
+                      </p>
+                      <p className="text-sm font-medium text-gray-100 group-hover:text-white transition-colors block">
+                        Narayanganj, Bangladesh
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Approaching Collaborative Card */}
-            <div className="glass-panel p-8 border-border-main rounded-2xl space-y-5 select-none">
-              <div className="space-y-1">
-                <h4 className="text-[10px] font-black uppercase tracking-widest text-primary">
-                  Let&apos;s Connect
-                </h4>
-                <p className="text-xs text-text-muted leading-relaxed">
-                  I am regularly active on my professional networks. Let&apos;s
-                  connect, share developer notes, and discuss modern web design!
+              {/* Socials Section */}
+              <div className="pt-8 border-t border-white/10">
+                <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-4">
+                  Follow Me
                 </p>
-              </div>
-
-              <div className="flex space-x-4 pt-2">
-                <a
-                  href="https://github.com/mehedi-ts"
-                  className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all duration-300 hover:scale-105"
-                >
-                  <Github size={18} />
-                </a>
-                <a
-                  href="https://linkedin.com/in/mehedi-ts"
-                  className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all duration-300 hover:scale-105"
-                >
-                  <Linkedin size={18} />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all duration-300 hover:scale-105"
-                >
-                  <Twitter size={18} />
-                </a>
+                <div className="flex items-center gap-4">
+                  <a
+                    href="https://github.com/mehedi-ts"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-10 h-10 rounded-full border border-white/20 dark:border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-200"
+                  >
+                    <Github size={16} />
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/mehedi-ts"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-10 h-10 rounded-full border border-white/20 dark:border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-200"
+                  >
+                    <Linkedin size={16} />
+                  </a>
+                  <a
+                    href="https://facebook.com/mehedi-ts"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-10 h-10 rounded-full border border-white/20 dark:border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-200"
+                  >
+                    <SiFacebook size={16} />
+                  </a>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-10 h-10 rounded-full border border-white/20 dark:border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-200"
+                  >
+                    <Twitter size={16} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -23,7 +23,7 @@ export default function ProjectCard({ project, index, isFeatured }) {
         setIsModalOpen(false);
       }
     };
-    
+
     if (isModalOpen) {
       document.body.style.overflow = "hidden";
       document.addEventListener("keydown", handleKeyDown);
@@ -45,9 +45,8 @@ export default function ProjectCard({ project, index, isFeatured }) {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
         transition={{ duration: 0.5, delay: index * 0.05, ease: "easeOut" }}
-        className={`group relative flex flex-col h-full bg-gradient-to-b from-bg-card to-primary/[0.02] border border-border-main rounded-2xl md:rounded-[2rem] overflow-hidden transition-all duration-500 ease-out hover:-translate-y-1.5 hover:scale-[1.01] shadow-sm hover:shadow-2xl hover:shadow-primary/20 ${
-          isFeatured ? "md:col-span-2" : ""
-        }`}
+        className={`group relative flex flex-col h-full bg-gradient-to-b from-bg-card to-primary/[0.02] border border-border-main rounded-2xl md:rounded-[2rem] overflow-hidden transition-all duration-500 ease-out hover:-translate-y-1.5 hover:scale-[1.01] shadow-sm hover:shadow-2xl hover:shadow-primary/20 ${isFeatured ? "md:col-span-2" : ""
+          }`}
       >
         {/* Glow Border Effect */}
         <div className="absolute inset-0 rounded-2xl md:rounded-[2rem] border-2 border-transparent group-hover:border-primary/20 transition-colors duration-500 z-30 pointer-events-none" />
@@ -122,7 +121,7 @@ export default function ProjectCard({ project, index, isFeatured }) {
 
             {/* Action Button & Quick Links */}
             <div className="flex items-center justify-between pt-1">
-              
+
               {/* Quick Links Row */}
               <div className="flex items-center gap-2">
                 {project.githubClient && (
@@ -219,7 +218,7 @@ export default function ProjectCard({ project, index, isFeatured }) {
                     <X size={20} />
                   </button>
                 </div>
-                
+
                 {/* Modal Body / Iframe */}
                 <div className="w-full flex-grow bg-white relative">
                   <iframe
