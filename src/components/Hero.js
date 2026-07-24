@@ -13,27 +13,45 @@ import {
 import { Github, Linkedin } from "./BrandIcons";
 import ParticleBackground from "./ParticleBackground";
 
-export default function Hero() {
-  const [typewriterText, setTypewriterText] = useState("");
-  const [isScrolled, setIsScrolled] = useState(false);
+function TypewriterRotate({ phrases, typingSpeed = 100, deletingSpeed = 50, pauseDuration = 1500 }) {
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    let i = 0;
-    let current = "";
-    const text = '"MERN Stack Explorer";';
-    
-    const timer = setInterval(() => {
-      if (i < text.length) {
-        current += text.charAt(i);
-        setTypewriterText(current);
-        i++;
-      } else {
-        clearInterval(timer);
-      }
-    }, 100);
-    
-    return () => clearInterval(timer);
-  }, []);
+    const currentPhrase = phrases[phraseIndex];
+    let timeout;
+
+    if (!isDeleting && displayedText.length < currentPhrase.length) {
+      timeout = setTimeout(() => {
+        setDisplayedText(currentPhrase.slice(0, displayedText.length + 1));
+      }, typingSpeed);
+    } else if (!isDeleting && displayedText.length === currentPhrase.length) {
+      timeout = setTimeout(() => setIsDeleting(true), pauseDuration);
+    } else if (isDeleting && displayedText.length > 0) {
+      timeout = setTimeout(() => {
+        setDisplayedText(currentPhrase.slice(0, displayedText.length - 1));
+      }, deletingSpeed);
+    } else if (isDeleting && displayedText.length === 0) {
+      setIsDeleting(false);
+      setPhraseIndex((prev) => (prev + 1) % phrases.length);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayedText, isDeleting, phraseIndex, phrases, typingSpeed, deletingSpeed, pauseDuration]);
+
+  return (
+    <div className="flex items-center min-w-[200px]">
+      <span className="text-primary font-bold">
+        {displayedText}
+      </span>
+      <span className="inline-block w-1.5 h-4 bg-primary ml-1 animate-blink" />
+    </div>
+  );
+}
+
+export default function Hero() {
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -161,12 +179,14 @@ export default function Hero() {
                 <span className="text-text-muted select-none mr-1.5">
                   const developer ={" "}
                 </span>
-                <div className="flex items-center min-w-[200px]">
-                  <span className="text-primary font-bold">
-                    {typewriterText}
-                  </span>
-                  <span className="inline-block w-1.5 h-4 bg-primary ml-1 animate-blink" />
-                </div>
+                <TypewriterRotate
+                  phrases={[
+                    '"MERN Stack Explorer";',
+                    '"Full-Stack Developer";',
+                    '"React & Next.js Enthusiast";',
+                    '"Backend Problem Solver";'
+                  ]}
+                />
               </motion.div>
             </div>
 
