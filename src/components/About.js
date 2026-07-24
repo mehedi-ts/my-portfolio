@@ -3,13 +3,8 @@
 import { motion } from "framer-motion";
 import { MoveRight, Cpu, Layout, Smartphone } from "lucide-react";
 import SectionLabel from "./SectionLabel";
-import AnimatedCounter from "./AnimatedCounter";
 
-const stats = [
-  { label: "Learning & Code", value: "2+ Yrs", metric: "Active Dev" },
-  { label: "React Projects", value: "15+", metric: "Custom UI" },
-  { label: "MERN Stack Specialist", value: "100%", metric: "Hands-on" },
-];
+
 
 const coreRules = [
   {
@@ -31,7 +26,7 @@ const coreRules = [
 
 export default function About() {
   return (
-    <section id="about" className="relative py-24 md:py-36 bg-bg-card/30 overflow-hidden select-none">
+    <section id="about" className="relative scroll-mt-20 pt-32 pb-20 md:pt-40 md:pb-24 bg-bg-card/30 overflow-hidden select-none">
       
       {/* Contextual Background Animation: Morphing Gradient Blobs */}
       <motion.div 
@@ -65,7 +60,7 @@ export default function About() {
             className="lg:col-span-5 w-full flex items-center justify-center relative mt-6 lg:mt-0"
           >
             {/* Outer Bento Frame */}
-            <div className="w-[280px] h-[400px] lg:w-[340px] lg:h-[500px] rounded-[2rem] p-1 bg-gradient-to-tr from-secondary/40 via-primary/30 to-amber-500/20 shadow-xl flex items-center justify-center overflow-hidden group">
+            <div className="w-[260px] h-[320px] lg:w-[320px] lg:h-[400px] rounded-[2rem] p-1 bg-gradient-to-tr from-secondary/40 via-primary/30 to-amber-500/20 shadow-xl flex items-center justify-center overflow-hidden group">
               <div className="w-full h-full rounded-[1.8rem] bg-bg-main relative flex flex-col items-center justify-center overflow-hidden">
                 
                 {/* Micro dotted grid layer inside Card */}
@@ -93,18 +88,6 @@ export default function About() {
               </div>
             </div>
 
-            {/* Micro floating dashboard box overlay */}
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-8 -right-6 lg:-right-10 glass border-border-main p-4 rounded-2xl shadow-lg flex flex-col space-y-1.5 select-none z-20 whitespace-nowrap"
-            >
-              <span className="text-[9px] font-black uppercase tracking-wider text-text-muted">Main Goal</span>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 rounded-full bg-primary" />
-                <span className="text-sm font-black text-text-main">Clean Coding UI</span>
-              </div>
-            </motion.div>
           </motion.div>
 
           {/* Right Side: Narrative Copywriting Area */}
@@ -116,15 +99,24 @@ export default function About() {
             className="lg:col-span-7 space-y-10 text-left"
           >
             <div className="space-y-4">
-              <SectionLabel>Passion & Growth</SectionLabel>
+              <SectionLabel>About Me</SectionLabel>
               
-              <h2 className="text-4xl md:text-5xl font-black text-text-main leading-none">
-                Crafting interfaces with <span className="text-gradient">solid MERN</span> foundations.
+              <h2 className="text-4xl md:text-5xl font-black text-text-main leading-tight mb-2">
+                Turning complex logic into <br className="hidden lg:block" />
+                <span className="text-gradient">seamless experiences.</span>
               </h2>
               
-              <p className="text-sm md:text-base text-text-muted leading-relaxed">
-                I am a growing full-stack developer dedicated to building responsive, accessible web applications. I focus on creating interactive frontend systems coupled with structured Node.js / Express APIs and reliable MongoDB storage. I love continuous learning and constantly look for ways to write neater code, improve routing latency, and design delightful web tools.
-              </p>
+              <div className="space-y-4 text-sm md:text-base text-text-muted leading-relaxed">
+                <p>
+                  I've been writing code and building digital products since 2023. What started as an intense curiosity quickly evolved into a deep commitment to the craft. Since completing Programming Hero (Batch 13), I've spent every day deliberately sharpening my skills across the MERN ecosystem—mastering JavaScript, TypeScript, React, Next.js, Node.js, and PostgreSQL through relentless, hands-on development.
+                </p>
+                <p>
+                  I thrive on architecting production-grade, full-stack applications. Whether I'm building clinic management systems, lost-and-found platforms, or AI-powered support bots, I love the challenge of turning complex backend logic into clean, highly usable SaaS products. My long-term roadmap is clear: scale from freelancing to agency work, and ultimately step into the role of a SaaS founder.
+                </p>
+                <p>
+                  When I'm not architecting databases or refining UI, you'll usually find me reading or writing.
+                </p>
+              </div>
             </div>
 
             {/* Core Stack Highlights */}
@@ -146,19 +138,6 @@ export default function About() {
                     <p className="text-[11.5px] text-text-muted leading-relaxed">{rule.description}</p>
                   </div>
                 </motion.div>
-              ))}
-            </div>
-
-            {/* Stats Indicators Block */}
-            <div className="grid grid-cols-3 gap-4 pt-8 border-t border-border-main">
-              {stats.map((stat) => (
-                <div key={stat.label} className="space-y-1 text-left">
-                  <div className="text-2xl md:text-3xl font-black leading-none">
-                    <AnimatedCounter value={stat.value} />
-                  </div>
-                  <div className="text-[9px] font-black uppercase tracking-wider text-text-main leading-tight pt-1.5">{stat.label}</div>
-                  <div className="text-[8px] font-semibold text-text-muted uppercase tracking-wider">{stat.metric}</div>
-                </div>
               ))}
             </div>
           </motion.div>
