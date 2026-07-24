@@ -59,34 +59,32 @@ export default async function ProjectDetail({ params }) {
           </Link>
         </div>
 
-        {/* Full-Bleed Hero Image with Overlay Content */}
-        <section className="relative w-full aspect-[4/5] sm:aspect-[16/10] md:aspect-[21/9] rounded-[2rem] overflow-hidden bg-bg-card animate-fade-in-up">
+        {/* Project Header (Title and Tagline) */}
+        <div className="mb-12 animate-fade-in-up">
+          <div className="space-y-6 max-w-4xl">
+            <span className="inline-block px-4 py-1.5 bg-bg-card/50 text-text-main text-[10px] font-black uppercase tracking-[0.2em] rounded-full border border-border-main/50">
+              {project.category}
+            </span>
+            <h1 className="text-4xl md:text-6xl lg:text-[5.5rem] font-black text-text-main leading-[0.95] tracking-tighter">
+              {project.title}
+            </h1>
+            <p className="text-lg md:text-2xl text-text-muted font-medium max-w-prose leading-relaxed">
+              {project.shortDesc}
+            </p>
+          </div>
+        </div>
+
+        {/* Hero Image */}
+        <section className="relative w-full aspect-[4/5] sm:aspect-[16/10] md:aspect-[21/9] rounded-[2rem] overflow-hidden bg-bg-card animate-fade-in-up animation-delay-100 shadow-sm border border-border-main/10">
           {project.image ? (
             <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-text-muted">No Image Provided</div>
           )}
-          
-          {/* Bottom-heavy gradient for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
-          
-          <div className="absolute bottom-0 left-0 w-full p-8 md:p-12 lg:p-16 flex flex-col justify-end h-full">
-            <div className="space-y-6 max-w-4xl">
-              <span className="inline-block px-4 py-1.5 backdrop-blur-md bg-white/20 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full border border-white/10 shadow-lg">
-                {project.category}
-              </span>
-              <h1 className="text-4xl md:text-6xl lg:text-[5.5rem] font-black text-white leading-[0.95] tracking-tighter drop-shadow-2xl">
-                {project.title}
-              </h1>
-              <p className="text-lg md:text-2xl text-white/80 font-medium max-w-prose leading-relaxed drop-shadow-md">
-                {project.shortDesc}
-              </p>
-            </div>
-          </div>
         </section>
 
-        {/* Action Row Below Hero */}
-        <div className="flex flex-col sm:flex-row items-center gap-6 mt-8 md:px-12 animate-fade-in-up animation-delay-100">
+        {/* Action Row Below Image */}
+        <div className="flex flex-col sm:flex-row items-center gap-6 mt-12 animate-fade-in-up animation-delay-200">
           {project.liveUrl && (
             <a href={project.liveUrl} target="_blank" rel="noreferrer" className="w-full sm:w-auto px-10 py-4 bg-primary text-white text-[11px] font-black uppercase tracking-[0.2em] rounded-full flex items-center justify-center gap-3 hover:bg-orange-600 transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5">
               <span>Live Demo</span>
