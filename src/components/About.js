@@ -26,7 +26,7 @@ const coreRules = [
 
 export default function About() {
   return (
-    <section id="about" className="relative scroll-mt-20 pt-32 pb-20 md:pt-40 md:pb-24 bg-bg-card/30 overflow-hidden select-none">
+    <section id="about" className="relative scroll-mt-32 pt-28 pb-16 md:pt-36 md:pb-20 bg-bg-card/30 overflow-x-clip select-none">
       
       {/* Contextual Background Animation: Morphing Gradient Blobs */}
       <motion.div 
@@ -49,15 +49,15 @@ export default function About() {
       />
 
       <div className="section-container">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* Visual Side: Premium Profile Frame Slot 2 */}
+          {/* Visual Side: Premium Profile Frame (Sticky) */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 w-full flex items-center justify-center relative mt-6 lg:mt-0"
+            className="lg:col-span-5 w-full flex items-start justify-center relative mt-6 lg:mt-0 lg:sticky lg:top-32"
           >
             {/* Outer Bento Frame */}
             <div className="w-[260px] h-[320px] lg:w-[320px] lg:h-[400px] rounded-[2rem] p-1 bg-gradient-to-tr from-secondary/40 via-primary/30 to-amber-500/20 shadow-xl flex items-center justify-center overflow-hidden group">
@@ -106,15 +106,25 @@ export default function About() {
                 <span className="text-gradient">seamless experiences.</span>
               </h2>
               
-              <div className="space-y-4 text-sm md:text-base text-text-muted leading-relaxed">
+              <div className="space-y-6 text-sm md:text-base text-text-muted leading-relaxed">
                 <p>
-                  I've been writing code and building digital products since 2023. What started as an intense curiosity quickly evolved into a deep commitment to the craft. Since completing Programming Hero (Batch 13), I've spent every day deliberately sharpening my skills across the MERN ecosystem—mastering JavaScript, TypeScript, React, Next.js, Node.js, and PostgreSQL through relentless, hands-on development.
+                  I've been passionate about programming since 2023, when curiosity led me to write my first lines of code. What started as an interest quickly grew into a commitment to building modern, user-focused web applications. Since completing the Programming Hero Web Development Bootcamp, I've continued strengthening my skills through hands-on projects, exploring the MERN ecosystem with a strong focus on JavaScript, React.js, Next.js, Node.js, Express.js, and MongoDB.
                 </p>
                 <p>
-                  I thrive on architecting production-grade, full-stack applications. Whether I'm building clinic management systems, lost-and-found platforms, or AI-powered support bots, I love the challenge of turning complex backend logic into clean, highly usable SaaS products. My long-term roadmap is clear: scale from freelancing to agency work, and ultimately step into the role of a SaaS founder.
+                  I enjoy transforming ideas into responsive, intuitive, and scalable digital products. Whether I'm designing clean frontend interfaces, building secure backend APIs, or solving real-world development challenges, I appreciate writing maintainable code and creating seamless user experiences. Every project is an opportunity to improve my problem-solving skills and learn better development practices.
                 </p>
+
+                {/* Highlight Pull-Quote Block (Paragraph 4) */}
+                <div className="border-l-4 border-primary bg-primary/5 p-6 rounded-r-2xl my-8">
+                  <p className="text-text-main font-semibold italic md:text-lg">
+                    As a developer, I believe consistency, continuous learning, and attention to detail are the foundations of long-term success. I'm currently looking for opportunities where I can contribute to meaningful projects, collaborate with experienced developers, and continue growing into a skilled Full-Stack Software Engineer.
+                  </p>
+                </div>
+
+                <hr className="border-border-main my-8" />
+
                 <p>
-                  When I'm not architecting databases or refining UI, you'll usually find me reading or writing.
+                  Beyond coding, I enjoy reading technology blogs, writing technical articles, and exploring the latest trends in web development. I also enjoy watching football and spending time learning new tools and technologies that help me grow as a developer. These interests keep me curious, motivated, and continuously improving both my technical and communication skills.
                 </p>
               </div>
             </div>
