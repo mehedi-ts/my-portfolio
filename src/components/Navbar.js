@@ -5,6 +5,7 @@ import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import Logo from "./Logo";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
 import { Github, Linkedin } from "./BrandIcons";
@@ -149,20 +150,8 @@ export default function Navbar() {
           )}
 
           {/* Brand Logo */}
-          <Link href="/" className="font-extrabold tracking-tighter text-text-main group flex items-center space-x-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg relative z-10">
-            <span className={cn("hidden sm:block font-black text-text-main transition-all duration-300 ease-out", scrolled ? "text-lg" : "text-xl")}>
-              Mehedi Hasan
-            </span>
-            <span className={cn("sm:hidden font-black text-text-main transition-all duration-300 ease-out", scrolled ? "text-lg" : "text-xl")}>
-              MH
-            </span>
-            <motion.span
-              animate={{ scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-              className={cn("text-primary font-black transition-all duration-300 ease-out", scrolled ? "text-lg" : "text-xl")}
-            >
-              .
-            </motion.span>
+          <Link href="/" aria-label="Home" className="group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg relative z-10 flex items-center">
+            <Logo size={scrolled ? "sm" : "md"} className="transition-all duration-300 ease-out hover:scale-105" />
           </Link>
 
           {/* Desktop Navigation Links */}

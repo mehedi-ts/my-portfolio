@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Github, Linkedin, Twitter, Instagram } from "./BrandIcons";
+import Logo from "./Logo";
 import { Globe } from "lucide-react";
 
 export default function Footer() {
@@ -33,10 +34,8 @@ export default function Footer() {
           
           {/* Brand/Introduction Block */}
           <div className="md:col-span-5 space-y-6">
-            <Link href="/" className="text-xl font-extrabold tracking-tighter text-text-main flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-primary to-amber-500 flex items-center justify-center text-white text-sm font-black shadow-md shadow-primary/20">M</div>
-              <span className="font-black text-text-main">Hasan</span>
-              <span className="text-primary font-black">.</span>
+            <Link href="/" aria-label="Home" className="inline-block hover:scale-105 transition-transform duration-300">
+              <Logo size="lg" />
             </Link>
             
             <p className="text-text-muted leading-relaxed max-w-sm text-xs font-medium">

@@ -1,4 +1,4 @@
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Dancing_Script } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import CustomCursor from "@/components/CustomCursor";
@@ -13,6 +13,11 @@ const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta" 
 });
 
+const dancingScript = Dancing_Script({
+  subsets: ["latin"],
+  variable: "--font-signature",
+});
+
 export const metadata = {
   title: "Mehedi Hasan | Staff Web Engineer",
   description: "Premium Portfolio of Mehedi Hasan - Staff Full Stack Web Developer & Product Designer",
@@ -21,7 +26,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${jakarta.variable} font-sans`} suppressHydrationWarning>
+      <body className={`${jakarta.variable} ${dancingScript.variable} font-sans`} suppressHydrationWarning>
         <Providers>
           <SmoothScroll>
             <CustomCursor />

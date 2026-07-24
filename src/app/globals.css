@@ -12,6 +12,7 @@
   --color-border-main: var(--border-main);
 
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui;
+  --font-signature: var(--font-signature), cursive;
 }
 
 /* Light Theme (Default) */
