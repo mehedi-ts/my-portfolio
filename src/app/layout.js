@@ -6,6 +6,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import { Providers } from "@/components/Providers";
 import BackgroundElements from "@/components/BackgroundElements";
 import PageTransition from "@/components/PageTransition";
+import BackToTop from "@/components/BackToTop";
 
 const jakarta = Plus_Jakarta_Sans({ 
   subsets: ["latin"],
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
             <PageTransition>
               {children}
             </PageTransition>
+            <BackToTop />
           </SmoothScroll>
         </Providers>
       </body>
