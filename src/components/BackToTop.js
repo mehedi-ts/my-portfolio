@@ -13,9 +13,9 @@ export default function BackToTop() {
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          if (window.scrollY > 400) {
+          if (window.scrollY > 500) {
             setIsVisible(true);
-          } else {
+          } else if (window.scrollY < 300) {
             setIsVisible(false);
           }
           ticking = false;
@@ -48,8 +48,8 @@ export default function BackToTop() {
           transition={{ duration: 0.3, ease: "easeOut" }}
           onClick={scrollToTop}
           aria-label="Back to top"
-          className="fixed bottom-6 right-6 z-[90] flex items-center justify-center 
-                     w-10 h-10 md:w-12 md:h-12 rounded-full 
+          className="fixed bottom-6 right-6 z-50 flex items-center justify-center 
+                     w-10 h-10 md:w-12 md:h-12 rounded-full pointer-events-auto
                      bg-primary text-white 
                      shadow-lg shadow-orange-500/30 
                      hover:scale-110 hover:shadow-xl hover:shadow-orange-500/40 
