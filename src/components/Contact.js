@@ -204,15 +204,7 @@ export default function Contact() {
                       >
                         +880 1355-025437
                       </a>
-                      <a
-                        href="https://wa.me/8801XXXXXXXXX"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs text-green-400 hover:text-green-300 mt-1 transition-colors"
-                      >
-                        <SiWhatsapp size={12} />
-                        <span>Chat on WhatsApp</span>
-                      </a>
+
                     </div>
                   </div>
 
@@ -256,21 +248,14 @@ export default function Contact() {
                     <Linkedin size={16} />
                   </a>
                   <a
-                    href="https://facebook.com/mehedi-ts"
+                    href="https://www.facebook.com/profile.php?id=61589513515471"
                     target="_blank"
                     rel="noreferrer"
                     className="w-10 h-10 rounded-full border border-white/20 dark:border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-200"
                   >
                     <SiFacebook size={16} />
                   </a>
-                  <a
-                    href="#"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-10 h-10 rounded-full border border-white/20 dark:border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-200"
-                  >
-                    <Twitter size={16} />
-                  </a>
+
                 </div>
               </div>
             </div>
