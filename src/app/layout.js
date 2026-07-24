@@ -5,6 +5,7 @@ import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
 import { Providers } from "@/components/Providers";
 import BackgroundElements from "@/components/BackgroundElements";
+import PageTransition from "@/components/PageTransition";
 
 const jakarta = Plus_Jakarta_Sans({ 
   subsets: ["latin"],
@@ -25,7 +26,9 @@ export default function RootLayout({ children }) {
             <CustomCursor />
             <Navbar />
             <BackgroundElements />
-            {children}
+            <PageTransition>
+              {children}
+            </PageTransition>
           </SmoothScroll>
         </Providers>
       </body>

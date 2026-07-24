@@ -1,21 +1,20 @@
 "use client";
 
-import { Menu, X, Sun, Moon } from "lucide-react";
-import { Github, Linkedin } from "./BrandIcons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sun, Moon } from "lucide-react";
+import { Github, Linkedin } from "./BrandIcons";
 
-// Optimized links count for desktop to prevent wrapping on smaller monitors
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/#about" },
-  { name: "Skills", href: "/#skills" },
+  { name: "About", href: "/about" },
   { name: "Projects", href: "/projects" },
-  { name: "Experience", href: "/#experience" },
-  { name: "Contact", href: "/#contact" },
+  { name: "Blogs", href: "/blogs" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -23,177 +22,151 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
   const pathname = usePathname();
+  
+  const drawerRef = useRef(null);
+  const hamburgerRef = useRef(null);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
+    let ticking = false;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-
-      if (pathname === "/") {
-        const sections = [
-          "home",
-          "about",
-
-          "skills",
-          "projects",
-          "experience",
-
-          "contact",
-        ];
-        const current = sections.find((section) => {
-          const el = document.getElementById(section);
-          if (el) {
-            const rect = el.getBoundingClientRect();
-            return rect.top <= 120 && rect.bottom >= 120;
-          }
-          return false;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 50);
+          ticking = false;
         });
-        if (current) setActiveSection(current);
+        ticking = true;
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [pathname]);
+  }, []);
 
   const isActive = (href) => {
-    if (pathname === "/projects" && href === "/projects") return true;
-    if (pathname === "/" && href === "/")
-      return activeSection === "home" || activeSection === "";
-    if (href.startsWith("/#")) {
-      const sectionId = href.split("#")[1];
-      return pathname === "/" && activeSection === sectionId;
+    if (href === "/") {
+      return pathname === "/";
     }
-    return false;
+    return pathname.startsWith(href);
+  };
+
+  // Accessibility: Focus Trap and Escape Key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!isOpen) return;
+
+      if (e.key === "Escape") {
+        setIsOpen(false);
+        hamburgerRef.current?.focus();
+        return;
+      }
+
+      if (e.key === "Tab" && drawerRef.current) {
+        const focusableElements = drawerRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        
+        if (focusableElements.length === 0) return;
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            lastElement.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            firstElement.focus();
+            e.preventDefault();
+          }
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
+
+  // Focus drawer on open
+  useEffect(() => {
+    if (isOpen && drawerRef.current) {
+      const focusableElements = drawerRef.current.querySelectorAll(
+        'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusableElements.length > 0) {
+        // slightly delay focus to allow animation to start
+        setTimeout(() => focusableElements[0].focus(), 50);
+      }
+    }
+  }, [isOpen]);
+
+  // Close mobile menu on resize to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024 && isOpen) { // lg breakpoint is 1024px
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isOpen]);
+
+  // Framer Motion variants for mobile menu
+  const mobileMenuVariants = {
+    closed: { x: "100%", transition: { type: "tween", duration: 0.3 } },
+    open: { x: 0, transition: { type: "tween", duration: 0.3, staggerChildren: 0.08, delayChildren: 0.1 } },
+  };
+
+  const linkVariants = {
+    closed: { x: 20, opacity: 0 },
+    open: { x: 0, opacity: 1 },
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-[100] flex justify-center p-4 md:p-6 pointer-events-none select-none">
-      {/* Main Bar Wrapper - Static, simple, stable, zero fancy entrance animations */}
+    <nav className="fixed top-0 left-0 right-0 z-[100] flex justify-center w-full pointer-events-none select-none px-4 md:px-6 transition-all duration-300">
       <div
         className={cn(
-          "flex w-full max-w-7xl items-center justify-between rounded-[1.5rem] md:rounded-[2rem] px-6 md:px-8 py-3.5 transition-all duration-300 pointer-events-auto",
-          scrolled
-            ? "glass shadow-lg shadow-black/5 dark:shadow-white/2 border border-border-main backdrop-blur-2xl py-3"
-            : "bg-transparent border border-transparent",
+          "w-full max-w-7xl mx-auto transition-all duration-300 pointer-events-auto relative",
+          scrolled ? "mt-4" : "mt-6 md:mt-8"
         )}
       >
-        {/* Brand Logo */}
-        <Link
-          href="/"
-          className="text-lg md:text-xl font-extrabold tracking-tighter text-text-main group flex items-center space-x-2"
-        >
-          <span className="hidden sm:block font-black text-text-main">
-            Mehedi Hasan
-          </span>
-          <span className="text-primary font-black">.</span>
-        </Link>
-
-        {/* Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center space-x-1">
-          {navLinks.map((link) => {
-            const active = isActive(link.href);
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={cn(
-                  "relative px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.25em] transition-all duration-200 hover:text-primary",
-                  active
-                    ? "text-primary bg-primary/5 dark:bg-primary/10"
-                    : "text-text-muted",
-                )}
-              >
-                <span>{link.name}</span>
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Desktop Theme Toggle & CTA Buttons */}
-        <div className="hidden lg:flex items-center space-x-4 shrink-0">
-          {mounted && (
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2.5 rounded-xl bg-bg-card border border-border-main text-text-muted hover:text-primary transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
-              aria-label="Toggle Theme"
-            >
-              {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
-            </button>
-          )}
-          <a
-            href="https://drive.google.com/file/d/1k6-itZYqgHNLzDHAxbEALXIqkusE00sT/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-xl bg-primary px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-white transition-all duration-200 hover:scale-105 hover:bg-primary/95 text-center whitespace-nowrap shrink-0"
-          >
-            Download Resume
-          </a>
-        </div>
-
-        {/* Mobile Navbar Control Center (Theme Toggle + Burger Icon) */}
-        <div className="flex lg:hidden items-center space-x-3 pointer-events-auto">
-          {mounted && (
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2.5 rounded-xl bg-bg-card border border-border-main text-text-muted hover:text-primary transition-all duration-200 cursor-pointer"
-              aria-label="Toggle Theme"
-            >
-              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-            </button>
-          )}
-          <button
-            className="text-text-main p-2.5 bg-bg-card border border-border-main rounded-xl hover:bg-bg-card/80 transition-colors cursor-pointer"
-            onClick={() => setIsOpen(true)}
-            aria-label="Open Menu"
-          >
-            <Menu size={18} />
-          </button>
-        </div>
-      </div>
-
-      {/* Redesigned, Bulletproof Mobile Navbar Overlay (Simple, stable transitions, closes on any backdrop or link click) */}
-      <div
-        className={cn(
-          "fixed inset-0 z-[999] lg:hidden transition-all duration-300 ease-in-out pointer-events-none",
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0",
-        )}
-      >
-        {/* Clickable Backdrop Overlay */}
         <div
           className={cn(
-            "absolute inset-0 bg-bg-main/80 backdrop-blur-md transition-opacity duration-300",
-            isOpen ? "opacity-100" : "opacity-0",
-          )}
-          onClick={() => setIsOpen(false)}
-        />
-
-        {/* Sliding Menu Side Panel Drawer */}
-        <div
-          className={cn(
-            "absolute top-0 right-0 bottom-0 w-full max-w-[300px] bg-bg-main border-l border-border-main p-6 flex flex-col transition-transform duration-300 ease-out shadow-2xl",
-            isOpen ? "translate-x-0" : "translate-x-full",
+            "flex w-full items-center justify-between transition-all duration-300 ease-out overflow-hidden",
+            scrolled
+              ? "rounded-full bg-bg-main/70 backdrop-blur-xl border border-transparent shadow-[0_8px_30px_rgb(0,0,0,0.04)] py-2.5 px-4 md:px-6"
+              : "rounded-[2rem] bg-transparent border border-transparent py-4 px-2 md:px-4"
           )}
         >
-          {/* Mobile Drawer Header */}
-          <div className="flex items-center justify-between mb-8 pb-4 border-b border-border-main/50">
-            <span className="text-[10px] font-black uppercase tracking-widest text-primary">
-              Navigation
+          {scrolled && (
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent transition-opacity duration-300" />
+          )}
+
+          {/* Brand Logo */}
+          <Link href="/" className="font-extrabold tracking-tighter text-text-main group flex items-center space-x-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg relative z-10">
+            <span className={cn("hidden sm:block font-black text-text-main transition-all duration-300 ease-out", scrolled ? "text-lg" : "text-xl")}>
+              Mehedi Hasan
             </span>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="p-2 border border-border-main rounded-xl text-text-main hover:bg-bg-card transition-colors cursor-pointer"
-              aria-label="Close Menu"
+            <span className={cn("sm:hidden font-black text-text-main transition-all duration-300 ease-out", scrolled ? "text-lg" : "text-xl")}>
+              MH
+            </span>
+            <motion.span
+              animate={{ scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+              className={cn("text-primary font-black transition-all duration-300 ease-out", scrolled ? "text-lg" : "text-xl")}
             >
-              <X size={16} />
-            </button>
-          </div>
+              .
+            </motion.span>
+          </Link>
 
-          {/* Links list - closes mobile drawer instantly on click */}
-          <div className="flex-1 flex flex-col space-y-3 overflow-y-auto pr-1">
+          {/* Desktop Navigation Links */}
+          <div className="hidden lg:flex items-center relative z-10 bg-transparent">
             {navLinks.map((link) => {
               const active = isActive(link.href);
               return (
@@ -201,58 +174,162 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   className={cn(
-                    "text-xl font-bold py-2 px-3 rounded-xl border border-transparent text-left transition-all",
-                    active
-                      ? "text-primary bg-primary/5 border-primary/10"
-                      : "text-text-main hover:text-primary hover:bg-bg-card/50",
+                    "relative px-4 py-2 text-[11px] uppercase tracking-[0.15em] font-black transition-all duration-300 ease-out group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-full hover:scale-[1.02]",
+                    active ? "text-primary" : "text-text-muted hover:text-text-main"
                   )}
-                  onClick={() => setIsOpen(false)}
                 >
-                  {link.name}
+                  <span className="relative z-10">{link.name}</span>
+                  {active && (
+                    <motion.div
+                      layoutId="activeNavIndicator"
+                      className="absolute inset-0 bg-primary/10 rounded-full z-0"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
                 </Link>
               );
             })}
           </div>
 
-          {/* Bottom mobile drawer footer (Theme + CTA + Socials) */}
-          <div className="pt-6 border-t border-border-main/50 space-y-6">
-            {/* Direct CTA Link inside Mobile Menu */}
-            <a
-              href="https://drive.google.com/file/d/1k6-itZYqgHNLzDHAxbEALXIqkusE00sT/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setIsOpen(false)}
-              className="block w-full py-3.5 rounded-xl bg-primary text-white text-[10px] font-black uppercase tracking-widest text-center shadow-md hover:bg-primary/95 transition-all"
+          {/* Desktop Theme Toggle & CTA Buttons */}
+          <div className="hidden lg:flex items-center space-x-3 shrink-0 relative z-10">
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2.5 rounded-full bg-transparent hover:bg-bg-card/50 text-text-muted hover:text-primary transition-all duration-200 hover:scale-[1.05] active:scale-95 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary flex items-center justify-center min-w-[37px] min-h-[37px]"
+              aria-label="Toggle Theme"
             >
-              Download Resume
+              {mounted ? (theme === "dark" ? <Sun size={17} /> : <Moon size={17} />) : <span className="w-[17px] h-[17px] block" />}
+            </button>
+            <a
+              href="mailto:contact@mehedihasan.com"
+              className="rounded-full bg-primary px-6 py-2.5 text-[11px] font-black uppercase tracking-[0.15em] text-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(234,88,12,0.4)] hover:bg-primary/95 hover:scale-[1.05] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg-main"
+            >
+              Let's Connect
             </a>
+          </div>
 
-            <div className="flex items-center justify-between pt-2">
-              <span className="text-[9px] font-black uppercase tracking-wider text-text-muted">
-                Stay Connected
-              </span>
-              <div className="flex space-x-3">
-                <a
-                  href="https://github.com/mehedi-ts"
-                  className="w-8 h-8 rounded-lg bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all"
-                >
-                  <Github size={14} />
-                </a>
-                <a
-                  href="https://linkedin.com/in/mehedi-ts"
-                  className="w-8 h-8 rounded-lg bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all"
-                >
-                  <Linkedin size={14} />
-                </a>
-              </div>
-            </div>
-
-            <p className="text-[9px] font-mono text-text-muted text-left">
-              &copy; {new Date().getFullYear()} Mehedi Hasan.
-            </p>
+          {/* Mobile Navbar Control Center (Theme Toggle + Burger Icon) */}
+          <div className="flex lg:hidden items-center space-x-2 pointer-events-auto relative z-10">
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2.5 rounded-full bg-transparent text-text-muted hover:text-primary transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary hover:scale-[1.05]"
+              aria-label="Toggle Theme"
+            >
+              {mounted ? (theme === "dark" ? <Sun size={18} /> : <Moon size={18} />) : <span className="w-[18px] h-[18px] block" />}
+            </button>
+            <button
+              ref={hamburgerRef}
+              className="relative z-[1001] min-h-[44px] min-w-[44px] flex flex-col items-center justify-center space-y-1.5 p-2 bg-transparent rounded-full transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary hover:scale-[1.05]"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle navigation menu"
+              aria-expanded={isOpen}
+            >
+              <span className={cn("block w-5 h-0.5 bg-text-main transition-transform duration-300 ease-in-out", isOpen ? "translate-y-2 rotate-45" : "")} />
+              <span className={cn("block w-5 h-0.5 bg-text-main transition-opacity duration-300 ease-in-out", isOpen ? "opacity-0" : "")} />
+              <span className={cn("block w-5 h-0.5 bg-text-main transition-transform duration-300 ease-in-out", isOpen ? "-translate-y-2 -rotate-45" : "")} />
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Redesigned, Bulletproof Mobile Navbar Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[999] bg-bg-main/90 backdrop-blur-md pointer-events-auto lg:hidden"
+              onClick={() => setIsOpen(false)}
+            />
+            <motion.div
+              ref={drawerRef}
+              variants={mobileMenuVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              className="fixed top-0 right-0 bottom-0 z-[1000] w-full max-w-[300px] bg-bg-main border-l border-border-main p-6 flex flex-col shadow-2xl pointer-events-auto lg:hidden"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile Navigation"
+            >
+              <div className="flex items-center justify-between mb-12 mt-4">
+                <span className="text-xs font-black uppercase tracking-widest text-primary">
+                  Navigation
+                </span>
+                {/* Burger morphs into X, so we don't need a close button here */}
+              </div>
+
+              <div className="flex-1 flex flex-col space-y-2 overflow-y-auto pr-1">
+                {navLinks.map((link) => {
+                  const active = isActive(link.href);
+                  return (
+                    <motion.div key={link.name} variants={linkVariants}>
+                      <Link
+                        href={link.href}
+                        className={cn(
+                          "flex items-center min-h-[44px] text-xl font-bold py-3 px-4 rounded-2xl border border-transparent transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary relative overflow-hidden group hover:scale-[1.02]",
+                          active
+                            ? "text-primary bg-primary/5"
+                            : "text-text-main hover:text-primary hover:bg-bg-card/50"
+                        )}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <span className="relative z-10">{link.name}</span>
+                        {active && (
+                          <motion.div
+                            layoutId="mobileActiveNavIndicator"
+                            className="absolute left-0 top-0 bottom-0 w-1 bg-primary z-0 rounded-r-full"
+                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                          />
+                        )}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              <motion.div variants={linkVariants} className="pt-6 border-t border-border-main/50 space-y-6">
+                <a
+                  href="mailto:contact@mehedihasan.com"
+                  onClick={() => setIsOpen(false)}
+                  className="rounded-full bg-primary flex items-center justify-center min-h-[44px] w-full py-3.5 px-4 text-[11px] font-black uppercase tracking-widest text-white hover:shadow-[0_0_20px_rgba(234,88,12,0.4)] hover:bg-primary/95 hover:scale-[1.02] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg-main"
+                >
+                  Let's Connect
+                </a>
+
+                <div className="flex items-center justify-between pt-2">
+                  <span className="text-xs font-black uppercase tracking-wider text-text-muted">
+                    Stay Connected
+                  </span>
+                  <div className="flex space-x-3">
+                    <a
+                      href="https://github.com/mehedi-ts"
+                      className="min-h-[44px] min-w-[44px] rounded-full bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary hover:scale-[1.05]"
+                      aria-label="GitHub"
+                    >
+                      <Github size={20} />
+                    </a>
+                    <a
+                      href="https://linkedin.com/in/mehedi-ts"
+                      className="min-h-[44px] min-w-[44px] rounded-full bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary hover:scale-[1.05]"
+                      aria-label="LinkedIn"
+                    >
+                      <Linkedin size={20} />
+                    </a>
+                  </div>
+                </div>
+
+                <p className="text-xs font-mono text-text-muted text-left">
+                  &copy; {new Date().getFullYear()} Mehedi Hasan.
+                </p>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
