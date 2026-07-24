@@ -14,7 +14,7 @@ const navLinks = [
   { name: "About", href: "/about" },
   { name: "Projects", href: "/projects" },
   { name: "Blogs", href: "/blogs" },
-  { name: "Contact", href: "/contact" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
@@ -23,7 +23,7 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  
+
   const drawerRef = useRef(null);
   const hamburgerRef = useRef(null);
 
@@ -43,7 +43,7 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -69,7 +69,7 @@ export default function Navbar() {
         const focusableElements = drawerRef.current.querySelectorAll(
           'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
         );
-        
+
         if (focusableElements.length === 0) return;
 
         const firstElement = focusableElements[0];

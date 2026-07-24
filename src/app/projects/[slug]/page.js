@@ -47,20 +47,18 @@ export default async function ProjectDetail({ params }) {
   const restOfOverview = project.overview.substring(pullQuote.length).trim();
 
   return (
-    <main className="min-h-screen bg-bg-main text-left pb-0 selection:bg-primary/30 selection:text-primary">
+    <main className="min-h-screen bg-bg-main text-left pb-0 pt-24 md:pt-32 selection:bg-primary/30 selection:text-primary">
       
-      {/* Top Bar Navigation */}
-      <div className="absolute top-0 left-0 w-full z-50 pt-8 pb-4">
-        <div className="max-w-7xl mx-auto px-6 flex items-center">
-          <Link href="/projects" className="group inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-white/70 hover:text-white transition-colors bg-black/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 pb-24">
+        
+        {/* Top Bar Navigation (Flows naturally below global Navbar) */}
+        <div className="mb-8 flex items-center">
+          <Link href="/projects" className="group inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-text-muted hover:text-text-main transition-colors px-5 py-2.5 rounded-full border border-border-main/50 hover:border-text-main/30 bg-bg-card/50">
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
             <span>Back to Projects</span>
           </Link>
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6 pt-6 pb-24">
-        
         {/* Full-Bleed Hero Image with Overlay Content */}
         <section className="relative w-full aspect-[4/5] sm:aspect-[16/10] md:aspect-[21/9] rounded-[2rem] overflow-hidden bg-bg-card animate-fade-in-up">
           {project.image ? (
