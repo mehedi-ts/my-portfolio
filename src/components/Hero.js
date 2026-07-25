@@ -304,18 +304,6 @@ export default function Hero() {
                 {/* Subtle Inner Glass Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-bg-main/30 to-transparent z-15" />
 
-                {/* Bottom Frame Tech Stack Tag */}
-                <div className="absolute bottom-6 border border-border-main bg-bg-card/85 backdrop-blur-md rounded-full px-4 py-2 flex items-center space-x-3.5 z-20">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-[8px] font-black uppercase tracking-widest text-text-main">
-                      MERN Specialist
-                    </span>
-                  </div>
-                  <span className="text-[8px] font-mono text-primary font-bold">
-                    v1.0.0
-                  </span>
-                </div>
               </div>
             </motion.div>
 

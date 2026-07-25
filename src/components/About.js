@@ -58,7 +58,7 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 w-full flex items-start justify-center relative mt-6 lg:mt-0 lg:sticky lg:top-32"
+            className="hidden md:flex lg:col-span-5 w-full items-start justify-center relative mt-6 lg:mt-0 lg:sticky lg:top-32"
           >
             {/* Outer Bento Frame */}
             <div className="w-[260px] h-[320px] lg:w-[320px] lg:h-[400px] rounded-[2rem] p-1 bg-gradient-to-tr from-secondary/40 via-primary/30 to-amber-500/20 shadow-xl flex items-center justify-center overflow-hidden group">
@@ -77,14 +77,7 @@ export default function About() {
                 {/* Subtle Inner Glass Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-bg-main/30 to-transparent z-15" />
 
-                {/* Stack highlight badge */}
-                <div className="absolute top-5 left-5 border border-border-main bg-bg-card/85 backdrop-blur-md rounded-xl p-3 flex items-center gap-3 z-20 whitespace-nowrap">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-text-main flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
-                    Clean Coder
-                  </span>
-                  <span className="text-[10px] font-mono text-secondary font-bold">MERN stack</span>
-                </div>
+
 
               </div>
             </div>
