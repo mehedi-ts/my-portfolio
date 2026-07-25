@@ -14,8 +14,7 @@ const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Projects", href: "/projects" },
-  { name: "Blogs", href: "/blogs" },
-  { name: "Contact", href: "#contact" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -189,12 +188,12 @@ export default function Navbar() {
             >
               {mounted ? (theme === "dark" ? <Sun size={17} /> : <Moon size={17} />) : <span className="w-[17px] h-[17px] block" />}
             </button>
-            <a
-              href="mailto:contact@mehedihasan.com"
+            <Link
+              href="/contact"
               className="rounded-full bg-primary px-6 py-2.5 text-[11px] font-black uppercase tracking-[0.15em] text-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(234,88,12,0.4)] hover:bg-primary/95 hover:scale-[1.05] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg-main"
             >
               Let's Connect
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Navbar Control Center (Theme Toggle + Burger Icon) */}
@@ -281,13 +280,13 @@ export default function Navbar() {
               </div>
 
               <motion.div variants={linkVariants} className="pt-6 border-t border-border-main/50 space-y-6">
-                <a
-                  href="mailto:contact@mehedihasan.com"
+                <Link
+                  href="/contact"
                   onClick={() => setIsOpen(false)}
                   className="rounded-full bg-primary flex items-center justify-center min-h-[44px] w-full py-3.5 px-4 text-[11px] font-black uppercase tracking-widest text-white hover:shadow-[0_0_20px_rgba(234,88,12,0.4)] hover:bg-primary/95 hover:scale-[1.02] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg-main"
                 >
                   Let's Connect
-                </a>
+                </Link>
 
                 <div className="flex items-center justify-between pt-2">
                   <span className="text-xs font-black uppercase tracking-wider text-text-muted">
