@@ -174,6 +174,29 @@ export default async function ProjectDetail({ params }) {
               </ScrollReveal>
             )}
 
+            {/* Future Improvements */}
+            {project.futureImprovements && (
+              <ScrollReveal delay={0.4}>
+                <section className="pt-8">
+                  <div className="relative pl-8 md:pl-12 border-l-4 border-text-main/10 py-2 before:absolute before:left-0 before:top-0 before:w-1 before:h-12 before:bg-primary before:-ml-1">
+                    <h2 className="text-[11px] font-black uppercase tracking-[0.3em] text-text-main mb-6">Future Improvements</h2>
+                    <div className="space-y-8">
+                      {project.futureImprovements.map((improvement, idx) => (
+                        <div key={idx} className="relative pl-12 md:pl-16">
+                          <span className="absolute left-0 top-0 text-3xl md:text-4xl font-black text-text-main/10 select-none leading-none tracking-tighter">
+                            {String(idx + 1).padStart(2, '0')}
+                          </span>
+                          <p className="text-lg text-text-main font-medium leading-relaxed max-w-prose pt-1">
+                            {improvement}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+              </ScrollReveal>
+            )}
+
           </div>
 
           {/* Sticky Side Info Panel */}

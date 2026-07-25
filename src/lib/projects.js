@@ -28,6 +28,12 @@ export const projects = [
       "Trainer profile and scheduling management",
     ],
     challenges: "The most challenging technical hurdle was managing real-time inventory for class slots while simultaneously processing Stripe transactions without race conditions. I implemented atomic database transactions and webhooks to ensure booking integrity. This project significantly deepened my understanding of distributed state management and third-party API integration.",
+    futureImprovements: [
+      "Implement an advanced admin analytics dashboard for revenue and class attendance tracking.",
+      "Integrate in-app push notifications for class reminders and schedule changes.",
+      "Expand the community feature with user-to-user direct messaging.",
+      "Optimize database queries and implement caching for faster load times during peak booking hours."
+    ],
     tech: ["Next.js", "Express.js", "MongoDB", "Better Auth", "Tailwind CSS", "HeroUI", "Stripe"],
     techIcons: [
       { name: "Next.js", icon: SiNextdotjs, color: "text-text-main dark:text-white" },
@@ -59,6 +65,12 @@ export const projects = [
       "Secure user authentication (Better Auth)",
     ],
     challenges: "Handling time-zone discrepancies and ensuring double-bookings were impossible proved difficult. I learned to leverage MongoDB's querying capabilities to block overlapping date ranges efficiently. Building the interactive calendar UI from scratch also sharpened my React state management skills.",
+    futureImprovements: [
+      "Develop a recurring booking feature for long-term study groups.",
+      "Integrate a real-time chat system for seamless communication between space owners and students.",
+      "Add a review and rating system for individual study spaces.",
+      "Implement a waitlist feature with automated notifications when a booked room is canceled."
+    ],
     tech: ["React.js", "Next.js", "Node.js", "Express.js", "MongoDB", "Better Auth"],
     techIcons: [
       { name: "React.js", icon: SiReact, color: "text-[#61DAFB]" },
@@ -89,6 +101,12 @@ export const projects = [
       "Responsive, mobile-first book catalog UI",
     ],
     challenges: "Building a complex state pipeline on the frontend to simulate the lending lifecycle (Request -> Approve -> Borrow -> Return) without a robust backend was an interesting exercise in frontend architecture and mock-data management. It taught me how to strictly type and validate states before ever hitting a server.",
+    futureImprovements: [
+      "Incorporate a map-based UI for discovering nearby available books visually.",
+      "Implement a gamified reputation system to reward consistent and reliable lenders.",
+      "Add barcode scanning via device camera for quick book inventory uploads.",
+      "Integrate push notifications for time-sensitive swap requests and due date reminders."
+    ],
     tech: ["Next.js", "React.js", "Tailwind CSS", "Better Auth"],
     techIcons: [
       { name: "Next.js", icon: SiNextdotjs, color: "text-text-main dark:text-white" },
@@ -116,6 +134,12 @@ export const projects = [
       "Built entirely with Vite for lightning-fast HMR",
     ],
     challenges: "Integrating Recharts to create meaningful, responsive data visualizations required careful parsing of the timeline data. I had to write custom aggregation utility functions to transform raw interaction logs into chart-ready datasets, which significantly improved my JavaScript data manipulation skills.",
+    futureImprovements: [
+      "Integrate with Google Calendar and Outlook to automatically sync contact interactions.",
+      "Develop AI-powered suggestions for reconnecting with friends based on interaction gaps.",
+      "Add a mobile-native version built with React Native for on-the-go logging.",
+      "Implement end-to-end encryption for all personal timeline notes and interaction logs."
+    ],
     tech: ["React.js", "Tailwind CSS", "Recharts", "Vite"],
     techIcons: [
       { name: "React.js", icon: SiReact, color: "text-[#61DAFB]" },
