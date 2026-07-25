@@ -9,6 +9,7 @@ import {
   Cpu,
   Database,
   Blocks,
+  Download,
 } from "lucide-react";
 import { Github, Linkedin } from "./BrandIcons";
 import ParticleBackground from "./ParticleBackground";
@@ -143,6 +144,15 @@ export default function Hero() {
 
             {/* Title Headline */}
             <div className="space-y-4">
+              {/* Fixed Designation Line */}
+              <motion.h2 
+                variants={itemVariants}
+                className="text-sm md:text-base font-black uppercase tracking-[0.25em] text-primary flex items-center space-x-4"
+              >
+                <span className="w-8 md:w-12 h-[2px] bg-primary"></span>
+                <span>Full Stack Developer (MERN)</span>
+              </motion.h2>
+
               <h1 className="text-5xl md:text-7xl font-black text-text-main leading-[1.05] tracking-tight max-w-[15ch] flex flex-wrap gap-x-4">
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
@@ -211,17 +221,14 @@ export default function Hero() {
               variants={itemVariants}
               className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-2"
             >
-              <button
-                onClick={() =>
-                  document
-                    .getElementById("contact")
-                    .scrollIntoView({ behavior: "smooth" })
-                }
+              <a
+                href="/resume.pdf"
+                download
                 className="group px-8 py-4 glow-button hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] text-xs uppercase tracking-widest font-black flex items-center justify-center space-x-2 cursor-pointer transition-all duration-300"
               >
-                <span>Let&apos;s Connect</span>
-                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
+                <span>Download Resume</span>
+                <Download size={14} className="transition-transform duration-300 group-hover:-translate-y-1" />
+              </a>
               <button
                 onClick={() =>
                   document
