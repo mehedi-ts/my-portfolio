@@ -16,7 +16,7 @@ export default function Education() {
       <div className="section-container max-w-4xl mx-auto">
         {/* Section Header */}
         <div className="mb-14 max-w-2xl text-left">
-          <SectionLabel>MY EDUCATION</SectionLabel>
+          <SectionLabel>My Education</SectionLabel>
           <h2 className="text-4xl md:text-5xl font-black text-text-main leading-tight mb-4">
             Academic <span className="text-gradient">Background.</span>
           </h2>

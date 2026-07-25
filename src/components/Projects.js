@@ -43,7 +43,7 @@ export default function Projects() {
             <div className="hidden md:block">
                <Link
                 href="/projects"
-                className="px-6 py-3 glass hover:border-primary/30 rounded-xl font-black uppercase tracking-widest text-xs hover:bg-bg-card transition-all duration-300 flex items-center space-x-2 text-text-main group"
+                className="px-6 py-3 glass hover:border-primary/30 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-bg-card transition-all duration-300 flex items-center space-x-2 text-text-main group"
               >
                 <span>View All Projects</span>
                 <ArrowRight size={14} className="text-primary group-hover:translate-x-1 transition-transform" />
@@ -70,7 +70,7 @@ export default function Projects() {
         <div className="mt-12 flex justify-center md:hidden">
           <Link
             href="/projects"
-            className="w-full px-6 py-4 glass hover:border-primary/30 rounded-xl font-black uppercase tracking-widest text-xs hover:bg-bg-card transition-all duration-300 flex items-center justify-center space-x-2 text-text-main group"
+            className="w-full px-6 py-4 glass hover:border-primary/30 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-bg-card transition-all duration-300 flex items-center justify-center space-x-2 text-text-main group"
           >
             <span>View All Projects</span>
             <ArrowRight size={14} className="text-primary group-hover:translate-x-1 transition-transform" />

@@ -51,7 +51,7 @@ export default function Footer() {
                 <a 
                   key={i} 
                   href={item.href} 
-                  className="w-9 h-9 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary hover:border-primary/30 transition-all duration-300"
+                  className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-white hover:bg-primary hover:border-primary hover:scale-105 transition-all duration-300"
                 >
                   <item.Icon size={16} />
                 </a>
@@ -63,10 +63,10 @@ export default function Footer() {
           <div className="md:col-span-2 space-y-5">
             <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Navigation</h4>
             <ul className="space-y-3.5 text-[10px] font-black uppercase tracking-widest text-text-muted">
-              <li><Link href="/#about" className="hover:text-primary transition-colors">About</Link></li>
-              <li><Link href="/#services" className="hover:text-primary transition-colors">Services</Link></li>
-              <li><Link href="/projects" className="hover:text-primary transition-colors">Projects</Link></li>
-              <li><Link href="/#experience" className="hover:text-primary transition-colors">Experience</Link></li>
+              <li><Link href="/#about" className="inline-block hover:text-primary hover:-translate-y-0.5 transition-all duration-300">About</Link></li>
+              <li><Link href="/#services" className="inline-block hover:text-primary hover:-translate-y-0.5 transition-all duration-300">Services</Link></li>
+              <li><Link href="/projects" className="inline-block hover:text-primary hover:-translate-y-0.5 transition-all duration-300">Projects</Link></li>
+              <li><Link href="/#experience" className="inline-block hover:text-primary hover:-translate-y-0.5 transition-all duration-300">Experience</Link></li>
             </ul>
           </div>
 
@@ -103,8 +103,8 @@ export default function Footer() {
             © {currentYear} Mehedi Hasan. Handcrafted with love and code.
           </div>
           <div className="flex gap-8 text-[9px] font-black text-text-muted uppercase tracking-[0.2em]">
-            <a href="#" className="hover:text-primary transition-colors">Data Privacy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+            <a href="#" className="inline-block hover:text-primary hover:-translate-y-0.5 transition-all duration-300">Data Privacy</a>
+            <a href="#" className="inline-block hover:text-primary hover:-translate-y-0.5 transition-all duration-300">Terms of Service</a>
           </div>
         </div>
 

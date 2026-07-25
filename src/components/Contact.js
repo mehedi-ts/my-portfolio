@@ -92,7 +92,7 @@ export default function Contact() {
                       placeholder="John Doe"
                       value={formState.name}
                       onChange={handleFormChange}
-                      className="w-full bg-transparent border-b border-gray-300 dark:border-white/20 py-2 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 focus:border-b-2 focus:border-orange-500 focus:outline-none transition-all duration-200"
+                      className="w-full bg-transparent border-b border-gray-300 dark:border-white/20 py-2 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 focus:border-b-2 focus:border-primary focus:outline-none transition-all duration-300"
                     />
                   </div>
 
@@ -109,7 +109,7 @@ export default function Contact() {
                       placeholder="john@example.com"
                       value={formState.email}
                       onChange={handleFormChange}
-                      className="w-full bg-transparent border-b border-gray-300 dark:border-white/20 py-2 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 focus:border-b-2 focus:border-orange-500 focus:outline-none transition-all duration-200"
+                      className="w-full bg-transparent border-b border-gray-300 dark:border-white/20 py-2 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 focus:border-b-2 focus:border-primary focus:outline-none transition-all duration-300"
                     />
                   </div>
                 </div>
@@ -127,7 +127,7 @@ export default function Contact() {
                     placeholder="Tell me about your project..."
                     value={formState.message}
                     onChange={handleFormChange}
-                    className="w-full bg-transparent border-b border-gray-300 dark:border-white/20 py-2 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 focus:border-b-2 focus:border-orange-500 focus:outline-none transition-all duration-200 resize-none"
+                    className="w-full bg-transparent border-b border-gray-300 dark:border-white/20 py-2 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 focus:border-b-2 focus:border-primary focus:outline-none transition-all duration-300 resize-none"
                   />
                 </div>
               </div>
@@ -137,7 +137,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting || submitted}
-                  className="group relative bg-primary text-white rounded-full px-8 py-4 text-[11px] uppercase tracking-widest font-black shadow-lg shadow-orange-500/30 dark:shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/40 hover:scale-[1.03] transition-all duration-200 flex items-center gap-3 overflow-hidden disabled:opacity-90 disabled:hover:scale-100 disabled:cursor-default"
+                  className="group relative px-8 py-4 glow-button rounded-2xl text-[11px] uppercase tracking-widest font-black transition-all duration-300 flex items-center justify-center gap-3 overflow-hidden disabled:opacity-90 disabled:hover:scale-100 disabled:cursor-default"
                 >
                   {submitted ? (
                     <span className="flex items-center gap-2">
@@ -240,7 +240,7 @@ export default function Contact() {
                     href="https://github.com/mehedi-ts"
                     target="_blank"
                     rel="noreferrer"
-                    className="w-10 h-10 rounded-full border border-white/20 dark:border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-200"
+                    className="w-10 h-10 rounded-xl border border-white/20 dark:border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary hover:border-primary hover:scale-105 transition-all duration-300"
                   >
                     <Github size={16} />
                   </a>
@@ -248,7 +248,7 @@ export default function Contact() {
                     href="https://linkedin.com/in/mehedi-ts"
                     target="_blank"
                     rel="noreferrer"
-                    className="w-10 h-10 rounded-full border border-white/20 dark:border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-200"
+                    className="w-10 h-10 rounded-xl border border-white/20 dark:border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary hover:border-primary hover:scale-105 transition-all duration-300"
                   >
                     <Linkedin size={16} />
                   </a>
@@ -256,7 +256,7 @@ export default function Contact() {
                     href="https://www.facebook.com/profile.php?id=61589513515471"
                     target="_blank"
                     rel="noreferrer"
-                    className="w-10 h-10 rounded-full border border-white/20 dark:border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-200"
+                    className="w-10 h-10 rounded-xl border border-white/20 dark:border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary hover:border-primary hover:scale-105 transition-all duration-300"
                   >
                     <SiFacebook size={16} />
                   </a>

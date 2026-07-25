@@ -14,7 +14,12 @@ import {
 import { Github, Linkedin } from "./BrandIcons";
 import ParticleBackground from "./ParticleBackground";
 
-function TypewriterRotate({ phrases, typingSpeed = 100, deletingSpeed = 50, pauseDuration = 1500 }) {
+function TypewriterRotate({
+  phrases,
+  typingSpeed = 100,
+  deletingSpeed = 50,
+  pauseDuration = 1500,
+}) {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -39,13 +44,19 @@ function TypewriterRotate({ phrases, typingSpeed = 100, deletingSpeed = 50, paus
     }
 
     return () => clearTimeout(timeout);
-  }, [displayedText, isDeleting, phraseIndex, phrases, typingSpeed, deletingSpeed, pauseDuration]);
+  }, [
+    displayedText,
+    isDeleting,
+    phraseIndex,
+    phrases,
+    typingSpeed,
+    deletingSpeed,
+    pauseDuration,
+  ]);
 
   return (
     <div className="flex items-center min-w-[200px]">
-      <span className="text-primary font-bold">
-        {displayedText}
-      </span>
+      <span className="text-primary font-bold">{displayedText}</span>
       <span className="inline-block w-1.5 h-4 bg-primary ml-1 animate-blink" />
     </div>
   );
@@ -133,7 +144,11 @@ export default function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 will-change-transform"></span>
                 <motion.span
                   animate={{ scale: [1, 1.4, 1], opacity: [1, 0.7, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                   className="relative inline-flex rounded-full h-2 w-2 bg-green-500 will-change-transform"
                 />
               </span>
@@ -145,7 +160,7 @@ export default function Hero() {
             {/* Title Headline */}
             <div className="space-y-4">
               {/* Fixed Designation Line */}
-              <motion.h2 
+              <motion.h2
                 variants={itemVariants}
                 className="text-sm md:text-base font-black uppercase tracking-[0.25em] text-primary flex items-center space-x-4"
               >
@@ -157,7 +172,11 @@ export default function Hero() {
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.1,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                   className="will-change-transform"
                 >
                   Building
@@ -165,7 +184,11 @@ export default function Hero() {
                 <motion.span
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.6,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                   className="text-gradient font-black will-change-transform"
                 >
                   Modern
@@ -173,7 +196,11 @@ export default function Hero() {
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.3,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                   className="block w-full mt-2 will-change-transform"
                 >
                   Web Experiences.
@@ -194,7 +221,7 @@ export default function Hero() {
                     '"MERN Stack Explorer";',
                     '"Full-Stack Developer";',
                     '"React & Next.js Enthusiast";',
-                    '"Backend Problem Solver";'
+                    '"Backend Problem Solver";',
                   ]}
                 />
               </motion.div>
@@ -222,12 +249,15 @@ export default function Hero() {
               className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-2"
             >
               <a
-                href="/resume.pdf"
+                href="/Mehedi Hasan(Full-Stack web Developer)Resume.pdf"
                 download
-                className="group px-8 py-4 glow-button hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] text-xs uppercase tracking-widest font-black flex items-center justify-center space-x-2 cursor-pointer transition-all duration-300"
+                className="group w-full sm:w-auto px-8 py-4 glow-button hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] text-xs uppercase tracking-widest font-black flex items-center justify-center space-x-2 cursor-pointer transition-all duration-300"
               >
                 <span>Download Resume</span>
-                <Download size={14} className="transition-transform duration-300 group-hover:-translate-y-1" />
+                <Download
+                  size={14}
+                  className="transition-transform duration-300 group-hover:-translate-y-1"
+                />
               </a>
               <button
                 onClick={() =>
@@ -235,7 +265,7 @@ export default function Hero() {
                     .getElementById("projects")
                     .scrollIntoView({ behavior: "smooth" })
                 }
-                className="px-8 py-4 glass hover:border-primary/30 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-gray-100 dark:hover:bg-gray-800 hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer text-text-main will-change-transform"
+                className="w-full sm:w-auto px-8 py-4 glass hover:border-primary/30 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-gray-100 dark:hover:bg-gray-800 hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer text-text-main will-change-transform"
               >
                 <span>Selected Works</span>
               </button>
@@ -248,13 +278,13 @@ export default function Hero() {
             >
               <a
                 href="https://github.com/mehedi-ts"
-                className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all duration-300 hover:scale-105 will-change-transform"
+                className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-white hover:bg-primary hover:border-primary transition-all duration-300 hover:scale-105 will-change-transform"
               >
                 <Github size={18} />
               </a>
               <a
                 href="https://linkedin.com/in/mehedi-ts"
-                className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-primary transition-all duration-300 hover:scale-105 will-change-transform"
+                className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-white hover:bg-primary hover:border-primary transition-all duration-300 hover:scale-105 will-change-transform"
               >
                 <Linkedin size={18} />
               </a>
@@ -303,12 +333,11 @@ export default function Hero() {
 
                 {/* Subtle Inner Glass Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-bg-main/30 to-transparent z-15" />
-
               </div>
             </motion.div>
 
             {/* FLOATING TECH BADGES - Flattened & Optimized */}
-            
+
             {/* Badge 1: React */}
             <motion.div
               initial={{ opacity: 0, x: -30, y: 0 }}
@@ -316,7 +345,12 @@ export default function Hero() {
               transition={{
                 opacity: { duration: 0.8, delay: 0.5 },
                 x: { duration: 0.8, delay: 0.5 },
-                y: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.3 },
+                y: {
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1.3,
+                },
               }}
               whileHover={{ scale: 1.05 }}
               className="absolute top-[8%] left-[2%] md:-left-[5%] z-20 glass rounded-2xl p-3 flex items-center space-x-2 border-border-main shadow-md cursor-pointer select-none will-change-transform"
@@ -336,7 +370,12 @@ export default function Hero() {
               transition={{
                 opacity: { duration: 0.8, delay: 0.6 },
                 x: { duration: 0.8, delay: 0.6 },
-                y: { duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1.4 },
+                y: {
+                  duration: 3.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1.4,
+                },
               }}
               whileHover={{ scale: 1.05 }}
               className="absolute bottom-[10%] right-[2%] md:-right-[5%] z-20 glass rounded-2xl p-3 flex items-center space-x-2 border-border-main shadow-md cursor-pointer select-none will-change-transform"
@@ -355,7 +394,12 @@ export default function Hero() {
               animate={{ opacity: 1, y: [0, -10, 0] }}
               transition={{
                 opacity: { duration: 0.8, delay: 0.7 },
-                y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.7 },
+                y: {
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.7,
+                },
               }}
               whileHover={{ scale: 1.05 }}
               className="absolute top-[18%] right-[0%] md:-right-[8%] z-20 glass rounded-2xl p-3 flex items-center space-x-2 border-border-main shadow-md cursor-pointer select-none will-change-transform"
@@ -374,7 +418,12 @@ export default function Hero() {
               animate={{ opacity: 1, y: [0, 10, 0] }}
               transition={{
                 opacity: { duration: 0.8, delay: 0.8 },
-                y: { duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 0.8 },
+                y: {
+                  duration: 3.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.8,
+                },
               }}
               whileHover={{ scale: 1.05 }}
               className="absolute bottom-[6%] left-[0%] md:-left-[8%] z-20 glass rounded-2xl p-3 flex items-center space-x-2 border-border-main shadow-md cursor-pointer select-none will-change-transform"
@@ -402,7 +451,11 @@ export default function Hero() {
           >
             <motion.div
               animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
               className="w-5 h-8 border border-border-main rounded-full flex justify-center p-1"
             >
               <div className="w-1 h-2 bg-text-muted rounded-full" />
