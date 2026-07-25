@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MoveRight, Cpu, Layout, Smartphone } from "lucide-react";
+import Link from "next/link";
 import SectionLabel from "./SectionLabel";
 
 
@@ -9,17 +10,17 @@ import SectionLabel from "./SectionLabel";
 const coreRules = [
   {
     title: "Clean Frontend UI",
-    description: "Designing semantic interfaces, smooth hover responses, and fluid CSS states using React, Next.js, and Tailwind.",
+    description: "Crafting semantic interfaces, responsive layouts, and fluid state management using React, Next.js, and Tailwind CSS.",
     icon: Layout,
   },
   {
     title: "Structured API Workflows",
-    description: "Architecting modular server routing, Express middlewares, and secure query operations with Node.js.",
+    description: "Architecting modular server routing, efficient middlewares, and secure endpoints with Node.js and Express.",
     icon: Cpu,
   },
   {
     title: "Safe Database Systems",
-    description: "Structuring reliable NoSQL collections, MongoDB schemas, and index pipelines for fluid record streams.",
+    description: "Designing reliable NoSQL collections, optimized MongoDB schemas, and efficient query pipelines for high-performance data handling.",
     icon: Smartphone,
   },
 ];
@@ -108,23 +109,23 @@ export default function About() {
               
               <div className="space-y-6 text-sm md:text-base text-text-muted leading-relaxed">
                 <p>
-                  I've been passionate about programming since 2023, when curiosity led me to write my first lines of code. What started as an interest quickly grew into a commitment to building modern, user-focused web applications. Since completing the Programming Hero Web Development Bootcamp, I've continued strengthening my skills through hands-on projects, exploring the MERN ecosystem with a strong focus on JavaScript, React.js, Next.js, Node.js, Express.js, and MongoDB.
+                  My programming journey began in 2023, sparked by a deep curiosity about how the web works. After establishing a strong foundation through the Programming Hero Web Development Bootcamp, I focused on accelerating my growth by building real-world projects. Through consistent, daily coding, I have developed a strong practical command of the MERN stack—specifically JavaScript, React.js, Next.js, Node.js, Express.js, and MongoDB.
                 </p>
                 <p>
-                  I enjoy transforming ideas into responsive, intuitive, and scalable digital products. Whether I'm designing clean frontend interfaces, building secure backend APIs, or solving real-world development challenges, I appreciate writing maintainable code and creating seamless user experiences. Every project is an opportunity to improve my problem-solving skills and learn better development practices.
+                  I specialize in architecting responsive, accessible, and scalable web applications that solve practical problems. Whether crafting clean frontend interfaces or engineering robust backend APIs, my core focus is always on writing maintainable code that delivers a truly seamless and frustration-free experience for users.
                 </p>
 
-                {/* Highlight Pull-Quote Block (Paragraph 4) */}
+                {/* Highlight Pull-Quote Block */}
                 <div className="border-l-4 border-primary bg-primary/5 p-6 rounded-r-2xl my-8">
                   <p className="text-text-main font-semibold italic md:text-lg">
-                    As a developer, I believe consistency, continuous learning, and attention to detail are the foundations of long-term success. I'm currently looking for opportunities where I can contribute to meaningful projects, collaborate with experienced developers, and continue growing into a skilled Full-Stack Software Engineer.
+                    "I believe that writing quality software requires a relentless commitment to consistency, continuous learning, and a disciplined approach to solving meaningful problems."
                   </p>
                 </div>
 
                 <hr className="border-border-main my-8" />
 
                 <p>
-                  Beyond coding, I enjoy reading technology blogs, writing technical articles, and exploring the latest trends in web development. I also enjoy watching football and spending time learning new tools and technologies that help me grow as a developer. These interests keep me curious, motivated, and continuously improving both my technical and communication skills.
+                  Beyond coding, I enjoy reading technology blogs, writing technical articles, and following football. Exploring emerging tools and frameworks naturally fuels my growth-oriented mindset, keeping me curious, disciplined, and constantly eager to refine my craft.
                 </p>
               </div>
             </div>
@@ -150,6 +151,19 @@ export default function About() {
                 </motion.div>
               ))}
             </div>
+            {/* CTA Button to Dedicated About Page */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="pt-6"
+            >
+              <Link href="/about" className="inline-flex items-center space-x-2 group px-6 py-3 glow-button hover:shadow-[0_0_20px_rgba(249,115,22,0.3)] text-xs uppercase tracking-widest font-black transition-all duration-300">
+                <span>Read My Full Story</span>
+                <MoveRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </motion.div>
           </motion.div>
 
         </div>
