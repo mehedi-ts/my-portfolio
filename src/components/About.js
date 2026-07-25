@@ -5,55 +5,57 @@ import { MoveRight, Cpu, Layout, Smartphone } from "lucide-react";
 import Link from "next/link";
 import SectionLabel from "./SectionLabel";
 
-
-
 const coreRules = [
   {
     title: "Clean Frontend UI",
-    description: "Crafting semantic interfaces, responsive layouts, and fluid state management using React, Next.js, and Tailwind CSS.",
+    description:
+      "Crafting semantic interfaces, responsive layouts, and fluid state management using React, Next.js, and Tailwind CSS.",
     icon: Layout,
   },
   {
     title: "Structured API Workflows",
-    description: "Architecting modular server routing, efficient middlewares, and secure endpoints with Node.js and Express.",
+    description:
+      "Architecting modular server routing, efficient middlewares, and secure endpoints with Node.js and Express.",
     icon: Cpu,
   },
   {
     title: "Safe Database Systems",
-    description: "Designing reliable NoSQL collections, optimized MongoDB schemas, and efficient query pipelines for high-performance data handling.",
+    description:
+      "Designing reliable NoSQL collections, optimized MongoDB schemas, and efficient query pipelines for high-performance data handling.",
     icon: Smartphone,
   },
 ];
 
 export default function About() {
   return (
-    <section id="about" className="relative scroll-mt-32 pt-28 pb-16 md:pt-36 md:pb-20 bg-bg-card/30 overflow-x-clip select-none">
-      
+    <section
+      id="about"
+      className="relative scroll-mt-32 pt-28 pb-16 md:pt-36 md:pb-20 bg-bg-card/30 overflow-x-clip select-none"
+    >
       {/* Contextual Background Animation: Morphing Gradient Blobs */}
-      <motion.div 
+      <motion.div
         className="absolute top-1/4 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-primary rounded-full blur-[120px] pointer-events-none -z-10"
-        animate={{ 
+        animate={{
           x: [0, 50, -50, 0],
           y: [0, 30, -30, 0],
-          opacity: [0.03, 0.05, 0.03]
+          opacity: [0.03, 0.05, 0.03],
         }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       />
-      <motion.div 
+      <motion.div
         className="absolute bottom-1/4 right-1/4 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-orange-400 dark:bg-orange-200 rounded-full blur-[140px] pointer-events-none -z-10"
-        animate={{ 
+        animate={{
           x: [0, -60, 40, 0],
           y: [0, -40, 50, 0],
-          opacity: [0.02, 0.04, 0.02]
+          opacity: [0.02, 0.04, 0.02],
         }}
         transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
       />
 
       <div className="section-container">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
           {/* Visual Side: Premium Profile Frame (Sticky) */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -63,7 +65,6 @@ export default function About() {
             {/* Outer Bento Frame */}
             <div className="w-[260px] h-[320px] lg:w-[320px] lg:h-[400px] rounded-[2rem] p-1 bg-gradient-to-tr from-secondary/40 via-primary/30 to-amber-500/20 shadow-xl flex items-center justify-center overflow-hidden group">
               <div className="w-full h-full rounded-[1.8rem] bg-bg-main relative flex flex-col items-center justify-center overflow-hidden">
-                
                 {/* Micro dotted grid layer inside Card */}
                 <div className="absolute inset-0 bg-[radial-gradient(var(--grid-dots)_1px,transparent_1px)] bg-[size:16px_16px] opacity-60" />
 
@@ -76,49 +77,66 @@ export default function About() {
 
                 {/* Subtle Inner Glass Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-bg-main/30 to-transparent z-15" />
-
-
-
               </div>
             </div>
-
           </motion.div>
 
           {/* Right Side: Narrative Copywriting Area */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], staggerChildren: 0.1 }}
+            transition={{
+              duration: 0.8,
+              ease: [0.16, 1, 0.3, 1],
+              staggerChildren: 0.1,
+            }}
             className="lg:col-span-7 space-y-10 text-left"
           >
             <div className="space-y-4">
               <SectionLabel>About Me</SectionLabel>
-              
+
               <h2 className="text-4xl md:text-5xl font-black text-text-main leading-tight mb-2">
                 Turning complex logic into <br className="hidden lg:block" />
                 <span className="text-gradient">seamless experiences.</span>
               </h2>
-              
+
               <div className="space-y-6 text-sm md:text-base text-text-muted leading-relaxed">
                 <p>
-                  My programming journey began in 2023, sparked by a deep curiosity about how the web works. After establishing a strong foundation through the Programming Hero Web Development Bootcamp, I focused on accelerating my growth by building real-world projects. Through consistent, daily coding, I have developed a strong practical command of the MERN stack—specifically JavaScript, React.js, Next.js, Node.js, Express.js, and MongoDB.
+                  My programming journey began in 2023, sparked by a deep
+                  curiosity about how the web works. After establishing a strong
+                  foundation through the Programming Hero Web Development
+                  Bootcamp, I focused on accelerating my growth by building
+                  real-world projects. Through consistent, daily coding, I have
+                  developed a strong practical command of the MERN
+                  stack—specifically JavaScript, React.js, Next.js, Node.js,
+                  Express.js, and MongoDB.
                 </p>
                 <p>
-                  I specialize in architecting responsive, accessible, and scalable web applications that solve practical problems. Whether crafting clean frontend interfaces or engineering robust backend APIs, my core focus is always on writing maintainable code that delivers a truly seamless and frustration-free experience for users.
+                  I specialize in architecting responsive, accessible, and
+                  scalable web applications that solve practical problems.
+                  Whether crafting clean frontend interfaces or engineering
+                  robust backend APIs, my core focus is always on writing
+                  maintainable code that delivers a truly seamless and
+                  frustration-free experience for users.
                 </p>
 
                 {/* Highlight Pull-Quote Block */}
                 <div className="border-l-4 border-primary bg-primary/5 p-6 rounded-r-2xl my-8">
                   <p className="text-text-main font-semibold italic md:text-lg">
-                    "I believe that writing quality software requires a relentless commitment to consistency, continuous learning, and a disciplined approach to solving meaningful problems."
+                    "I believe that writing quality software requires a
+                    relentless commitment to consistency, continuous learning,
+                    and a disciplined approach to solving meaningful problems."
                   </p>
                 </div>
 
                 <hr className="border-border-main my-8" />
 
                 <p>
-                  Beyond coding, I enjoy reading technology blogs, writing technical articles, and following football. Exploring emerging tools and frameworks naturally fuels my growth-oriented mindset, keeping me curious, disciplined, and constantly eager to refine my craft.
+                  Outside of programming, I enjoy watching football, exploring
+                  new places, listening to music, and reading books. These
+                  activities help me stay creative and maintain a healthy
+                  work-life balance.
                 </p>
               </div>
             </div>
@@ -138,27 +156,36 @@ export default function About() {
                     <rule.icon size={18} />
                   </div>
                   <div className="flex-1 space-y-1">
-                    <h4 className="text-xs font-black text-text-main uppercase tracking-wider">{rule.title}</h4>
-                    <p className="text-[11.5px] text-text-muted leading-relaxed">{rule.description}</p>
+                    <h4 className="text-xs font-black text-text-main uppercase tracking-wider">
+                      {rule.title}
+                    </h4>
+                    <p className="text-[11.5px] text-text-muted leading-relaxed">
+                      {rule.description}
+                    </p>
                   </div>
                 </motion.div>
               ))}
             </div>
             {/* CTA Button to Dedicated About Page */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
               className="pt-6"
             >
-              <Link href="/about" className="inline-flex items-center space-x-2 group px-6 py-3 glow-button hover:shadow-[0_0_20px_rgba(249,115,22,0.3)] text-xs uppercase tracking-widest font-black transition-all duration-300">
+              <Link
+                href="/about"
+                className="inline-flex items-center space-x-2 group px-6 py-3 glow-button hover:shadow-[0_0_20px_rgba(249,115,22,0.3)] text-xs uppercase tracking-widest font-black transition-all duration-300"
+              >
                 <span>Read My Full Story</span>
-                <MoveRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                <MoveRight
+                  size={14}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
               </Link>
             </motion.div>
           </motion.div>
-
         </div>
       </div>
     </section>
