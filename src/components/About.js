@@ -30,7 +30,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative scroll-mt-32 pt-28 pb-16 md:pt-36 md:pb-20 bg-bg-card/30 overflow-x-clip select-none"
+      className="relative scroll-mt-32 pt-28 pb-16 md:pt-36 md:pb-20 bg-bg-card/30 overflow-x-clip select-none bg-gradient-to-b from-indigo-500/[0.02] to-transparent"
     >
       {/* Contextual Background Animation: Morphing Gradient Blobs */}
       <motion.div
@@ -124,9 +124,10 @@ export default function About() {
                 {/* Highlight Pull-Quote Block */}
                 <div className="border-l-4 border-primary bg-primary/5 p-6 rounded-r-2xl my-8">
                   <p className="text-text-main font-semibold italic md:text-lg">
-                    "I believe that writing quality software requires a
+                    &quot;I believe that writing quality software requires a
                     relentless commitment to consistency, continuous learning,
-                    and a disciplined approach to solving meaningful problems."
+                    and a disciplined approach to solving meaningful
+                    problems.&quot;
                   </p>
                 </div>
 

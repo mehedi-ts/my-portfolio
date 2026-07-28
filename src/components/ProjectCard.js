@@ -120,53 +120,25 @@ export default function ProjectCard({ project, index, isFeatured }) {
             </div>
 
             {/* Action Button & Quick Links */}
-            <div className="flex items-center justify-between pt-1">
-
-              {/* Quick Links Row */}
-              <div className="flex items-center gap-2">
-                {project.githubClient && (
-                  <a
-                    href={project.githubClient}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="Client Code"
-                    className="w-10 h-10 rounded-xl bg-text-main/5 flex items-center justify-center text-text-muted hover:bg-text-main hover:text-bg-main hover:-translate-y-1 transition-all duration-300"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <Github size={16} />
-                  </a>
-                )}
-                {project.githubServer && (
-                  <a
-                    href={project.githubServer}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="Server Code"
-                    className="w-10 h-10 rounded-xl bg-text-main/5 flex items-center justify-center text-text-muted hover:bg-text-main hover:text-bg-main hover:-translate-y-1 transition-all duration-300"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <Github size={16} />
-                  </a>
-                )}
-                {project.liveUrl && (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="Live Demo"
-                    className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white hover:-translate-y-1 transition-all duration-300 ml-1"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <ExternalLink size={16} />
-                  </a>
-                )}
-              </div>
-
-              <div className="h-8 w-px bg-border-main mx-4 hidden sm:block" />
+            <div className="flex items-center justify-between pt-1 w-full">
+              {project.liveUrl ? (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[11px] md:text-xs font-black uppercase tracking-widest text-primary hover:text-orange-400 transition-colors duration-300 py-2"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ExternalLink size={16} />
+                  <span>Live Project</span>
+                </a>
+              ) : (
+                <div /> /* Empty div to keep 'View Project' aligned right */
+              )}
 
               <Link
                 href={`/projects/${project.slug}`}
-                className="group/cta inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-text-main hover:text-primary transition-colors duration-300 py-2"
+                className="group/cta inline-flex items-center gap-2 text-[11px] md:text-xs font-black uppercase tracking-widest text-text-main hover:text-primary transition-colors duration-300 py-2"
               >
                 <span>View Project</span>
                 <ArrowRight size={16} className="group-hover/cta:translate-x-1.5 transition-transform duration-300" />

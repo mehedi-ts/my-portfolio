@@ -8,7 +8,7 @@ export default function Education() {
   return (
     <section
       id="education"
-      className="py-24 md:py-36 relative overflow-hidden bg-bg-main select-none"
+      className="py-24 md:py-36 relative overflow-hidden bg-bg-main select-none bg-gradient-to-b from-slate-500/[0.02] to-transparent"
     >
       {/* Background soft ambient blur */}
       <div className="absolute top-1/2 right-[5%] w-[400px] h-[400px] bg-primary/4 dark:bg-primary/2 rounded-full blur-[120px] pointer-events-none -z-10 animate-pulse-soft" />

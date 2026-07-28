@@ -27,7 +27,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="py-20 md:py-24 border-t border-border-main bg-bg-card/10 relative overflow-hidden select-none">
+    <footer className="py-20 md:py-24 border-t border-border-main bg-bg-card/10 relative overflow-hidden select-none bg-gradient-to-t from-black/[0.03] dark:from-black/[0.1] to-transparent">
       
       <div className="section-container">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16">

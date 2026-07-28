@@ -100,7 +100,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative z-10 min-h-screen flex items-center pt-24 md:pt-28 pb-10 md:pb-16 overflow-hidden select-none"
+      className="relative z-10 min-h-screen flex items-center pt-24 md:pt-28 pb-10 md:pb-16 overflow-hidden select-none bg-gradient-to-b from-primary/[0.03] to-transparent"
     >
       <style>{`
         @keyframes blink {

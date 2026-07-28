@@ -65,7 +65,7 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 md:py-36 relative overflow-hidden bg-bg-main select-none">
+    <section id="skills" className="py-24 md:py-36 relative overflow-hidden bg-bg-main select-none bg-gradient-to-b from-cyan-500/[0.02] to-transparent">
       
       {/* Drifting Dot Grid Background */}
       <motion.div
