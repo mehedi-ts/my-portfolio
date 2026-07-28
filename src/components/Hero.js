@@ -1,6 +1,13 @@
 "use client";
 
-import { motion, AnimatePresence, useMotionValue, useSpring, useAnimationFrame, useTransform } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useSpring,
+  useAnimationFrame,
+  useTransform,
+} from "framer-motion";
 import { useEffect, useState } from "react";
 import {
   ArrowRight,
@@ -12,7 +19,14 @@ import {
 } from "lucide-react";
 import { Github, Linkedin } from "./BrandIcons";
 import ParticleBackground from "./ParticleBackground";
-import { SiJavascript, SiReact, SiNextdotjs, SiNodedotjs, SiExpress, SiMongodb } from "react-icons/si";
+import {
+  SiJavascript,
+  SiReact,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiExpress,
+  SiMongodb,
+} from "react-icons/si";
 
 const frontendLogos = [
   { name: "JavaScript", Icon: SiJavascript, color: "text-[#F7DF1E]" },
@@ -30,16 +44,20 @@ export default function Hero() {
 
   // Orbit animation state
   const rotation = useMotionValue(0);
-  const smoothRotation = useSpring(rotation, { stiffness: 40, damping: 15, mass: 1 });
-  
+  const smoothRotation = useSpring(rotation, {
+    stiffness: 40,
+    damping: 15,
+    mass: 1,
+  });
+
   // Inner orbit rotates clockwise
   const innerRotation = smoothRotation;
   const innerCounterRotation = useTransform(innerRotation, (r) => -r);
-  
+
   // Outer orbit rotates counter-clockwise
   const outerRotation = useTransform(smoothRotation, (r) => -r);
   const outerCounterRotation = useTransform(outerRotation, (r) => -r);
-  
+
   const [isHoveringProfile, setIsHoveringProfile] = useState(false);
   const [shouldAnimate, setShouldAnimate] = useState(false);
 
@@ -54,14 +72,17 @@ export default function Hero() {
     window.addEventListener("scroll", handleScroll);
 
     // Orbit setup
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const isMobile = window.innerWidth < 768;
-    
+
     if (!reducedMotion && !isMobile) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShouldAnimate(true);
       const timer = setTimeout(() => {
         rotation.set(360);
-      }, 500); 
+      }, 500);
       return () => {
         window.removeEventListener("scroll", handleScroll);
         clearTimeout(timer);
@@ -100,7 +121,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative z-10 min-h-screen flex items-center pt-24 md:pt-28 pb-10 md:pb-16 overflow-hidden select-none bg-gradient-to-b from-primary/[0.03] to-transparent"
+      className="relative z-10 min-h-screen flex items-center pt-28 pb-16 overflow-hidden select-none"
     >
       <style>{`
         @keyframes blink {
@@ -133,7 +154,7 @@ export default function Hero() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-7 space-y-4 md:space-y-6 z-10 text-left flex flex-col items-start"
+            className="lg:col-span-7 space-y-6 z-10 text-left flex flex-col items-start"
           >
             {/* Status Pulse Indicator */}
             <motion.div
@@ -158,7 +179,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Title Headline */}
-            <div className="space-y-2 md:space-y-4">
+            <div className="space-y-4">
               {/* Fixed Designation Line */}
               <motion.h2
                 variants={itemVariants}
@@ -168,7 +189,7 @@ export default function Hero() {
                 <span>WEB DEVELOPER</span>
               </motion.h2>
 
-              <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-text-main leading-tight md:leading-[1.05] tracking-tight max-w-[15ch] flex flex-wrap gap-x-2 md:gap-x-4">
+              <h1 className="text-5xl md:text-7xl font-black text-text-main leading-[1.05] tracking-tight max-w-[15ch] flex flex-wrap gap-x-4">
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -206,13 +227,12 @@ export default function Hero() {
                   Web Applications.
                 </motion.span>
               </h1>
-
             </div>
 
             {/* Premium Web Developer Copy */}
             <motion.p
               variants={itemVariants}
-              className="max-w-[95%] sm:max-w-xl text-[13px] md:text-base text-text-muted leading-snug md:leading-relaxed"
+              className="max-w-xl text-sm md:text-base text-text-muted leading-relaxed"
             >
               I&apos;m{" "}
               <strong className="text-text-main font-bold">Mehedi Hasan</strong>
@@ -220,13 +240,15 @@ export default function Hero() {
               <strong className="text-text-main font-semibold">
                 Next.js, React, Node.js, Express.js, and MongoDB
               </strong>
-              . I build fast, responsive, and scalable web applications with a strong focus on performance, clean architecture, and user experience.
+              . I build fast, responsive, and scalable web applications with a
+              strong focus on performance, clean architecture, and user
+              experience.
             </motion.p>
 
             {/* CTAs */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto pt-2 md:pt-2"
+              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-2"
             >
               <button
                 onClick={() =>
@@ -234,7 +256,7 @@ export default function Hero() {
                     .getElementById("projects")
                     .scrollIntoView({ behavior: "smooth" })
                 }
-                className="group w-full sm:w-auto px-8 py-3.5 md:py-4 glow-button hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] text-[11px] md:text-xs uppercase tracking-widest font-black flex items-center justify-center space-x-2 cursor-pointer transition-all duration-300"
+                className="group w-full sm:w-auto px-8 py-4 glow-button hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] text-xs uppercase tracking-widest font-black flex items-center justify-center space-x-2 cursor-pointer transition-all duration-300"
               >
                 <span>View Projects</span>
                 <Code
@@ -243,19 +265,19 @@ export default function Hero() {
                 />
               </button>
               <a
-                href="/Mehedi Hasan(Full-Stack web Developer)Resume.pdf"
+                href="/Mehedi Hasan(Web Developer)Resume.pdf"
                 download
-                className="w-full sm:w-auto px-8 py-3.5 md:py-4 glass hover:border-primary/30 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-xs hover:bg-gray-100 dark:hover:bg-gray-800 hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer text-text-main will-change-transform"
+                className="w-full sm:w-auto px-8 py-4 glass hover:border-primary/30 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-gray-100 dark:hover:bg-gray-800 hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer text-text-main will-change-transform"
               >
                 <span>Download Resume</span>
                 <Download size={14} />
               </a>
             </motion.div>
 
-            {/* Social Anchors - Desktop */}
+            {/* Social Anchors */}
             <motion.div
               variants={itemVariants}
-              className="hidden md:flex items-center space-x-5 pt-3"
+              className="flex items-center space-x-5 pt-3"
             >
               <a
                 href="https://github.com/mehedi-ts"
@@ -273,7 +295,7 @@ export default function Hero() {
           </motion.div>
 
           {/* Right Side: Visual Profile Block */}
-          <div className="lg:col-span-5 relative h-auto md:h-[450px] lg:h-[520px] w-full flex flex-col items-center justify-center mt-6 md:mt-8 lg:mt-0">
+          <div className="lg:col-span-5 relative h-[450px] lg:h-[520px] w-full flex items-center justify-center mt-8 lg:mt-0">
             {/* Ambient Back Glow Behind Portrait Frame */}
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/15 via-secondary/15 to-transparent rounded-full blur-3xl -z-10 animate-pulse-soft will-change-transform" />
 
@@ -281,16 +303,16 @@ export default function Hero() {
             <div className="absolute inset-0 pointer-events-none hidden sm:flex items-center justify-center">
               {/* Inner Orbit (Frontend) */}
               <div className="absolute w-[420px] h-[420px] rounded-full border border-primary/20 dark:border-primary/10" />
-              <motion.div 
+              <motion.div
                 className="absolute w-[420px] h-[420px]"
                 style={{ rotate: innerRotation }}
               >
                 {frontendLogos.map((tech, index) => {
                   const angle = (index * 360) / frontendLogos.length;
-                  const radius = 210; 
+                  const radius = 210;
                   const x = radius * Math.cos((angle * Math.PI) / 180);
                   const y = radius * Math.sin((angle * Math.PI) / 180);
-                  
+
                   return (
                     <motion.div
                       key={tech.name}
@@ -305,17 +327,17 @@ export default function Hero() {
 
               {/* Outer Orbit (Backend) */}
               <div className="absolute w-[520px] h-[520px] rounded-full border border-primary/20 dark:border-primary/10" />
-              <motion.div 
+              <motion.div
                 className="absolute w-[520px] h-[520px]"
                 style={{ rotate: outerRotation }}
               >
                 {backendLogos.map((tech, index) => {
                   const angle = (index * 360) / backendLogos.length;
-                  const offsetAngle = angle + 60; 
-                  const radius = 260; 
+                  const offsetAngle = angle + 60;
+                  const radius = 260;
                   const x = radius * Math.cos((offsetAngle * Math.PI) / 180);
                   const y = radius * Math.sin((offsetAngle * Math.PI) / 180);
-                  
+
                   return (
                     <motion.div
                       key={tech.name}
@@ -336,7 +358,7 @@ export default function Hero() {
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
               onMouseEnter={() => setIsHoveringProfile(true)}
               onMouseLeave={() => setIsHoveringProfile(false)}
-              className="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px] lg:w-[360px] lg:h-[360px] rounded-full p-1.5 shadow-2xl flex items-center justify-center overflow-hidden group will-change-transform z-10 cursor-pointer"
+              className="relative w-[320px] h-[320px] lg:w-[360px] lg:h-[360px] rounded-full p-1.5 shadow-2xl flex items-center justify-center overflow-hidden group will-change-transform z-10 cursor-pointer"
             >
               {/* Rotating Conic Gradient Border - Pure CSS for Performance */}
               <div
@@ -369,27 +391,6 @@ export default function Hero() {
                 {/* Subtle Inner Glass Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-bg-main/30 to-transparent z-15" />
               </div>
-            </motion.div>
-
-            {/* Social Anchors - Mobile */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="flex md:hidden items-center justify-center space-x-5 mt-6 z-20"
-            >
-              <a
-                href="https://github.com/mehedi-ts"
-                className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-white hover:bg-primary hover:border-primary transition-all duration-300"
-              >
-                <Github size={18} />
-              </a>
-              <a
-                href="https://linkedin.com/in/mehedi-ts"
-                className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-white hover:bg-primary hover:border-primary transition-all duration-300"
-              >
-                <Linkedin size={18} />
-              </a>
             </motion.div>
           </div>
         </div>
