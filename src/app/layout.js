@@ -8,9 +8,9 @@ import BackgroundElements from "@/components/BackgroundElements";
 import PageTransition from "@/components/PageTransition";
 import BackToTop from "@/components/BackToTop";
 
-const jakarta = Plus_Jakarta_Sans({ 
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-jakarta" 
+  variable: "--font-jakarta"
 });
 
 const dancingScript = Dancing_Script({
@@ -19,8 +19,8 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata = {
-  title: "Mehedi Hasan | Staff Web Engineer",
-  description: "Premium Portfolio of Mehedi Hasan - Staff Full Stack Web Developer & Product Designer",
+  title: "Mehedi Hasan | Web Developer",
+  description: "Portfolio of Mehedi Hasan | Web Developer",
 };
 
 export default function RootLayout({ children }) {
