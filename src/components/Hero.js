@@ -1,10 +1,9 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring, useAnimationFrame, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import {
   ArrowRight,
-  Terminal,
   Code,
   Cpu,
   Database,
@@ -13,57 +12,36 @@ import {
 } from "lucide-react";
 import { Github, Linkedin } from "./BrandIcons";
 import ParticleBackground from "./ParticleBackground";
+import { SiJavascript, SiReact, SiNextdotjs, SiNodedotjs, SiExpress, SiMongodb } from "react-icons/si";
 
-function TypewriterRotate({
-  phrases,
-  typingSpeed = 100,
-  deletingSpeed = 50,
-  pauseDuration = 1500,
-}) {
-  const [phraseIndex, setPhraseIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
+const frontendLogos = [
+  { name: "JavaScript", Icon: SiJavascript, color: "text-[#F7DF1E]" },
+  { name: "React", Icon: SiReact, color: "text-[#61DAFB]" },
+  { name: "Next.js", Icon: SiNextdotjs, color: "text-text-main" },
+];
 
-  useEffect(() => {
-    const currentPhrase = phrases[phraseIndex];
-    let timeout;
-
-    if (!isDeleting && displayedText.length < currentPhrase.length) {
-      timeout = setTimeout(() => {
-        setDisplayedText(currentPhrase.slice(0, displayedText.length + 1));
-      }, typingSpeed);
-    } else if (!isDeleting && displayedText.length === currentPhrase.length) {
-      timeout = setTimeout(() => setIsDeleting(true), pauseDuration);
-    } else if (isDeleting && displayedText.length > 0) {
-      timeout = setTimeout(() => {
-        setDisplayedText(currentPhrase.slice(0, displayedText.length - 1));
-      }, deletingSpeed);
-    } else if (isDeleting && displayedText.length === 0) {
-      setIsDeleting(false);
-      setPhraseIndex((prev) => (prev + 1) % phrases.length);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [
-    displayedText,
-    isDeleting,
-    phraseIndex,
-    phrases,
-    typingSpeed,
-    deletingSpeed,
-    pauseDuration,
-  ]);
-
-  return (
-    <div className="flex items-center min-w-[200px]">
-      <span className="text-primary font-bold">{displayedText}</span>
-      <span className="inline-block w-1.5 h-4 bg-primary ml-1 animate-blink" />
-    </div>
-  );
-}
-
+const backendLogos = [
+  { name: "Node.js", Icon: SiNodedotjs, color: "text-[#339933]" },
+  { name: "Express", Icon: SiExpress, color: "text-text-main" },
+  { name: "MongoDB", Icon: SiMongodb, color: "text-[#47A248]" },
+];
 export default function Hero() {
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Orbit animation state
+  const rotation = useMotionValue(0);
+  const smoothRotation = useSpring(rotation, { stiffness: 40, damping: 15, mass: 1 });
+  
+  // Inner orbit rotates clockwise
+  const innerRotation = smoothRotation;
+  const innerCounterRotation = useTransform(innerRotation, (r) => -r);
+  
+  // Outer orbit rotates counter-clockwise
+  const outerRotation = useTransform(smoothRotation, (r) => -r);
+  const outerCounterRotation = useTransform(outerRotation, (r) => -r);
+  
+  const [isHoveringProfile, setIsHoveringProfile] = useState(false);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,8 +52,30 @@ export default function Hero() {
       }
     };
     window.addEventListener("scroll", handleScroll);
+
+    // Orbit setup
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobile = window.innerWidth < 768;
+    
+    if (!reducedMotion && !isMobile) {
+      setShouldAnimate(true);
+      const timer = setTimeout(() => {
+        rotation.set(360);
+      }, 500); 
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+        clearTimeout(timer);
+      };
+    }
+
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [rotation]);
+
+  useAnimationFrame((t, delta) => {
+    if (shouldAnimate && isHoveringProfile) {
+      rotation.set(rotation.get() + delta * 0.02);
+    }
+  });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -133,7 +133,7 @@ export default function Hero() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-7 space-y-8 z-10 text-left flex flex-col items-start"
+            className="lg:col-span-7 space-y-6 z-10 text-left flex flex-col items-start"
           >
             {/* Status Pulse Indicator */}
             <motion.div
@@ -153,7 +153,7 @@ export default function Hero() {
                 />
               </span>
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-text-main">
-                Ready for fresh web projects
+                Available for new opportunities
               </span>
             </motion.div>
 
@@ -165,7 +165,7 @@ export default function Hero() {
                 className="text-sm md:text-base font-black uppercase tracking-[0.25em] text-primary flex items-center space-x-4"
               >
                 <span className="w-8 md:w-12 h-[2px] bg-primary"></span>
-                <span>Full Stack Developer (MERN)</span>
+                <span>WEB DEVELOPER</span>
               </motion.h2>
 
               <h1 className="text-5xl md:text-7xl font-black text-text-main leading-[1.05] tracking-tight max-w-[15ch] flex flex-wrap gap-x-4">
@@ -179,7 +179,7 @@ export default function Hero() {
                   }}
                   className="will-change-transform"
                 >
-                  Building
+                  Building Fast &
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -191,7 +191,7 @@ export default function Hero() {
                   }}
                   className="text-gradient font-black will-change-transform"
                 >
-                  Modern
+                  Scalable
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
@@ -203,44 +203,24 @@ export default function Hero() {
                   }}
                   className="block w-full mt-2 will-change-transform"
                 >
-                  Web Experiences.
+                  Web Applications.
                 </motion.span>
               </h1>
 
-              {/* Typewritten MERN Role */}
-              <motion.div
-                variants={itemVariants}
-                className="flex items-center font-mono text-xs md:text-sm bg-bg-card/45 dark:bg-white/3 border border-border-main px-4 py-2 rounded-xl backdrop-blur-md w-fit"
-              >
-                <Terminal size={14} className="text-primary mr-2.5" />
-                <span className="text-text-muted select-none mr-1.5">
-                  const developer ={" "}
-                </span>
-                <TypewriterRotate
-                  phrases={[
-                    '"MERN Stack Explorer";',
-                    '"Full-Stack Developer";',
-                    '"React & Next.js Enthusiast";',
-                    '"Backend Problem Solver";',
-                  ]}
-                />
-              </motion.div>
             </div>
 
-            {/* Authentic MERN Copy */}
+            {/* Premium Web Developer Copy */}
             <motion.p
               variants={itemVariants}
               className="max-w-xl text-sm md:text-base text-text-muted leading-relaxed"
             >
-              Hi, I&apos;m{" "}
+              I&apos;m{" "}
               <strong className="text-text-main font-bold">Mehedi Hasan</strong>
-              . I am a passionate full-stack developer specializing in the{" "}
+              , a Web Developer specializing in{" "}
               <strong className="text-text-main font-semibold">
-                MERN Stack
-              </strong>{" "}
-              (React, Next.js, Node.js, MongoDB). I love crafting clean, fast,
-              responsive interfaces and writing neat backend workflows that
-              bring complex layouts to life.
+                Next.js, React, Node.js, Express.js, and MongoDB
+              </strong>
+              . I build fast, responsive, and scalable web applications with a strong focus on performance, clean architecture, and user experience.
             </motion.p>
 
             {/* CTAs */}
@@ -248,27 +228,28 @@ export default function Hero() {
               variants={itemVariants}
               className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-2"
             >
-              <a
-                href="/Mehedi Hasan(Full-Stack web Developer)Resume.pdf"
-                download
-                className="group w-full sm:w-auto px-8 py-4 glow-button hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] text-xs uppercase tracking-widest font-black flex items-center justify-center space-x-2 cursor-pointer transition-all duration-300"
-              >
-                <span>Download Resume</span>
-                <Download
-                  size={14}
-                  className="transition-transform duration-300 group-hover:-translate-y-1"
-                />
-              </a>
               <button
                 onClick={() =>
                   document
                     .getElementById("projects")
                     .scrollIntoView({ behavior: "smooth" })
                 }
+                className="group w-full sm:w-auto px-8 py-4 glow-button hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] text-xs uppercase tracking-widest font-black flex items-center justify-center space-x-2 cursor-pointer transition-all duration-300"
+              >
+                <span>View Projects</span>
+                <Code
+                  size={14}
+                  className="transition-transform duration-300 group-hover:scale-110"
+                />
+              </button>
+              <a
+                href="/Mehedi Hasan(Full-Stack web Developer)Resume.pdf"
+                download
                 className="w-full sm:w-auto px-8 py-4 glass hover:border-primary/30 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-gray-100 dark:hover:bg-gray-800 hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer text-text-main will-change-transform"
               >
-                <span>Selected Works</span>
-              </button>
+                <span>Download Resume</span>
+                <Download size={14} />
+              </a>
             </motion.div>
 
             {/* Social Anchors */}
@@ -296,12 +277,66 @@ export default function Hero() {
             {/* Ambient Back Glow Behind Portrait Frame */}
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/15 via-secondary/15 to-transparent rounded-full blur-3xl -z-10 animate-pulse-soft will-change-transform" />
 
+            {/* Premium Concentric Orbits */}
+            <div className="absolute inset-0 pointer-events-none hidden sm:flex items-center justify-center">
+              {/* Inner Orbit (Frontend) */}
+              <div className="absolute w-[420px] h-[420px] rounded-full border border-primary/20 dark:border-primary/10" />
+              <motion.div 
+                className="absolute w-[420px] h-[420px]"
+                style={{ rotate: innerRotation }}
+              >
+                {frontendLogos.map((tech, index) => {
+                  const angle = (index * 360) / frontendLogos.length;
+                  const radius = 210; 
+                  const x = radius * Math.cos((angle * Math.PI) / 180);
+                  const y = radius * Math.sin((angle * Math.PI) / 180);
+                  
+                  return (
+                    <motion.div
+                      key={tech.name}
+                      className="absolute left-1/2 top-1/2 flex items-center justify-center w-12 h-12 -ml-6 -mt-6 rounded-full glass border border-border-main shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:shadow-[0_0_15px_rgba(255,255,255,0.05)] bg-bg-card/80 backdrop-blur-md"
+                      style={{ x, y, rotate: innerCounterRotation }}
+                    >
+                      <tech.Icon className={`text-xl ${tech.color}`} />
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+
+              {/* Outer Orbit (Backend) */}
+              <div className="absolute w-[520px] h-[520px] rounded-full border border-primary/20 dark:border-primary/10" />
+              <motion.div 
+                className="absolute w-[520px] h-[520px]"
+                style={{ rotate: outerRotation }}
+              >
+                {backendLogos.map((tech, index) => {
+                  const angle = (index * 360) / backendLogos.length;
+                  const offsetAngle = angle + 60; 
+                  const radius = 260; 
+                  const x = radius * Math.cos((offsetAngle * Math.PI) / 180);
+                  const y = radius * Math.sin((offsetAngle * Math.PI) / 180);
+                  
+                  return (
+                    <motion.div
+                      key={tech.name}
+                      className="absolute left-1/2 top-1/2 flex items-center justify-center w-12 h-12 -ml-6 -mt-6 rounded-full glass border border-border-main shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:shadow-[0_0_15px_rgba(255,255,255,0.05)] bg-bg-card/80 backdrop-blur-md"
+                      style={{ x, y, rotate: outerCounterRotation }}
+                    >
+                      <tech.Icon className={`text-xl ${tech.color}`} />
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            </div>
+
             {/* Profile Frame with animated gradient border and glass back */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-[320px] h-[320px] lg:w-[360px] lg:h-[360px] rounded-full p-1.5 shadow-2xl flex items-center justify-center overflow-hidden group will-change-transform"
+              onMouseEnter={() => setIsHoveringProfile(true)}
+              onMouseLeave={() => setIsHoveringProfile(false)}
+              className="relative w-[320px] h-[320px] lg:w-[360px] lg:h-[360px] rounded-full p-1.5 shadow-2xl flex items-center justify-center overflow-hidden group will-change-transform z-10 cursor-pointer"
             >
               {/* Rotating Conic Gradient Border - Pure CSS for Performance */}
               <div
@@ -334,106 +369,6 @@ export default function Hero() {
                 {/* Subtle Inner Glass Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-bg-main/30 to-transparent z-15" />
               </div>
-            </motion.div>
-
-            {/* FLOATING TECH BADGES - Flattened & Optimized */}
-
-            {/* Badge 1: React */}
-            <motion.div
-              initial={{ opacity: 0, x: -30, y: 0 }}
-              animate={{ opacity: 1, x: 0, y: [0, -10, 0] }}
-              transition={{
-                opacity: { duration: 0.8, delay: 0.5 },
-                x: { duration: 0.8, delay: 0.5 },
-                y: {
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1.3,
-                },
-              }}
-              whileHover={{ scale: 1.05 }}
-              className="absolute top-[8%] left-[2%] md:-left-[5%] z-20 glass rounded-2xl p-3 flex items-center space-x-2 border-border-main shadow-md cursor-pointer select-none will-change-transform"
-            >
-              <div className="w-6 h-6 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400">
-                <Code size={13} />
-              </div>
-              <span className="text-[9px] font-black uppercase tracking-widest text-text-main hidden sm:inline-block">
-                React
-              </span>
-            </motion.div>
-
-            {/* Badge 2: Next.js */}
-            <motion.div
-              initial={{ opacity: 0, x: 30, y: 0 }}
-              animate={{ opacity: 1, x: 0, y: [0, 10, 0] }}
-              transition={{
-                opacity: { duration: 0.8, delay: 0.6 },
-                x: { duration: 0.8, delay: 0.6 },
-                y: {
-                  duration: 3.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1.4,
-                },
-              }}
-              whileHover={{ scale: 1.05 }}
-              className="absolute bottom-[10%] right-[2%] md:-right-[5%] z-20 glass rounded-2xl p-3 flex items-center space-x-2 border-border-main shadow-md cursor-pointer select-none will-change-transform"
-            >
-              <div className="w-6 h-6 rounded-lg bg-text-main/10 flex items-center justify-center text-text-main">
-                <Blocks size={13} />
-              </div>
-              <span className="text-[9px] font-black uppercase tracking-widest text-text-main hidden sm:inline-block">
-                Next.js
-              </span>
-            </motion.div>
-
-            {/* Badge 3: Node.js */}
-            <motion.div
-              initial={{ opacity: 0, y: -30 }}
-              animate={{ opacity: 1, y: [0, -10, 0] }}
-              transition={{
-                opacity: { duration: 0.8, delay: 0.7 },
-                y: {
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 0.7,
-                },
-              }}
-              whileHover={{ scale: 1.05 }}
-              className="absolute top-[18%] right-[0%] md:-right-[8%] z-20 glass rounded-2xl p-3 flex items-center space-x-2 border-border-main shadow-md cursor-pointer select-none will-change-transform"
-            >
-              <div className="w-6 h-6 rounded-lg bg-green-500/10 flex items-center justify-center text-green-500">
-                <Cpu size={13} />
-              </div>
-              <span className="text-[9px] font-black uppercase tracking-widest text-text-main hidden sm:inline-block">
-                Node
-              </span>
-            </motion.div>
-
-            {/* Badge 4: MongoDB */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: [0, 10, 0] }}
-              transition={{
-                opacity: { duration: 0.8, delay: 0.8 },
-                y: {
-                  duration: 3.2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 0.8,
-                },
-              }}
-              whileHover={{ scale: 1.05 }}
-              className="absolute bottom-[6%] left-[0%] md:-left-[8%] z-20 glass rounded-2xl p-3 flex items-center space-x-2 border-border-main shadow-md cursor-pointer select-none will-change-transform"
-            >
-              <div className="w-6 h-6 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500">
-                <Database size={13} />
-              </div>
-              <span className="text-[9px] font-black uppercase tracking-widest text-text-main hidden sm:inline-block">
-                MongoDB
-              </span>
             </motion.div>
           </div>
         </div>
