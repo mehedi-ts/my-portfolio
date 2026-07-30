@@ -1,8 +1,8 @@
-import { projects } from "../../../lib/projects";
+import { projects } from "@/lib/projects";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, ArrowRight } from "lucide-react";
-import { Github } from "../../../components/BrandIcons";
-import ScrollReveal from "../../../components/ScrollReveal";
+import { Github } from "@/components/BrandIcons";
+import ScrollReveal from "@/components/ScrollReveal";
 
 // Generate static pages at build time
 export async function generateStaticParams() {

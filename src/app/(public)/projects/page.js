@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { projects } from "../../lib/projects";
-import ProjectCard from "../../components/ProjectCard";
+import { projects } from "@/lib/projects";
+import ProjectCard from "@/components/ProjectCard";
 
 const filters = ["All", "Full Stack", "Frontend"];
 

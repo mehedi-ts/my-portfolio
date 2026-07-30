@@ -1,12 +1,6 @@
 import { Plus_Jakarta_Sans, Dancing_Script } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import CustomCursor from "@/components/CustomCursor";
-import SmoothScroll from "@/components/SmoothScroll";
 import { Providers } from "@/components/Providers";
-import BackgroundElements from "@/components/BackgroundElements";
-import PageTransition from "@/components/PageTransition";
-import BackToTop from "@/components/BackToTop";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -28,15 +22,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body className={`${jakarta.variable} ${dancingScript.variable} font-sans`} suppressHydrationWarning>
         <Providers>
-          <SmoothScroll>
-            <CustomCursor />
-            <Navbar />
-            <BackgroundElements />
-            <PageTransition>
-              {children}
-            </PageTransition>
-            <BackToTop />
-          </SmoothScroll>
+          {children}
         </Providers>
       </body>
     </html>
