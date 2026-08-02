@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Mail, MapPin, Send, CheckCircle, Loader2, Phone } from "lucide-react";
 import { Github, Linkedin, Twitter } from "./BrandIcons";
 import { SiFacebook, SiWhatsapp } from "react-icons/si";
@@ -8,6 +8,7 @@ import { useState } from "react";
 import SectionLabel from "./SectionLabel";
 
 export default function Contact() {
+  const shouldReduceMotion = useReducedMotion();
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -40,7 +41,7 @@ export default function Contact() {
       {/* Animated Soft Blurred Gradient Blob Behind the Card */}
       <motion.div 
         className="absolute top-1/2 left-[30%] w-[500px] h-[500px] bg-primary/10 dark:bg-primary/15 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 -z-10"
-        animate={{ 
+        animate={shouldReduceMotion ? {} : { 
           x: [0, 80, -40, 0],
           y: [0, -50, 60, 0]
         }}
@@ -60,15 +61,14 @@ export default function Contact() {
             Get In Touch
           </SectionLabel>
           <h2 className="text-4xl md:text-5xl font-black text-text-main leading-tight">
-            Let&apos;s Build Something <span className="text-gradient">Awesome.</span>
+            Let&apos;s Build Something <br className="hidden sm:block" />
+            <span className="text-gradient">Awesome.</span>
           </h2>
         </motion.div>
 
         {/* Unified Glassmorphism Card Container */}
         <motion.div
-          className="rounded-2xl flex flex-col lg:flex-row overflow-hidden transition-all duration-300
-                     bg-white/80 backdrop-blur-xl shadow-2xl shadow-orange-900/5 border border-black/5 
-                     dark:bg-gray-900/60 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-black/40"
+          className="group bg-gradient-to-b from-bg-card to-primary/[0.02] border border-border-main rounded-2xl md:rounded-[2rem] flex flex-col lg:flex-row overflow-hidden transition-all duration-500 ease-out shadow-sm hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1.5 hover:scale-[1.01]"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -76,68 +76,83 @@ export default function Contact() {
         >
           {/* Left Panel: Form (60%) */}
           <div className="w-full lg:w-[60%] p-8 md:p-12 lg:p-16">
-            <form onSubmit={handleSubmit} className="space-y-10 flex flex-col h-full justify-between">
+            <form onSubmit={handleSubmit} className="space-y-12 flex flex-col h-full justify-between">
               <div className="space-y-10">
                 <div className="grid md:grid-cols-2 gap-10 md:gap-8">
                   {/* Name Input */}
-                  <div className="space-y-1 group">
-                    <label htmlFor="name" className="text-xs uppercase tracking-wide text-gray-500 dark:text-white/50 font-bold block transition-colors duration-200 group-focus-within:text-orange-500">
-                      Your Name
-                    </label>
+                  <div className="relative group">
                     <input
                       type="text"
                       id="name"
                       name="name"
                       required
-                      placeholder="John Doe"
+                      placeholder=" "
                       value={formState.name}
                       onChange={handleFormChange}
-                      className="w-full bg-transparent border-b border-gray-300 dark:border-white/20 py-2 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 focus:border-b-2 focus:border-primary focus:outline-none transition-all duration-300"
+                      className="peer block w-full bg-transparent border-b-2 border-border-main py-3 text-text-main focus:border-primary focus:outline-none focus:ring-0 transition-all duration-200 focus:shadow-[0_8px_16px_-6px_rgba(249,115,22,0.3)]"
                     />
+                    <label
+                      htmlFor="name"
+                      className="absolute left-0 text-sm font-bold text-text-muted duration-300 transform -translate-y-6 top-3 origin-[0] peer-focus:text-primary peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-base peer-placeholder-shown:font-normal peer-focus:-translate-y-6 peer-focus:text-xs peer-focus:font-bold peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:font-bold pointer-events-none"
+                    >
+                      Your Name
+                    </label>
                   </div>
 
                   {/* Email Input */}
-                  <div className="space-y-1 group">
-                    <label htmlFor="email" className="text-xs uppercase tracking-wide text-gray-500 dark:text-white/50 font-bold block transition-colors duration-200 group-focus-within:text-orange-500">
-                      Email Address
-                    </label>
+                  <div className="relative group">
                     <input
                       type="email"
                       id="email"
                       name="email"
                       required
-                      placeholder="john@example.com"
+                      placeholder=" "
                       value={formState.email}
                       onChange={handleFormChange}
-                      className="w-full bg-transparent border-b border-gray-300 dark:border-white/20 py-2 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 focus:border-b-2 focus:border-primary focus:outline-none transition-all duration-300"
+                      className="peer block w-full bg-transparent border-b-2 border-border-main py-3 text-text-main focus:border-primary focus:outline-none focus:ring-0 transition-all duration-200 focus:shadow-[0_8px_16px_-6px_rgba(249,115,22,0.3)]"
                     />
+                    <label
+                      htmlFor="email"
+                      className="absolute left-0 text-sm font-bold text-text-muted duration-300 transform -translate-y-6 top-3 origin-[0] peer-focus:text-primary peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-base peer-placeholder-shown:font-normal peer-focus:-translate-y-6 peer-focus:text-xs peer-focus:font-bold peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:font-bold pointer-events-none"
+                    >
+                      Email Address
+                    </label>
                   </div>
                 </div>
 
                 {/* Message Input */}
-                <div className="space-y-1 group">
-                  <label htmlFor="message" className="text-xs uppercase tracking-wide text-gray-500 dark:text-white/50 font-bold block transition-colors duration-200 group-focus-within:text-orange-500">
-                    Your Message
-                  </label>
+                <div className="relative group">
                   <textarea
                     id="message"
                     name="message"
                     required
-                    rows="4"
-                    placeholder="Tell me about your project..."
+                    placeholder=" "
+                    rows="1"
                     value={formState.message}
                     onChange={handleFormChange}
-                    className="w-full bg-transparent border-b border-gray-300 dark:border-white/20 py-2 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 focus:border-b-2 focus:border-primary focus:outline-none transition-all duration-300 resize-none"
+                    onInput={(e) => {
+                      e.target.style.height = 'auto';
+                      e.target.style.height = e.target.scrollHeight + 'px';
+                    }}
+                    className="peer block w-full bg-transparent border-b-2 border-border-main py-3 text-text-main focus:border-primary focus:outline-none focus:ring-0 transition-all duration-200 resize-none overflow-hidden focus:shadow-[0_8px_16px_-6px_rgba(249,115,22,0.3)]"
                   />
+                  <label
+                    htmlFor="message"
+                    className="absolute left-0 text-sm font-bold text-text-muted duration-300 transform -translate-y-6 top-3 origin-[0] peer-focus:text-primary peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-base peer-placeholder-shown:font-normal peer-focus:-translate-y-6 peer-focus:text-xs peer-focus:font-bold peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:font-bold pointer-events-none"
+                  >
+                    Your Message
+                  </label>
                 </div>
               </div>
 
               {/* Submit Button */}
-              <div className="pt-6">
-                <button
+              <div className="pt-8">
+                <motion.button
+                  whileHover={!shouldReduceMotion && !isSubmitting && !submitted ? { scale: 1.02, y: -2 } : {}}
+                  whileTap={!shouldReduceMotion && !isSubmitting && !submitted ? { scale: 0.97 } : {}}
                   type="submit"
                   disabled={isSubmitting || submitted}
-                  className="group relative px-8 py-4 glow-button rounded-2xl text-[11px] uppercase tracking-widest font-black transition-all duration-300 flex items-center justify-center gap-3 overflow-hidden disabled:opacity-90 disabled:hover:scale-100 disabled:cursor-default"
+                  className="group w-full sm:w-auto px-8 py-3.5 md:py-4 glow-button text-[11px] md:text-xs uppercase tracking-widest font-black flex items-center justify-center space-x-2 transition-all duration-300 disabled:opacity-90 disabled:hover:scale-100 disabled:cursor-default disabled:hover:shadow-[0_8px_20px_-4px_rgba(234,88,12,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900"
                 >
                   {submitted ? (
                     <span className="flex items-center gap-2">
@@ -153,114 +168,128 @@ export default function Contact() {
                       <Send size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
                     </span>
                   )}
-                </button>
+                </motion.button>
               </div>
             </form>
           </div>
 
           {/* Right Panel: Contact Info (40%) */}
-          <div className="w-full lg:w-[40%] bg-gray-900 dark:bg-black/40 dark:border-l dark:border-white/10 p-8 md:p-12 lg:p-16 text-white relative overflow-hidden flex flex-col justify-between transition-colors duration-300">
+          <div className="w-full lg:w-[40%] bg-[#050508] border-t lg:border-t-0 lg:border-l border-white/5 p-8 md:p-12 lg:p-16 text-white relative overflow-hidden flex flex-col justify-between transition-colors duration-300">
             {/* Geometric Pattern Overlay for Texture */}
             <div
-              className="absolute inset-0 opacity-[0.03] pointer-events-none"
+              className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
               style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}
             />
 
-            <div className="relative z-10 space-y-12">
+            {/* Drifting Gradient Orbs */}
+            <div className="absolute inset-0 pointer-events-none z-0">
+              <motion.div
+                className="absolute -top-[20%] -right-[10%] w-[350px] h-[350px] rounded-full bg-orange-500/20 blur-[100px]"
+                animate={shouldReduceMotion ? {} : { x: [0, -30, 0], y: [0, 40, 0] }}
+                transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <motion.div
+                className="absolute -bottom-[20%] -left-[10%] w-[300px] h-[300px] rounded-full bg-blue-600/20 blur-[100px]"
+                animate={shouldReduceMotion ? {} : { x: [0, 40, 0], y: [0, -30, 0] }}
+                transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
+
+            <div className="relative z-10 space-y-12 h-full flex flex-col">
               <div>
-                <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-primary mb-8">
-                  Contact Info
-                </h3>
-
-                <div className="space-y-8">
-                  {/* Email Row - With pulsing accent glow */}
-                  <div className="flex items-center gap-5 group cursor-pointer">
-                    <div className="relative">
-                      {/* Pulse accent behind icon */}
-                      <div className="absolute inset-0 bg-primary/40 rounded-full blur-md animate-pulse"></div>
-                      <div className="relative w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shrink-0 shadow-lg shadow-orange-500/40 transition-transform duration-300 ease-out group-hover:-rotate-[8deg] group-hover:scale-110">
-                        <Mail size={16} />
-                      </div>
-                    </div>
-                    <div>
-                      <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-1">
-                        Email
-                      </p>
-                      <a href="mailto:mehedits.dev@gmail.com" className="text-sm font-medium text-gray-100 hover:text-white transition-colors block">
-                        mehedits.dev@gmail.com
-                      </a>
-                    </div>
+                <div className="flex items-center justify-between mb-8 gap-4 flex-wrap">
+                  <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-primary">
+                    Contact Info
+                  </h3>
+                  {/* Pulsing Dot */}
+                  <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full border border-white/10 shrink-0">
+                    <span className="relative flex h-2 w-2">
+                      {!shouldReduceMotion && (
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      )}
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    <span className="text-[9px] uppercase tracking-wider text-gray-300 font-bold">
+                      Available for work
+                    </span>
                   </div>
+                </div>
 
-                  {/* Phone/WhatsApp Row */}
-                  <div className="flex items-center gap-5 group cursor-pointer">
-                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shrink-0 shadow-lg shadow-orange-500/40 transition-transform duration-300 ease-out group-hover:-rotate-[8deg] group-hover:scale-110">
-                      <Phone size={16} />
-                    </div>
-                    <div>
-                      <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-1">
-                        Phone / WhatsApp
-                      </p>
-                      <a
-                        href="https://wa.me/8801XXXXXXXXX"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-sm font-medium text-gray-100 hover:text-white transition-colors block"
+                <div className="space-y-6">
+                  {/* Contact Rows */}
+                  {[
+                    { icon: Mail, label: 'Email', value: 'mehedits.dev@gmail.com', href: 'mailto:mehedits.dev@gmail.com' },
+                    { icon: Phone, label: 'Phone / WhatsApp', value: '+880 1355-025437', href: 'https://wa.me/8801355025437' },
+                    { icon: MapPin, label: 'Location', value: 'Narayanganj, Bangladesh' }
+                  ].map((item, idx) => {
+                    const content = (
+                      <>
+                        <div className="relative shrink-0">
+                          {/* Soft orange glow on hover */}
+                          <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/40 rounded-full blur-md transition-all duration-300"></div>
+                          <div className="relative w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 group-hover:text-white group-hover:border-primary/50 group-hover:bg-primary/20 transition-all duration-300">
+                            <item.icon size={16} />
+                          </div>
+                        </div>
+                        <div>
+                          <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-1">
+                            {item.label}
+                          </p>
+                          <p className="text-sm font-medium text-gray-100 group-hover:text-white transition-colors block">
+                            {item.value}
+                          </p>
+                        </div>
+                      </>
+                    );
+                    
+                    const classes = "flex items-center gap-5 group cursor-pointer p-2 -ml-2 rounded-xl hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary";
+
+                    return item.href ? (
+                      <motion.a
+                        key={idx}
+                        href={item.href}
+                        target={item.href.startsWith('http') ? '_blank' : undefined}
+                        rel={item.href.startsWith('http') ? 'noreferrer' : undefined}
+                        whileHover={!shouldReduceMotion ? { scale: 1.02, y: -4 } : {}}
+                        className={classes}
                       >
-                        +880 1355-025437
-                      </a>
-
-                    </div>
-                  </div>
-
-                  {/* Location Row */}
-                  <div className="flex items-center gap-5 group cursor-pointer">
-                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shrink-0 shadow-lg shadow-orange-500/40 transition-transform duration-300 ease-out group-hover:-rotate-[8deg] group-hover:scale-110">
-                      <MapPin size={16} />
-                    </div>
-                    <div>
-                      <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-1">
-                        Location
-                      </p>
-                      <p className="text-sm font-medium text-gray-100 group-hover:text-white transition-colors block">
-                        Narayanganj, Bangladesh
-                      </p>
-                    </div>
-                  </div>
+                        {content}
+                      </motion.a>
+                    ) : (
+                      <motion.div
+                        key={idx}
+                        whileHover={!shouldReduceMotion ? { scale: 1.02, y: -4 } : {}}
+                        className={classes}
+                      >
+                        {content}
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
 
               {/* Socials Section */}
-              <div className="pt-8 border-t border-white/10">
+              <div className="pt-8 mt-auto">
                 <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-4">
                   Follow Me
                 </p>
                 <div className="flex items-center gap-4">
-                  <a
-                    href="https://github.com/mehedi-ts"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-10 h-10 rounded-xl border border-white/20 dark:border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary hover:border-primary hover:scale-105 transition-all duration-300"
-                  >
-                    <Github size={16} />
-                  </a>
-                  <a
-                    href="https://linkedin.com/in/mehedi-ts"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-10 h-10 rounded-xl border border-white/20 dark:border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary hover:border-primary hover:scale-105 transition-all duration-300"
-                  >
-                    <Linkedin size={16} />
-                  </a>
-                  <a
-                    href="https://www.facebook.com/profile.php?id=61589513515471"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-10 h-10 rounded-xl border border-white/20 dark:border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary hover:border-primary hover:scale-105 transition-all duration-300"
-                  >
-                    <SiFacebook size={16} />
-                  </a>
-
+                  {[
+                    { icon: Github, href: 'https://github.com/mehedi-ts' },
+                    { icon: Linkedin, href: 'https://linkedin.com/in/mehedi-ts' },
+                    { icon: SiFacebook, href: 'https://www.facebook.com/profile.php?id=61589513515471' }
+                  ].map((social, idx) => (
+                    <motion.a
+                      key={idx}
+                      href={social.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      whileHover={!shouldReduceMotion ? { scale: 1.1 } : {}}
+                      className="relative w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:border-primary hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    >
+                      <social.icon size={16} />
+                    </motion.a>
+                  ))}
                 </div>
               </div>
             </div>
