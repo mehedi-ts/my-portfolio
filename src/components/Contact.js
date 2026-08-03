@@ -68,11 +68,11 @@ export default function Contact() {
 
         {/* Unified Glassmorphism Card Container */}
         <motion.div
-          className="group bg-gradient-to-b from-bg-card to-primary/[0.02] border border-border-main rounded-2xl md:rounded-[2rem] flex flex-col lg:flex-row overflow-hidden transition-all duration-500 ease-out shadow-sm hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1.5 hover:scale-[1.01]"
-          initial={{ opacity: 0, y: 30 }}
+          className="group relative bg-bg-card/80 backdrop-blur-xl border border-border-main rounded-3xl lg:rounded-[2.5rem] flex flex-col lg:flex-row overflow-hidden transition-all duration-500 ease-out shadow-lg hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1.5"
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
         >
           {/* Left Panel: Form (60%) */}
           <div className="w-full lg:w-[60%] p-8 md:p-12 lg:p-16">
@@ -174,22 +174,22 @@ export default function Contact() {
           </div>
 
           {/* Right Panel: Contact Info (40%) */}
-          <div className="w-full lg:w-[40%] bg-[#050508] border-t lg:border-t-0 lg:border-l border-white/5 p-8 md:p-12 lg:p-16 text-white relative overflow-hidden flex flex-col justify-between transition-colors duration-300">
+          <div className="w-full lg:w-[40%] bg-primary/[0.03] dark:bg-primary/[0.05] border-t lg:border-t-0 lg:border-l border-border-main p-8 md:p-12 lg:p-16 relative overflow-hidden flex flex-col justify-between transition-colors duration-300">
             {/* Geometric Pattern Overlay for Texture */}
             <div
-              className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
-              style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}
+              className="absolute inset-0 opacity-[0.05] dark:opacity-[0.03] pointer-events-none z-0"
+              style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '24px 24px' }}
             />
 
             {/* Drifting Gradient Orbs */}
             <div className="absolute inset-0 pointer-events-none z-0">
               <motion.div
-                className="absolute -top-[20%] -right-[10%] w-[350px] h-[350px] rounded-full bg-orange-500/20 blur-[100px]"
+                className="absolute -top-[20%] -right-[10%] w-[350px] h-[350px] rounded-full bg-primary/10 blur-[100px]"
                 animate={shouldReduceMotion ? {} : { x: [0, -30, 0], y: [0, 40, 0] }}
                 transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.div
-                className="absolute -bottom-[20%] -left-[10%] w-[300px] h-[300px] rounded-full bg-blue-600/20 blur-[100px]"
+                className="absolute -bottom-[20%] -left-[10%] w-[300px] h-[300px] rounded-full bg-secondary/10 blur-[100px]"
                 animate={shouldReduceMotion ? {} : { x: [0, 40, 0], y: [0, -30, 0] }}
                 transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
               />
@@ -202,14 +202,14 @@ export default function Contact() {
                     Contact Info
                   </h3>
                   {/* Pulsing Dot */}
-                  <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full border border-white/10 shrink-0">
+                  <div className="flex items-center gap-2 bg-bg-card px-3 py-1.5 rounded-full border border-border-main shrink-0">
                     <span className="relative flex h-2 w-2">
                       {!shouldReduceMotion && (
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                       )}
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                     </span>
-                    <span className="text-[9px] uppercase tracking-wider text-gray-300 font-bold">
+                    <span className="text-[9px] uppercase tracking-wider text-text-muted font-bold">
                       Available for work
                     </span>
                   </div>
@@ -225,24 +225,22 @@ export default function Contact() {
                     const content = (
                       <>
                         <div className="relative shrink-0">
-                          {/* Soft orange glow on hover */}
-                          <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/40 rounded-full blur-md transition-all duration-300"></div>
-                          <div className="relative w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 group-hover:text-white group-hover:border-primary/50 group-hover:bg-primary/20 transition-all duration-300">
+                          <div className="relative w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted group-hover:text-white group-hover:bg-primary group-hover:border-primary transition-all duration-300 group-hover:scale-105 will-change-transform">
                             <item.icon size={16} />
                           </div>
                         </div>
                         <div>
-                          <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-1">
+                          <p className="text-[10px] uppercase tracking-widest text-text-muted font-bold mb-1">
                             {item.label}
                           </p>
-                          <p className="text-sm font-medium text-gray-100 group-hover:text-white transition-colors block">
+                          <p className="text-sm font-medium text-text-main group-hover:text-primary transition-colors block">
                             {item.value}
                           </p>
                         </div>
                       </>
                     );
                     
-                    const classes = "flex items-center gap-5 group cursor-pointer p-2 -ml-2 rounded-xl hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary";
+                    const classes = "flex items-center gap-5 group cursor-pointer p-2 -ml-2 rounded-xl hover:bg-bg-card/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary";
 
                     return item.href ? (
                       <motion.a
@@ -250,7 +248,6 @@ export default function Contact() {
                         href={item.href}
                         target={item.href.startsWith('http') ? '_blank' : undefined}
                         rel={item.href.startsWith('http') ? 'noreferrer' : undefined}
-                        whileHover={!shouldReduceMotion ? { scale: 1.02, y: -4 } : {}}
                         className={classes}
                       >
                         {content}
@@ -258,7 +255,6 @@ export default function Contact() {
                     ) : (
                       <motion.div
                         key={idx}
-                        whileHover={!shouldReduceMotion ? { scale: 1.02, y: -4 } : {}}
                         className={classes}
                       >
                         {content}
@@ -270,7 +266,7 @@ export default function Contact() {
 
               {/* Socials Section */}
               <div className="pt-8 mt-auto">
-                <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-4">
+                <p className="text-[10px] uppercase tracking-widest text-text-muted font-bold mb-4">
                   Follow Me
                 </p>
                 <div className="flex items-center gap-4">
@@ -279,16 +275,15 @@ export default function Contact() {
                     { icon: Linkedin, href: 'https://linkedin.com/in/mehedi-ts' },
                     { icon: SiFacebook, href: 'https://www.facebook.com/profile.php?id=61589513515471' }
                   ].map((social, idx) => (
-                    <motion.a
+                    <a
                       key={idx}
                       href={social.href}
                       target="_blank"
                       rel="noreferrer"
-                      whileHover={!shouldReduceMotion ? { scale: 1.1 } : {}}
-                      className="relative w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:border-primary hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                      className="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-muted hover:text-white hover:bg-primary hover:border-primary transition-all duration-300 hover:scale-105 will-change-transform"
                     >
-                      <social.icon size={16} />
-                    </motion.a>
+                      <social.icon size={18} />
+                    </a>
                   ))}
                 </div>
               </div>
