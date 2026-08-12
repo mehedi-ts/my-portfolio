@@ -115,27 +115,45 @@ export default function AboutContent() {
               </div>
             </div>
 
-            <div className="space-y-10 text-sm md:text-base text-text-muted leading-relaxed">
+            <div className="space-y-8 md:space-y-10 text-sm md:text-base text-text-muted leading-relaxed">
               
-              {/* My Journey */}
-              <div className="space-y-4">
-                <h2 className="text-xl md:text-2xl font-black text-text-main uppercase tracking-wide">
-                  My Journey
-                </h2>
-                <p>
-                  My programming journey began in 2023, driven by a deep curiosity to understand how the modern web operates beneath the surface. That initial interest quickly evolved into a dedicated career path. After building a solid foundation through the Programming Hero Web Development Bootcamp, I focused on accelerating my growth by tackling complex, real-world projects. Through consistent, daily coding, I have developed a strong practical command of the MERN stack—working extensively with JavaScript, React.js, Next.js, Node.js, Express.js, and MongoDB.
-                </p>
-              </div>
+              {/* My Journey Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="group relative flex flex-col bg-gradient-to-b from-bg-card to-primary/[0.02] border border-border-main rounded-2xl md:rounded-[2rem] overflow-hidden transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.01] shadow-sm hover:shadow-2xl hover:shadow-primary/20 p-6 md:p-8"
+              >
+                <div className="absolute inset-0 rounded-2xl md:rounded-[2rem] border-2 border-transparent group-hover:border-primary/20 transition-colors duration-500 z-30 pointer-events-none" />
+                <div className="relative z-20">
+                  <h2 className="text-xl md:text-2xl font-black text-text-main uppercase tracking-wide group-hover:text-primary transition-colors duration-500 mb-4">
+                    My Journey
+                  </h2>
+                  <p>
+                    My programming journey began in 2023, driven by a deep curiosity to understand how the modern web operates beneath the surface. That initial interest quickly evolved into a dedicated career path. After building a solid foundation through the Programming Hero Web Development Bootcamp, I focused on accelerating my growth by tackling complex, real-world projects. Through consistent, daily coding, I have developed a strong practical command of the MERN stack—working extensively with JavaScript, React.js, Next.js, Node.js, Express.js, and MongoDB.
+                  </p>
+                </div>
+              </motion.div>
 
-              {/* How I Work */}
-              <div className="space-y-4">
-                <h2 className="text-xl md:text-2xl font-black text-text-main uppercase tracking-wide">
-                  How I Work
-                </h2>
-                <p>
-                  I specialize in architecting responsive, accessible, and highly scalable web applications that solve practical, real-world problems. Whether I am crafting intuitive frontend user interfaces or engineering robust backend APIs, my focus is always on writing clean, reusable, and easily maintainable code. I treat every development cycle as a chance to refine my approach, adopt modern best practices, and deliver a seamless, frustration-free experience for end users.
-                </p>
-              </div>
+              {/* How I Work Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="group relative flex flex-col bg-gradient-to-b from-bg-card to-primary/[0.02] border border-border-main rounded-2xl md:rounded-[2rem] overflow-hidden transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.01] shadow-sm hover:shadow-2xl hover:shadow-primary/20 p-6 md:p-8"
+              >
+                <div className="absolute inset-0 rounded-2xl md:rounded-[2rem] border-2 border-transparent group-hover:border-primary/20 transition-colors duration-500 z-30 pointer-events-none" />
+                <div className="relative z-20">
+                  <h2 className="text-xl md:text-2xl font-black text-text-main uppercase tracking-wide group-hover:text-primary transition-colors duration-500 mb-4">
+                    How I Work
+                  </h2>
+                  <p>
+                    I specialize in architecting responsive, accessible, and highly scalable web applications that solve practical, real-world problems. Whether I am crafting intuitive frontend user interfaces or engineering robust backend APIs, my focus is always on writing clean, reusable, and easily maintainable code. I treat every development cycle as a chance to refine my approach, adopt modern best practices, and deliver a seamless, frustration-free experience for end users.
+                  </p>
+                </div>
+              </motion.div>
 
               {/* Core Stack Highlights */}
               <div className="space-y-4 pt-2">
@@ -146,39 +164,58 @@ export default function AboutContent() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    className="flex space-x-4 p-4 md:p-6 rounded-2xl bg-bg-card border border-border-main hover:border-primary/50 hover:bg-bg-card/85 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 group cursor-default"
+                    className="group relative flex p-4 md:p-6 bg-gradient-to-b from-bg-card to-primary/[0.02] border border-border-main rounded-2xl md:rounded-[1.5rem] overflow-hidden transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.01] shadow-sm hover:shadow-xl hover:shadow-primary/20 cursor-default"
                   >
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300 flex-shrink-0">
-                      <rule.icon size={20} />
-                    </div>
-                    <div className="flex-1 space-y-1.5">
-                      <h4 className="text-xs md:text-sm font-black text-text-main uppercase tracking-wider">
-                        {rule.title}
-                      </h4>
-                      <p className="text-[11.5px] md:text-xs text-text-muted leading-relaxed">
-                        {rule.description}
-                      </p>
+                    <div className="absolute inset-0 rounded-2xl md:rounded-[1.5rem] border-2 border-transparent group-hover:border-primary/20 transition-colors duration-500 z-30 pointer-events-none" />
+                    <div className="relative z-20 flex space-x-4 w-full">
+                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300 flex-shrink-0">
+                        <rule.icon size={20} />
+                      </div>
+                      <div className="flex-1 space-y-1.5 mt-0.5">
+                        <h4 className="text-xs md:text-sm font-black text-text-main uppercase tracking-wider group-hover:text-primary transition-colors duration-500">
+                          {rule.title}
+                        </h4>
+                        <p className="text-[11.5px] md:text-xs text-text-muted leading-relaxed">
+                          {rule.description}
+                        </p>
+                      </div>
                     </div>
                   </motion.div>
                 ))}
               </div>
 
-              {/* Beyond Coding */}
-              <div className="space-y-4 pt-6">
-                <h2 className="text-xl md:text-2xl font-black text-text-main uppercase tracking-wide">
-                  Beyond Coding
-                </h2>
-                <p>
-                  Beyond the code editor, I enjoy staying engaged with the tech community by reading industry blogs and writing technical articles. When I step away from the screen, you'll usually find me following football or exploring emerging development tools just for fun. This natural curiosity fuels a disciplined, growth-minded approach to my work. Ultimately, my goal is to collaborate with experienced teams to build meaningful products while growing into a highly skilled Full-Stack Software Engineer.
-                </p>
-              </div>
+              {/* Beyond Coding Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="group relative flex flex-col bg-gradient-to-b from-bg-card to-primary/[0.02] border border-border-main rounded-2xl md:rounded-[2rem] overflow-hidden transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.01] shadow-sm hover:shadow-2xl hover:shadow-primary/20 p-6 md:p-8 mt-6"
+              >
+                <div className="absolute inset-0 rounded-2xl md:rounded-[2rem] border-2 border-transparent group-hover:border-primary/20 transition-colors duration-500 z-30 pointer-events-none" />
+                <div className="relative z-20">
+                  <h2 className="text-xl md:text-2xl font-black text-text-main uppercase tracking-wide group-hover:text-primary transition-colors duration-500 mb-4">
+                    Beyond Coding
+                  </h2>
+                  <p>
+                    Beyond the code editor, I enjoy staying engaged with the tech community by reading industry blogs and writing technical articles. When I step away from the screen, you'll usually find me following football or exploring emerging development tools just for fun. This natural curiosity fuels a disciplined, growth-minded approach to my work. Ultimately, my goal is to collaborate with experienced teams to build meaningful products while growing into a highly skilled Full-Stack Software Engineer.
+                  </p>
+                </div>
+              </motion.div>
 
               {/* Highlight Pull-Quote Block */}
-              <div className="border-l-4 border-primary bg-primary/5 p-6 md:p-8 rounded-r-2xl my-10 shadow-sm shadow-primary/5">
-                <p className="text-text-main font-semibold italic md:text-lg leading-relaxed">
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="relative overflow-hidden group border-l-4 border-primary bg-gradient-to-r from-primary/10 to-transparent p-6 md:p-8 rounded-r-2xl md:rounded-r-[2rem] my-10 transition-all duration-500 hover:shadow-lg hover:shadow-primary/10"
+              >
+                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <p className="relative z-20 text-text-main font-semibold italic md:text-lg leading-relaxed">
                   &quot;I believe that writing exceptional software requires consistency, continuous learning, and thoughtful collaboration. Great products are built through discipline, a sharp attention to detail, and a relentless drive to solve complex problems.&quot;
                 </p>
-              </div>
+              </motion.div>
 
             </div>
 
