@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { projectService } from "../services/project.service";
 import Link from "next/link";
 import { useState } from "react";
+import { createProject } from "@/lib/actions/creatProject";
 
 export function ProjectForm({ initialData }) {
   const router = useRouter();
@@ -44,9 +45,11 @@ export function ProjectForm({ initialData }) {
       if (isEditing) {
         await projectService.updateProject(initialData.id, data);
       } else {
-        await projectService.createProject(data);
+        const res = await createProject(data);
+        if (res?.success) {
+          router.push("/dashboard/projects");
+        }
       }
-      router.push("/dashboard/projects");
     } catch (error) {
       console.error("Failed to save project", error);
       setIsSubmitting(false);
