@@ -34,6 +34,11 @@ export function ProjectForm({ initialData }) {
   });
 
   const onSubmit = async (data) => {
+    console.log("====================================");
+    console.log("📝 FORM SUBMISSION DATA:");
+    console.log(JSON.stringify(data, null, 2));
+    console.log("====================================");
+
     setIsSubmitting(true);
     try {
       if (isEditing) {
@@ -78,8 +83,8 @@ export function ProjectForm({ initialData }) {
               <Input label="Project Title" placeholder="e.g. E-Commerce Platform" error={errors.title?.message} {...register("title")} />
               <Input label="Slug" placeholder="e-commerce-platform" error={errors.slug?.message} {...register("slug")} />
             </div>
-            <Textarea label="Short Description" placeholder="A brief summary of the project..." error={errors.shortDescription?.message} {...register("shortDescription")} />
-            <Textarea label="Full Description" placeholder="Detailed explanation of the project, architecture, etc..." className="min-h-[200px]" error={errors.fullDescription?.message} {...register("fullDescription")} />
+            <Textarea label="Short Description" placeholder="A brief summary of the project..." error={errors.shortDesc?.message} {...register("shortDesc")} />
+            <Textarea label="Overview" placeholder="Detailed explanation of the project, architecture, etc..." className="min-h-[200px]" error={errors.overview?.message} {...register("overview")} />
           </section>
 
           {/* Technical Details */}
@@ -91,14 +96,11 @@ export function ProjectForm({ initialData }) {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Input label="Role" placeholder="e.g. Lead Frontend Developer" error={errors.role?.message} {...register("role")} />
-              <div className="grid grid-cols-2 gap-4">
-                <Input label="Start Date" type="date" error={errors.startDate?.message} {...register("startDate")} />
-                <Input label="Completion Date" type="date" error={errors.completionDate?.message} {...register("completionDate")} />
-              </div>
+              <Input label="Timeline" placeholder="e.g. Jan 2023 - Mar 2023" error={errors.timeline?.message} {...register("timeline")} />
             </div>
-            <Textarea label="Challenges" placeholder="What were the main challenges?" error={errors.challenges?.message} {...register("challenges")} />
-            <Textarea label="Solutions" placeholder="How did you solve them?" error={errors.solutions?.message} {...register("solutions")} />
-            <Textarea label="Key Features" placeholder="Feature 1, Feature 2..." error={errors.keyFeatures?.message} {...register("keyFeatures")} />
+            <Textarea label="Key Features" placeholder="Feature 1, Feature 2... (comma or newline separated)" error={errors.features?.message} {...register("features")} />
+            <Textarea label="Challenges & Learnings" placeholder="What were the main challenges?" error={errors.challenges?.message} {...register("challenges")} />
+            <Textarea label="Future Improvements" placeholder="Ideas for future features... (comma or newline separated)" error={errors.futureImprovements?.message} {...register("futureImprovements")} />
           </section>
         </div>
 
@@ -112,8 +114,9 @@ export function ProjectForm({ initialData }) {
           {/* Links */}
           <section className="glass-panel p-6 space-y-6">
             <h2 className="text-lg font-semibold text-text-main border-b border-border-main pb-2">Links</h2>
-            <Input label="Live Website URL" placeholder="https://" error={errors.live?.message} {...register("live")} />
-            <Input label="GitHub Repository URL" placeholder="https://github.com/..." error={errors.github?.message} {...register("github")} />
+            <Input label="Live Website URL" placeholder="https://" error={errors.liveUrl?.message} {...register("liveUrl")} />
+            <Input label="GitHub Client Repository" placeholder="https://github.com/..." error={errors.githubClient?.message} {...register("githubClient")} />
+            <Input label="GitHub Server Repository" placeholder="https://github.com/..." error={errors.githubServer?.message} {...register("githubServer")} />
           </section>
 
           {/* Status & Display */}
