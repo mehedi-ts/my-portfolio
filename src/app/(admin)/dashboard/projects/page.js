@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { projectService } from "@/features/projects/services/project.service";
+import { getProjects } from "@/lib/actions/getProjects";
 import Link from "next/link";
 import { Plus, Edit2, Trash2, ExternalLink, Star } from "lucide-react";
+import { projectService } from "@/features/projects/services/project.service";
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState([]);
@@ -11,7 +12,7 @@ export default function ProjectsPage() {
 
   const fetchProjects = async () => {
     try {
-      const data = await projectService.getAllProjects();
+      const data = await getProjects();
       setProjects(data);
     } catch (error) {
       console.error(error);
@@ -74,7 +75,7 @@ export default function ProjectsPage() {
                 </tr>
               ) : (
                 projects.map((project) => (
-                  <tr key={project.id} className="border-b border-border-main hover:bg-bg-main/30 transition-colors">
+                  <tr key={project._id || project.id} className="border-b border-border-main hover:bg-bg-main/30 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-lg bg-bg-main border border-border-main overflow-hidden flex-shrink-0">
@@ -86,7 +87,7 @@ export default function ProjectsPage() {
                         </div>
                         <div>
                           <div className="font-semibold text-text-main">{project.title}</div>
-                          <div className="text-xs text-text-muted mt-0.5">{project.technologies?.slice(0, 2).join(", ")}</div>
+                          <div className="text-xs text-text-muted mt-0.5">{project.technologies}</div>
                         </div>
                       </div>
                     </td>
@@ -118,10 +119,10 @@ export default function ProjectsPage() {
                             <ExternalLink className="w-4 h-4" />
                           </a>
                         )}
-                        <Link href={`/dashboard/projects/add?id=${project.id}`} className="p-2 text-text-muted hover:text-primary transition-colors">
+                        <Link href={`/dashboard/projects/add?id=${project._id || project.id}`} className="p-2 text-text-muted hover:text-primary transition-colors">
                           <Edit2 className="w-4 h-4" />
                         </Link>
-                        <button onClick={() => handleDelete(project.id)} className="p-2 text-text-muted hover:text-red-500 transition-colors">
+                        <button onClick={() => handleDelete(project._id || project.id)} className="p-2 text-text-muted hover:text-red-500 transition-colors">
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
