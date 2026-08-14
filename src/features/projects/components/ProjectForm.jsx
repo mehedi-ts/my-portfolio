@@ -35,11 +35,6 @@ export function ProjectForm({ initialData }) {
   });
 
   const onSubmit = async (data) => {
-    console.log("====================================");
-    console.log("📝 FORM SUBMISSION DATA:");
-    console.log(JSON.stringify(data, null, 2));
-    console.log("====================================");
-
     setIsSubmitting(true);
     try {
       if (isEditing) {
@@ -48,6 +43,7 @@ export function ProjectForm({ initialData }) {
       } else {
         const res = await createProject(data);
         if (res?.success) {
+          alert("project create successfully")
           router.push("/dashboard/projects");
         } else {
           console.error("Failed to create project:", res?.message || "Unknown error");
