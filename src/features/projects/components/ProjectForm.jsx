@@ -44,14 +44,20 @@ export function ProjectForm({ initialData }) {
     try {
       if (isEditing) {
         await projectService.updateProject(initialData.id, data);
+        router.push("/dashboard/projects");
       } else {
         const res = await createProject(data);
         if (res?.success) {
           router.push("/dashboard/projects");
+        } else {
+          console.error("Failed to create project:", res?.message || "Unknown error");
+          alert(res?.message || "Failed to create project");
         }
       }
     } catch (error) {
       console.error("Failed to save project", error);
+      alert("An unexpected error occurred while saving the project.");
+    } finally {
       setIsSubmitting(false);
     }
   };
