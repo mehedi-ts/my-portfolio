@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { projectService } from "@/features/projects/services/project.service";
+import { getProjects } from "@/lib/actions/getProjects";
 import { FolderKanban, Star, Activity, Plus } from "lucide-react";
 import Link from "next/link";
 
@@ -15,7 +15,7 @@ export default function DashboardHome() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const projects = await projectService.getAllProjects();
+        const projects = await getProjects();
         setStats({
           totalProjects: projects.length,
           featuredProjects: projects.filter(p => p.featured).length,
