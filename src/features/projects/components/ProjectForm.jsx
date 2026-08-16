@@ -10,7 +10,7 @@ import { Select } from "@/components/admin/form/Select";
 import { ImagePlaceholder } from "@/components/admin/form/ImagePlaceholder";
 import { Loader2, Save, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { projectService } from "../services/project.service";
+import { updateProject } from "@/lib/actions/updateProject";
 import Link from "next/link";
 import { useState } from "react";
 import { createProject } from "@/lib/actions/creatProject";
@@ -38,8 +38,12 @@ export function ProjectForm({ initialData }) {
     setIsSubmitting(true);
     try {
       if (isEditing) {
-        await projectService.updateProject(initialData.id, data);
-        router.push("/dashboard/projects");
+        const res = await updateProject(initialData._id || initialData.id, data);
+        if (res?.success !== false) {
+           router.push("/dashboard/projects");
+        } else {
+           alert(res?.message || "Failed to update project");
+        }
       } else {
         const res = await createProject(data);
         if (res?.success) {

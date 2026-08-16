@@ -2,7 +2,7 @@
 
 import { useEffect, useState, Suspense } from "react";
 import { ProjectForm } from "@/features/projects/components/ProjectForm";
-import { projectService } from "@/features/projects/services/project.service";
+import { getProjectById } from "@/lib/actions/getProjectById";
 import { useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
@@ -15,7 +15,7 @@ function ProjectFormContainer() {
 
   useEffect(() => {
     if (id) {
-      projectService.getProjectById(id)
+      getProjectById(id)
         .then((data) => {
           setInitialData(data);
           setIsLoading(false);

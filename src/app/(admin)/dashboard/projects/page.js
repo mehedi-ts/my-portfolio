@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getProjects } from "@/lib/actions/getProjects";
 import Link from "next/link";
 import { Plus, Edit2, Trash2, ExternalLink, Star } from "lucide-react";
-import { projectService } from "@/features/projects/services/project.service";
+import { deleteProject } from "@/lib/actions/deleteProject";
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState([]);
@@ -27,8 +27,12 @@ export default function ProjectsPage() {
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this project?")) {
-      await projectService.deleteProject(id);
-      fetchProjects();
+      const res = await deleteProject(id);
+      if (res?.success !== false) {
+          fetchProjects();
+      } else {
+          alert(res?.message || "Failed to delete project");
+      }
     }
   };
 
