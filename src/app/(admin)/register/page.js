@@ -2,14 +2,14 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema } from "@/features/projects/validation/projectSchema";
+import { registerSchema } from "@/features/projects/validation/projectSchema";
 import { Input } from "@/components/admin/form/Input";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [globalError, setGlobalError] = useState("");
@@ -19,21 +19,18 @@ export default function LoginPage() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(registerSchema),
   });
 
   const onSubmit = async (data) => {
     setIsLoading(true);
     setGlobalError("");
     
-    // Simulate authentication
+    // Simulate registration
     setTimeout(() => {
-      if (data.email === "admin@example.com" && data.password === "password") {
-        router.push("/dashboard");
-      } else {
-        setGlobalError("Invalid email or password (Hint: admin@example.com / password)");
-        setIsLoading(false);
-      }
+      // In a real application, you'd call your registration API here
+      console.log("Registration data:", data);
+      router.push("/login"); // Redirect to login after successful registration
     }, 1000);
   };
 
@@ -47,8 +44,8 @@ export default function LoginPage() {
           <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-white mx-auto mb-4">
             <span className="font-signature text-2xl">M</span>
           </div>
-          <h1 className="text-2xl font-bold text-text-main tracking-tight">Welcome back</h1>
-          <p className="text-sm text-text-muted mt-2">Sign in to your admin dashboard</p>
+          <h1 className="text-2xl font-bold text-text-main tracking-tight">Create an account</h1>
+          <p className="text-sm text-text-muted mt-2">Sign up for an admin account</p>
         </div>
 
         {globalError && (
@@ -58,6 +55,14 @@ export default function LoginPage() {
         )}
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <Input
+            label="Full Name"
+            type="text"
+            placeholder="John Doe"
+            error={errors.name?.message}
+            {...register("name")}
+          />
+
           <Input
             label="Email Address"
             type="email"
@@ -74,34 +79,28 @@ export default function LoginPage() {
             {...register("password")}
           />
 
-          <div className="flex items-center justify-between">
-            <label className="flex items-center gap-2 text-sm text-text-muted cursor-pointer hover:text-text-main transition-colors">
-              <input
-                type="checkbox"
-                className="rounded border-border-main text-primary focus:ring-primary bg-bg-main"
-                {...register("rememberMe")}
-              />
-              Remember me
-            </label>
-            <a href="#" className="text-sm text-primary hover:underline">
-              Forgot password?
-            </a>
-          </div>
+          <Input
+            label="Confirm Password"
+            type="password"
+            placeholder="••••••••"
+            error={errors.confirmPassword?.message}
+            {...register("confirmPassword")}
+          />
 
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full h-10 bg-primary hover:bg-primary/90 text-white font-medium rounded-md flex items-center justify-center transition-colors disabled:opacity-70"
+            className="w-full h-10 bg-primary hover:bg-primary/90 text-white font-medium rounded-md flex items-center justify-center transition-colors disabled:opacity-70 mt-6"
           >
-            {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Sign In"}
+            {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Sign Up"}
           </button>
         </form>
 
         <div className="mt-6 text-center">
           <p className="text-sm text-text-muted">
-            Don't have an account?{" "}
-            <Link href="/register" className="text-primary hover:underline font-medium">
-              Sign Up
+            Already have an account?{" "}
+            <Link href="/login" className="text-primary hover:underline font-medium">
+              Sign In
             </Link>
           </p>
         </div>
