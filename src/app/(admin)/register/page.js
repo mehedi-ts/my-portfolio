@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -26,19 +27,31 @@ export default function RegisterPage() {
     setIsLoading(true);
     setGlobalError("");
     
-    // Simulate registration
-    setTimeout(() => {
-      // In a real application, you'd call your registration API here
-      console.log("Registration data:", data);
+    try {
+      const { data: authData, error } = await authClient.signUp.email({
+        email: data.email,
+        password: data.password,
+        name: data.name,
+      });
+
+      if (error) {
+        setGlobalError(error.message || "An error occurred during registration.");
+        return;
+      }
+
       router.push("/login"); // Redirect to login after successful registration
-    }, 1000);
+    } catch (err) {
+      setGlobalError("An unexpected error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-bg-main p-4 font-sans relative overflow-hidden">
       {/* Background glow effects matching portfolio style */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
-      
+
       <div className="w-full max-w-md glass-panel p-8 relative z-10">
         <div className="mb-8 text-center">
           <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-white mx-auto mb-4">
@@ -70,7 +83,7 @@ export default function RegisterPage() {
             error={errors.email?.message}
             {...register("email")}
           />
-          
+
           <Input
             label="Password"
             type="password"
