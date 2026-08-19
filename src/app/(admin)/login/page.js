@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -26,15 +27,25 @@ export default function LoginPage() {
     setIsLoading(true);
     setGlobalError("");
     
-    // Simulate authentication
-    setTimeout(() => {
-      if (data.email === "admin@example.com" && data.password === "password") {
-        router.push("/dashboard");
-      } else {
-        setGlobalError("Invalid email or password (Hint: admin@example.com / password)");
-        setIsLoading(false);
+    try {
+      const { data: authData, error } = await authClient.signIn.email({
+        email: data.email,
+        password: data.password,
+        callbackURL: "/dashboard",
+        rememberMe: data.rememberMe || false
+      });
+
+      if (error) {
+        setGlobalError(error.message || "Invalid email or password.");
+        return;
       }
-    }, 1000);
+      
+      router.push("/dashboard");
+    } catch (err) {
+      setGlobalError("An unexpected error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
