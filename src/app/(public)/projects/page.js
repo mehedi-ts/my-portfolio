@@ -3,19 +3,36 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
+import { getProjects } from "@/lib/actions/getProjects";
+import { useEffect } from "react";
 import Link from "next/link";
-import { projects } from "@/lib/projects";
 import ProjectCard from "@/components/ProjectCard";
 
 const filters = ["All", "Full Stack", "Frontend"];
 
 export default function ProjectsPage() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        const data = await getProjects();
+        setProjects(data || []);
+      } catch (error) {
+        console.error("Failed to load projects:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchProjects();
+  }, []);
 
   const filteredProjects =
     activeFilter === "All"
-      ? projects.sort((a, b) => new Date(b.date) - new Date(a.date))
-      : projects
+      ? [...projects].sort((a, b) => new Date(b.date) - new Date(a.date))
+      : [...projects]
           .filter((p) => p.category === activeFilter)
           .sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -78,7 +95,7 @@ export default function ProjectsPage() {
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, index) => (
               <ProjectCard
-                key={project.slug}
+                key={project._id}
                 project={project}
                 index={index}
                 isFeatured={false} // Clean equal 3-col grid on listing page
@@ -87,9 +104,15 @@ export default function ProjectsPage() {
           </AnimatePresence>
         </div>
 
-        {filteredProjects.length === 0 && (
+        {!isLoading && filteredProjects.length === 0 && (
           <div className="w-full py-24 text-center text-text-muted font-bold tracking-widest uppercase text-xs">
             No projects found in this category.
+          </div>
+        )}
+
+        {isLoading && (
+          <div className="w-full py-24 text-center text-text-muted font-bold tracking-widest uppercase text-xs">
+            Loading projects...
           </div>
         )}
       </div>
